@@ -1,0 +1,25 @@
+.menu{
+  display: flex;
+  flex-direction: column;
+  max-width: 25%;
+
+  h1{
+    font-size: 15px;
+  }
+
+  &__lista{
+
+
+    &-item{
+      font-size: 10px;
+      padding: 6px;
+    }
+
+  }
+
+
+
+
+}
+
+
