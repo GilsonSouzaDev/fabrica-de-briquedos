@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { FbcHeaderComponent } from "./components/fbc-header/fbc-header.component";
 import { FbcMenuComponent } from "./components/fbc-menu/fbc-menu.component";
+import { RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FbcHeaderComponent, FbcMenuComponent],
+  imports: [FbcHeaderComponent, FbcMenuComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

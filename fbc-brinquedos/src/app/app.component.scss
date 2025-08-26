@@ -1,1 +1,26 @@
+.container{
+  display: flex;
+  justify-content: space-around;
 
+  app-fbc-menu{
+    max-width: 25%;
+    min-width: 25%;
+  }
+
+  main{
+    min-width: 70%;
+    max-width: 70%;
+  }
+
+
+
+}
+
+.cards{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 36px;
+
+
+}
