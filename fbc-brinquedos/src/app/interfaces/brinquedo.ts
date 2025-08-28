@@ -1,9 +1,11 @@
 export interface Brinquedo{
-  codigo: string;
+  id: number;
+  codigo: number;
   descricao: string;
   categoria: string;
   marca: string;
   imagem: string;
   valor: number;
   detalhes: string;
+  quantVendas: number;
 }

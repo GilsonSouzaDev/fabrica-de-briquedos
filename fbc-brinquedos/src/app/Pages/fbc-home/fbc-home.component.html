@@ -1,0 +1,7 @@
+<div class="home">
+
+  @for (brinq of destaques$ | async ; track brinq.id) {
+    <app-fbc-card [brinquedo]="brinq"></app-fbc-card>
+  }
+
+</div>

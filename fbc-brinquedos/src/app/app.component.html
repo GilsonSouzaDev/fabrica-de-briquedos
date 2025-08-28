@@ -2,6 +2,8 @@
 <div class="container">
   <app-fbc-menu></app-fbc-menu>
   <main>
+    <h2>{{ mainTitle }}</h2>
+    <h3 *ngIf="subTitle"> : {{ subTitle }}</h3>
     <router-outlet/>
   </main>
 </div>
