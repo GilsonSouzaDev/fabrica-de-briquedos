@@ -1,7 +1,19 @@
 <div class="home">
 
-  @for (brinq of destaques$ | async ; track brinq.id) {
-    <app-fbc-card [brinquedo]="brinq"></app-fbc-card>
-  }
+  <div class="home__imagem">
+    <app-fbc-banner></app-fbc-banner>
+  </div>
+
+    <h1>Mais Vendidos</h1>
+
+  <div class="home__card">
+    @for (brinq of destaques$ | async ; track brinq.id) {
+      <app-fbc-card [brinquedo]="brinq"></app-fbc-card>
+    }
+  </div>
 
 </div>
+
+
+
+

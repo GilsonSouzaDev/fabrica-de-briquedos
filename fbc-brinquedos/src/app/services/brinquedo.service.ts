@@ -23,9 +23,19 @@ export class BrinquedoService {
         // 1. Cria uma cópia para não modificar o array original.
         [...brinquedos]
           // 2. Ordena pela quantidade de vendas, do maior para o menor.
-          .sort((a, b) => b.quantVendas - a.quantVendas)
+          .sort((a, b) => b.quantVendas! - a.quantVendas!)
           // 3. Pega apenas os 8 primeiros itens da lista ordenada.
           .slice(0, QUANTIDADE_MAXIMA_DESTAQUES)
+      )
+    );
+  }
+
+  getBrinquedosPorCategoria(tituloCategoria: string): Observable<Brinquedo[]> {
+    return this.getBrinquedos().pipe(
+      map((brinquedos) =>
+        brinquedos.filter(
+          (brinquedo) => brinquedo.categoria === tituloCategoria
+        )
       )
     );
   }

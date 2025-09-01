@@ -1,1 +1,42 @@
-<p>fbc-form works!</p>
+<div class="fbc-form">
+
+  <h1>{{ toy.id ? 'Editar Brinquedo' : 'Cadastrar Brinquedo' }}</h1>
+
+  <div class="form-container">
+
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <!-- ID oculto ou desabilitado -->
+      <input type="hidden" [(ngModel)]="toy.id" name="id" />
+
+      <label>Código</label>
+      <input [(ngModel)]="toy.codigo" name="codigo" required />
+
+      <label>Descricao</label>
+      <input [(ngModel)]="toy.descricao" name="descricao" required />
+
+      <label>Categoria</label>
+      <input [(ngModel)]="toy.categoria" name="categoria" required />
+
+      <label>Marca</label>
+      <input [(ngModel)]="toy.marca" name="marca" />
+
+      <label>Imagem (URL)</label>
+      <input [(ngModel)]="toy.imagem" name="imagem" />
+
+      <label>Valor</label>
+      <input type="number" [(ngModel)]="toy.valor" name="valor" />
+
+      <label>Descrição</label>
+      <textarea [(ngModel)]="toy.detalhes" name="descricao"></textarea>
+
+
+      <div class="actions">
+        <button type="submit">{{ toy.id ? 'Atualizar' : 'Cadastrar' }}</button>
+      </div>
+
+
+    </form>
+  </div>
+
+</div>

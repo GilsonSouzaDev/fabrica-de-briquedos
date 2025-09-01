@@ -1,0 +1,51 @@
+<div class="card">
+    <h2 class="card__title">Lista de Produtos</h2>
+    <div class="card__content">
+        <div class="table-responsive">
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Estado de Carregamento -->
+                    @if (isLoading) {
+                      <tr class="product-table__row--loading">
+                        <td colspan="5"><div class="loading-spinner"></div></td>
+                      </tr>
+                    }
+
+                    <!-- Estado com Dados -->
+                    @if (!isLoading && brinquedos && brinquedos.length > 0) {
+                      @for (brinquedo of brinquedos; track brinquedo.id) {
+                        <tr>
+                            <td>{{ brinquedo.codigo }}</td>
+                            <td>{{ brinquedo.descricao }}</td>
+                            <td>{{ brinquedo.categoria }}</td>
+                            <td>{{ brinquedo.valor | currency:'BRL' }}</td>
+                            <td>
+                                <!-- Dispara os outputs ao ser clicado -->
+                                <a href="javascript:void(0)" (click)="onEdit(brinquedo.id!)" class="product-table__action product-table__action--edit">Editar</a>
+                                <a href="javascript:void(0)" (click)="onRemove(brinquedo.id!)" class="product-table__action product-table__action--delete">Apagar</a>
+                            </td>
+                        </tr>
+                      }
+                    }
+
+                    <!-- Estado Vazio -->
+                    @if (!isLoading && (!brinquedos || brinquedos.length === 0)) {
+                      <tr class="product-table__row--empty">
+                        <td colspan="5">Nenhum brinquedo cadastrado.</td>
+                      </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

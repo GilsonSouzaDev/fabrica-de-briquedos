@@ -1,26 +1,21 @@
+@use 'variables' as *;
+
 .container{
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  height: auto;
+  min-height: 100vh;
+  background-color: $bg-body-color;
 
-  app-fbc-menu{
-    max-width: 25%;
-    min-width: 25%;
-  }
-
-  main{
-    min-width: 70%;
-    max-width: 70%;
-  }
-
-
+main {
+  flex: 1;
+  // Opcional: Adicione um pouco de padding para o conteúdo não colar no header/footer
+  padding: 20px 0;
+}
 
 }
 
-.cards{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 36px;
 
 
-}

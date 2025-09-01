@@ -1,9 +1,14 @@
+@use 'variables' as *;
+
 .header__container{
   display: flex;
   justify-content: space-around;
   align-items: center;
 
-  h1{
-    font-size: 40px;
-  }
+
+  background-color: $primary-color ;
+  height: 90px;
+  min-height: 57px;
+  max-height: 100px;
+
 }

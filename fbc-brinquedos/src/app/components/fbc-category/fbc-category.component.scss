@@ -1,0 +1,71 @@
+@use 'variables' as *;
+
+.categoria {
+  position: relative; // Essencial para posicionar o título sobre a imagem
+  width: 280px; // Largura e altura iguais para formar um círculo
+  height: 280px;
+  border-radius: 50%; // A mágica para deixar o container redondo
+  overflow: hidden; // Esconde o que "vazar" do círculo (como o zoom da imagem)
+  cursor: pointer;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease-out;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Garante que a imagem preencha o círculo sem distorcer
+    transition: transform 0.4s ease-out; // Transição suave para o efeito de zoom
+  }
+
+  // Título da Categoria
+  h1 {
+    position: absolute; // Posiciona o título em relação ao container '.categoria'
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); // Centraliza o texto perfeitamente
+
+    margin: 0;
+    width: 100%; // Garante que o texto possa se quebrar e continuar centralizado
+    padding: 1rem;
+
+    font-family: $fontcard;
+    font-size: 2.5rem; // Título bem grande
+    font-weight: 700;
+    color: $text-light; // Texto claro para contrastar com a camada escura
+    text-align: center;
+
+    opacity: 0; // Oculto por padrão
+    transition: opacity 0.4s ease-out;
+    // Sombra no texto para melhorar ainda mais a legibilidade sobre qualquer imagem
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  // Camada escura que aparece sobre a imagem no hover
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($bg-dark, 0.6); // Usa a variável de fundo escuro com transparência
+    opacity: 0; // Oculta por padrão
+    transition: opacity 0.4s ease-out;
+  }
+
+  // --- Efeitos de Interatividade (Hover) ---
+  &:hover {
+    transform: scale(1.05); // Aumenta levemente o círculo todo
+
+    img {
+      transform: scale(1.15); // Efeito de zoom na imagem dentro do círculo
+    }
+
+    // Mostra a camada escura e o título
+    &::after,
+    h1 {
+      opacity: 1;
+    }
+  }
+}

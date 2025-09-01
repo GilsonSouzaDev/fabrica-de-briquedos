@@ -1,1 +1,38 @@
-<p>fbc-catalog works!</p>
+<div class="catalog">
+
+
+  <!-- Renderização Condicional: Mostra categorias OU brinquedos filtrados -->
+  @if (!selectedCategory()) {
+    <h1>Catálogo de Brinquedos</h1>
+    <!-- Se NENHUMA categoria estiver selecionada, mostra a lista de categorias -->
+    <div class="catalog__card">
+      @for (category of categoria$ | async; track $index) {
+        <!--
+          (categoryClicked) é um evento que o componente filho (app-fbc-category) deve emitir.
+          Ele envia o título da categoria ($event) para o método onCategorySelected.
+        -->
+        <app-fbc-category
+          [categoria]="category"
+          (categoryClicked)="onCategorySelected($event)">
+        </app-fbc-category>
+      }
+    </div>
+  } @else {
+    <!-- Se UMA categoria ESTIVER selecionada, mostra os brinquedos -->
+    <div class="catalog__filtered-view">
+
+      <div class="filtered-view__header">
+        <h1>{{ selectedCategory() }}</h1>
+      </div>
+
+      <div class="catalog__card-category">
+        @for(brinquedo of brinquedosFiltrados$ | async; track brinquedo.id){
+          <app-fbc-card [brinquedo]="brinquedo"></app-fbc-card>
+        }
+      </div>
+
+      <button (click)="goBackToCategories()" class="back-button">← Categorias</button>
+    </div>
+  }
+
+</div>

@@ -1,6 +1,57 @@
+@use 'variables' as *;
+
+
 .home{
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 16px;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 24px;
+  height: auto;
+  max-width: 70%;
+  gap: 24px;
+
+
+  &__imagem{
+    width: 100%;
+    height: 350px;
+  }
+
+  &__card{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 16px;
+      gap: 64px;
+  }
+
+  img{
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
+  }
+
+  h1{
+    text-align: center;
+  }
+
+
+  @media (max-width: 1450px) {
+    &__imagem{
+      width: 100%;
+      height: 250px;
+    }
+  }
+
+  @media (max-width: 950px) {
+    .home {
+      width: 100%;
+    }
+
+  }
+
+
+
 }
+
+

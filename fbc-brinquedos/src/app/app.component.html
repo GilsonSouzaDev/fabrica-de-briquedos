@@ -1,9 +1,10 @@
-<app-fbc-header></app-fbc-header>
 <div class="container">
+  <app-fbc-header></app-fbc-header>
   <app-fbc-menu></app-fbc-menu>
   <main>
-    <h2>{{ mainTitle }}</h2>
-    <h3 *ngIf="subTitle"> : {{ subTitle }}</h3>
     <router-outlet/>
   </main>
+  <app-fbc-footer></app-fbc-footer>
 </div>
+
+

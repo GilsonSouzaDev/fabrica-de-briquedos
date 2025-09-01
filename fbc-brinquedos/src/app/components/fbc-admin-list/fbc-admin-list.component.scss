@@ -1,0 +1,120 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+// Animação do Spinner
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Estilos do componente
+:host {
+  display: block;
+}
+
+.card {
+  background-color: $bg-card;
+  border-radius: 12px;
+  border: 1px solid $border-card-color;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+  &__title {
+    padding: 1rem 1.5rem;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+    background-color: $bg-light;
+    border-bottom: 1px solid $border-card-color;
+    border-radius: 11px 11px 0 0;
+    text-align: center;
+    color: $text-secondary;
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+
+  th,
+  td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid $border-card-color;
+  }
+
+  thead th {
+    background-color: $second-color;
+    color: $text-light;
+    font-weight: 500;
+  }
+
+  tbody tr {
+    transition: background-color 0.2s ease-in-out;
+
+    &:last-child td {
+      border-bottom: none;
+    }
+
+    &:not(.product-table__row--empty):hover {
+      background-color: rgba($primary-color, 0.05);
+    }
+  }
+
+  tbody td {
+    color: $text-secondary;
+  }
+
+  &__row--empty td,
+  &__row--loading td {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: $text-secondary;
+  }
+
+  &__action {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 1rem;
+    transition: color 0.2s;
+
+    &--edit{
+      color: $primary-color; // Cor normal
+
+      &:hover {
+          // Cor do texto escurece 10% no hover
+        color: color.adjust($primary-color, $lightness: -10%);
+      }
+    }
+
+
+
+    &--delete {
+      color: $danger-color;
+
+      &:hover {
+        color: color.adjust($danger-color, $lightness: -10%);
+      }
+    }
+  }
+}
+
+.loading-spinner {
+  border: 4px solid rgba($primary-color, 0.2);
+  border-top: 4px solid $primary-color;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}

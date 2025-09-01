@@ -1,0 +1,123 @@
+@use 'variables' as *;
+
+.fbc-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 80%;
+  background-color: $bg-body-color;
+  padding: 2rem;
+  font-family: $fontcard;
+}
+
+// Título do formulário
+h3 {
+  color: $text-primary;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+// O "card" que envolve o formulário
+.form-container {
+  background-color: $bg-card;
+  padding: 2.5rem;
+  border-radius: 16px; // Bordas mais arredondadas como na imagem
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); // Sombra suave para dar elevação
+  width: 100%;
+  max-width: 800px;
+}
+
+// Estrutura do formulário em grid para alinhar labels e inputs
+form {
+  display: grid;
+  // Duas colunas: a primeira para o label (auto) e a segunda para o input (ocupa o resto)
+  grid-template-columns: auto 1fr;
+  gap: 1rem 1.5rem; // Espaçamento vertical e horizontal
+  align-items: center;
+  padding: 1rem;
+
+  label {
+    color: $text-secondary;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: right; // Alinha o texto do label à direita
+  }
+
+  // Estilo base para inputs e textarea
+  input,
+  textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid transparent; // Borda transparente para não "pular" no focus
+    background-color: $adm-bg-color; // Fundo cinza claro como na imagem
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: $text-primary;
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+    }
+  }
+
+  textarea {
+    grid-column: 2 / 3; // Ocupa apenas a coluna do input
+    min-height: 100px;
+    resize: vertical; // Permite redimensionar apenas na vertical
+  }
+
+  // O input "código" é menor na imagem
+  input[name="codigo"] {
+    max-width: 120px;
+  }
+}
+
+// Container para os botões de ação
+.actions {
+  grid-column: 1 / -1; // Ocupa todas as colunas do grid
+  display: flex;
+  justify-content: center; // Centraliza os botões
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+// Estilo dos botões
+button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  min-width: 150px;
+
+  // Botão principal (Cadastrar)
+  &[type="submit"] {
+    background: linear-gradient(to top, #509bf7, #6eb0fa); // Gradiente suave
+    color: $text-light;
+    box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba($primary-color, 0.35);
+    }
+  }
+
+  // Botão secundário (Cancelar)
+  &[type="button"] {
+    background-color: transparent;
+    color: $text-secondary;
+
+    &:hover {
+      background-color: $adm-bg-color;
+      color: $text-primary;
+    }
+  }
+}
