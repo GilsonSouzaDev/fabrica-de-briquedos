@@ -8,7 +8,7 @@
   margin: auto;
   width: 80%;
   background-color: $bg-body-color;
-  padding: 2rem;
+  padding: 0.5rem;
   font-family: $fontcard;
 }
 
@@ -16,14 +16,14 @@
 h3 {
   color: $text-primary;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
 // O "card" que envolve o formulário
 .form-container {
   background-color: $bg-card;
-  padding: 2.5rem;
+  padding: 1rem;
   border-radius: 16px; // Bordas mais arredondadas como na imagem
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); // Sombra suave para dar elevação
   width: 100%;
@@ -35,13 +35,13 @@ form {
   display: grid;
   // Duas colunas: a primeira para o label (auto) e a segunda para o input (ocupa o resto)
   grid-template-columns: auto 1fr;
-  gap: 1rem 1.5rem; // Espaçamento vertical e horizontal
+  gap: 0.5rem 0.8rem; // Espaçamento vertical e horizontal
   align-items: center;
   padding: 1rem;
 
   label {
     color: $text-secondary;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     text-align: right; // Alinha o texto do label à direita
   }
@@ -50,7 +50,7 @@ form {
   input,
   textarea {
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     border: 1px solid transparent; // Borda transparente para não "pular" no focus
     background-color: $adm-bg-color; // Fundo cinza claro como na imagem
     border-radius: 8px;
@@ -68,7 +68,7 @@ form {
 
   textarea {
     grid-column: 2 / 3; // Ocupa apenas a coluna do input
-    min-height: 100px;
+    min-height: 80px;
     resize: vertical; // Permite redimensionar apenas na vertical
   }
 
@@ -84,12 +84,12 @@ form {
   display: flex;
   justify-content: center; // Centraliza os botões
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 // Estilo dos botões
 button {
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 1rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;

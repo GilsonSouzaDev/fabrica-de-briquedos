@@ -1,16 +1,22 @@
+// components/fbc-form/fbc-form.component.ts
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Brinquedo } from '../../interfaces/brinquedo';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Brinquedo } from '../../interfaces/brinquedo';
+
+type FormMode = 'create' | 'edit';
 
 @Component({
   selector: 'app-fbc-form',
-  imports: [FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './fbc-form.component.html',
   styleUrl: './fbc-form.component.scss',
 })
 export class FbcFormComponent {
-  /** Dados iniciais do formulário (edição ou cadastro vazio) */
+  @Input() mode: FormMode = 'create';
   @Input() toy: Brinquedo = {
+    id: 0,
     codigo: 0,
     descricao: '',
     categoria: '',
@@ -18,18 +24,19 @@ export class FbcFormComponent {
     imagem: '',
     valor: 0,
     detalhes: '',
+    quantVendas: 0,
   };
 
-  /** Emite os dados preenchidos quando clicar em salvar */
-  @Output() cadastrar = new EventEmitter<Brinquedo>();
-
-  /** Emite quando o formulário for cancelado */
+  @Output() save = new EventEmitter<Brinquedo>();
   @Output() cancel = new EventEmitter<void>();
 
-  onSubmit() {
-    this.cadastrar.emit(this.toy);
+  get isEdit(): boolean {
+    return this.mode === 'edit';
   }
 
+  onSubmit() {
+    this.save.emit(this.toy);
+  }
   onCancel() {
     this.cancel.emit();
   }

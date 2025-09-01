@@ -1,5 +1,5 @@
 export interface Brinquedo{
-  id?: number;
+  id: number;
   codigo: number;
   descricao: string;
   categoria: string;
@@ -7,5 +7,5 @@ export interface Brinquedo{
   imagem: string;
   valor: number;
   detalhes: string;
-  quantVendas?: number;
+  quantVendas: number;
 }

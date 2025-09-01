@@ -2,15 +2,15 @@
 
 .categoria {
   position: relative; // Essencial para posicionar o título sobre a imagem
-  width: 280px; // Largura e altura iguais para formar um círculo
-  height: 280px;
+  width: 210px; // Largura e altura iguais para formar um círculo
+  height: 210px;
   border-radius: 50%; // A mágica para deixar o container redondo
   overflow: hidden; // Esconde o que "vazar" do círculo (como o zoom da imagem)
   cursor: pointer;
 
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.4s ease-out;
-  
+
   img {
     width: 100%;
     height: 100%;

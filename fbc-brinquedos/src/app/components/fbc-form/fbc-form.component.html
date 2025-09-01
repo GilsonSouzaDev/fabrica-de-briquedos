@@ -1,18 +1,17 @@
+<!-- components/fbc-form/fbc-form.component.html -->
 <div class="fbc-form">
-
-  <h1>{{ toy.id ? 'Editar Brinquedo' : 'Cadastrar Brinquedo' }}</h1>
+  <h1>{{ isEdit ? 'Editar Brinquedo' : 'Cadastrar Brinquedo' }}</h1>
 
   <div class="form-container">
-
-  <form (ngSubmit)="onSubmit()" #form="ngForm">
-
-    <!-- ID oculto ou desabilitado -->
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <!-- id oculto (preservado na edição) -->
       <input type="hidden" [(ngModel)]="toy.id" name="id" />
 
       <label>Código</label>
-      <input [(ngModel)]="toy.codigo" name="codigo" required />
+      <input type="number" [(ngModel)]="toy.codigo" name="codigo" required
+             [readonly]="isEdit" />
 
-      <label>Descricao</label>
+      <label>Descrição</label>
       <input [(ngModel)]="toy.descricao" name="descricao" required />
 
       <label>Categoria</label>
@@ -25,18 +24,15 @@
       <input [(ngModel)]="toy.imagem" name="imagem" />
 
       <label>Valor</label>
-      <input type="number" [(ngModel)]="toy.valor" name="valor" />
+      <input type="number" [(ngModel)]="toy.valor" name="valor" required />
 
-      <label>Descrição</label>
-      <textarea [(ngModel)]="toy.detalhes" name="descricao"></textarea>
-
+      <label>Detalhes</label>
+      <textarea [(ngModel)]="toy.detalhes" name="detalhes"></textarea>
 
       <div class="actions">
-        <button type="submit">{{ toy.id ? 'Atualizar' : 'Cadastrar' }}</button>
+        <button type="submit">{{ isEdit ? 'Atualizar' : 'Cadastrar' }}</button>
+        <button type="button" (click)="onCancel()">Cancelar</button>
       </div>
-
-
     </form>
   </div>
-
 </div>

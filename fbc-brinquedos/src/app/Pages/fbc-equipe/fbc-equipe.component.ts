@@ -5,16 +5,12 @@ import { Brinquedo } from '../../interfaces/brinquedo';
 
 @Component({
   selector: 'app-fbc-equipe',
-  imports: [FbcFormComponent],
+  imports: [],
   templateUrl: './fbc-equipe.component.html',
   styleUrl: './fbc-equipe.component.scss',
 })
 export class FbcEquipeComponent {
 
-
-  onCadastro(form: Brinquedo){
-      console.log(form)
-  }
 
 
 }

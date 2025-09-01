@@ -1,23 +1,31 @@
+<!-- pages/fbc-admin/fbc-admin.component.html -->
 <main class="admin-page">
-  <h1 class="admin-page__title">Administração</h1>
 
-  <!-- O componente pai passa os dados e escuta os eventos -->
-  <app-fbc-admin-list
-    [brinquedos]="(paginatedBrinquedos$ | async)"
-    [isLoading]="!(brinquedos$ | async)"
-    (edit)="handleEdit($event)"
-    (remove)="handleRemove($event)">
-  </app-fbc-admin-list>
+  <ng-container *ngIf="view === 'list'; else formTpl">
+    <h2 class="admin-page__title">Administração</h2>
+    <app-fbc-admin-list
+      [brinquedos]="(paginatedBrinquedos$ | async)"
+      [isLoading]="!(brinquedos$ | async)"
+      (edit)="handleEdit($event)"
+      (remove)="handleRemove($event)">
+    </app-fbc-admin-list>
 
-  <!-- Paginador -->
-  <mat-paginator
-    [length]="(brinquedos$ | async)?.length || 0"
-    [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 20]"
-    (page)="onPageChange($event)">
-  </mat-paginator>
+    <mat-paginator
+      [length]="(brinquedos$ | async)?.length || 0"
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
 
+    <button class="btn btn--primary" (click)="newToy()">Novo Brinquedo</button>
+  </ng-container>
 
-  <button href="#" class="btn btn--primary">Novo Brinquedo</button>
-
+  <ng-template #formTpl>
+    <app-fbc-form
+      [mode]="formMode"
+      [toy]="currentToy"
+      (save)="onSave($event)"
+      (cancel)="onCancelForm()">
+    </app-fbc-form>
+  </ng-template>
 </main>
