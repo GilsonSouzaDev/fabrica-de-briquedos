@@ -1,0 +1,106 @@
+@use 'variables' as *;
+
+
+.detalhe-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: $bg-body-color;
+}
+
+.card-detalhe {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  background: $bg-card;
+  border: 1px solid $border-card-color;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 1000px;
+  width: 100%;
+  font-family: $fontcard;
+
+  .imagem-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 350px;
+      border-radius: 1rem;
+    }
+  }
+
+  .info-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .titulo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: $text-primary;
+      margin-bottom: 0.5rem;
+    }
+
+    .marca {
+      font-size: 1.2rem;
+      color: $text-secondary;
+      margin-bottom: 1rem;
+    }
+
+    .detalhes {
+      font-size: 1.1rem;
+      line-height: 1.4;
+      color: $text-primary;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-extra {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: $text-secondary;
+
+      span {
+        background: $nav-menu-color;
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.5rem;
+      }
+    }
+
+    .valor-compra {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2rem;
+
+      .preco {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: $second-color;
+      }
+
+      .btn-comprar {
+        background: $primary-color;
+        color: $text-light;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 0.8rem 1.6rem;
+        border: none;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: rgba($primary-color, 0.9); // Ou ajuste a opacidade
+            transform: scale(1.05);
+        }
+      }
+    }
+  }
+}

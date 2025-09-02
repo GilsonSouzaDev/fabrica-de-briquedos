@@ -3,6 +3,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Brinquedo } from '../../interfaces/brinquedo';
+import { Categoria } from '../../interfaces/categoria';
+import { CATEGORIAS } from '../../data/categoria';
 
 type FormMode = 'create' | 'edit';
 
@@ -29,6 +31,8 @@ export class FbcFormComponent {
 
   @Output() save = new EventEmitter<Brinquedo>();
   @Output() cancel = new EventEmitter<void>();
+
+  categorias: Categoria[] = CATEGORIAS;
 
   get isEdit(): boolean {
     return this.mode === 'edit';

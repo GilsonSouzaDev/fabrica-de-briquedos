@@ -26,7 +26,7 @@ type FormMode = 'create' | 'edit';
     MatPaginatorModule,
     FbcAdminListComponent,
     FbcFormComponent,
-  ],
+],
   templateUrl: './fbc-admin.component.html',
   styleUrl: './fbc-admin.component.scss',
   providers: [{ provide: MatPaginatorIntl, useFactory: CustomPaginator }],

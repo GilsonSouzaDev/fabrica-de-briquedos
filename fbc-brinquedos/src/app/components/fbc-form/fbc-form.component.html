@@ -15,7 +15,11 @@
       <input [(ngModel)]="toy.descricao" name="descricao" required />
 
       <label>Categoria</label>
-      <input [(ngModel)]="toy.categoria" name="categoria" required />
+      <select id="categoria" [(ngModel)]="toy.categoria" name="categoria" required>
+        <option *ngFor="let cat of categorias" [value]="cat.titulo">
+          {{ cat.titulo }}
+        </option>
+      </select>
 
       <label>Marca</label>
       <input [(ngModel)]="toy.marca" name="marca" />

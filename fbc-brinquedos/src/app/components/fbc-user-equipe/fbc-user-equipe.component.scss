@@ -1,0 +1,70 @@
+@use 'variables' as *;
+
+.equipe-container {
+  text-align: center;
+  padding: 2rem;
+  background-color: $bg-body-color;
+
+  h2 {
+    font-family: $fontcard;
+    font-size: 2rem;
+    color: $text-primary;
+    margin-bottom: 2rem;
+  }
+}
+
+.equipe-lista {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.membro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+  font-family: $fontcard;
+
+  .foto-wrapper {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: $nav-menu-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .nome {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 0.5rem;
+  }
+
+  .links {
+    display: flex;
+    gap: 0.8rem;
+
+    a {
+      font-size: 1.5rem;
+      color: $text-secondary;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}
