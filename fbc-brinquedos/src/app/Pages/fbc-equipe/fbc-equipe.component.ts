@@ -1,10 +1,8 @@
+import { UserEquipeService } from './../../services/user-equipe.service';
+import { UserEquipe } from './../../interfaces/user-equipe';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FbcFormComponent } from "../../components/fbc-form/fbc-form.component";
-import { FormControl } from '@angular/forms';
-import { Brinquedo } from '../../interfaces/brinquedo';
 import { FbcUserEquipeComponent } from "../../components/fbc-user-equipe/fbc-user-equipe.component";
-import { UserEquipe } from '../../interfaces/user-equipe';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,6 +12,12 @@ import { Observable } from 'rxjs';
   styleUrl: './fbc-equipe.component.scss',
 })
 export class FbcEquipeComponent {
-
   meusUsuarios$!: Observable<UserEquipe[]>;
+
+  constructor(private readonly userEquipeService: UserEquipeService) {}
+
+  ngOnInit() {
+    this.meusUsuarios$ = this.userEquipeService.getUserEquipe();
+    console.log(this.meusUsuarios$);
+  }
 }

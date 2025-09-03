@@ -1,8 +1,44 @@
- <div class="banner">
+  <!-- <div class="banner">
     <img
     ngSrc="/assets/img/banner-home.jpg"
     fill
     alt="banner"
     style="object-fit: cover;"
     loading="lazy">
+  </div> -->
+
+<div class="banner">
+  <!-- src/app/seu-componente/seu-componente.component.html -->
+
+<swiper-container
+  [slides-per-view]="1"
+  [space-between]="10"
+  [navigation]="true"
+  [pagination]="{ clickable: true }"
+  [loop]="true"
+  >
+
+  <swiper-slide>
+    <img src="/assets/img/banner-home.jpg" alt="Slide 1">
+  </swiper-slide>
+  <swiper-slide>
+    <img src="/assets/img/banner-home2.jpg" alt="Slide 3">
+  </swiper-slide>
+
+    <swiper-slide>
+    <img src="/assets/img/banner-home3.jpg" alt="Slide 3">
+  </swiper-slide>
+
+  <swiper-slide>
+    <img src="/assets/img/banner-home4.jpg" alt="Slide 3">
+  </swiper-slide>
+
+  <swiper-slide>
+    <img src="/assets/img/banner-home5.jpg" alt="Slide 3">
+  </swiper-slide>
+
+
+</swiper-container>
+
+
 </div>

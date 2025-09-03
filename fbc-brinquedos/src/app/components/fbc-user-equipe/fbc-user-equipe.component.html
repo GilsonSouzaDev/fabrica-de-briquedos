@@ -1,21 +1,19 @@
-<div class="equipe-container">
-  <h2>Equipe</h2>
+<div class="usuario-container">
 
-  <div class="equipe-lista">
-    <div class="membro">
-      <div class="foto-wrapper">
-        <img [src]="equipe.userImagem" [alt]="equipe.nome + ' ' + equipe.sobrenome" />
-      </div>
-      <p class="nome">{{ equipe.nome }} {{ equipe.sobrenome }}</p>
-      <div class="links">
-        <a [href]="equipe.userLinkedin" target="_blank">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a [href]="equipe.userGitHub" target="_blank">
-          <i class="fab fa-github"></i>
-        </a>
-      </div>
+  <div class="usuario">
+    <div class="foto-wrapper">
+      <img [src]="equipe.userImagem" [alt]="equipe.nome + ' ' + equipe.sobrenome" />
+    </div>
+    <p class="nome">{{ equipe.nome }} {{ equipe.sobrenome }}</p>
+    <div class="links">
+      <a [href]="equipe.userLinkedin" target="_blank">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a [href]="equipe.userGitHub" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
     </div>
   </div>
 </div>
+
 
