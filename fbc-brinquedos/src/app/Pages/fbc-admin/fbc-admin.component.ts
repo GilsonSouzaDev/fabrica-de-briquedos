@@ -14,6 +14,7 @@ import { FbcAdminListComponent } from '../../components/fbc-admin-list/fbc-admin
 import { FbcFormComponent } from '../../components/fbc-form/fbc-form.component';
 import { CustomPaginator } from '../../utils/custom-paginator-intl';
 import { paginate } from '../../utils/pagination.util';
+import { DialogService } from '../../shared/services/dialog.service';
 
 type ViewMode = 'list' | 'form';
 type FormMode = 'create' | 'edit';
@@ -26,34 +27,26 @@ type FormMode = 'create' | 'edit';
     MatPaginatorModule,
     FbcAdminListComponent,
     FbcFormComponent,
-],
+  ],
   templateUrl: './fbc-admin.component.html',
   styleUrl: './fbc-admin.component.scss',
   providers: [{ provide: MatPaginatorIntl, useFactory: CustomPaginator }],
 })
 export class FbcAdminComponent {
   private brinquedoService = inject(BrinquedoService);
+  private dialogService = inject(DialogService);
 
-  // streams
   brinquedos$!: Observable<Brinquedo[]>;
   paginatedBrinquedos$!: Observable<Brinquedo[]>;
-
-  // paginação
   private pageIndex$ = new BehaviorSubject(0);
   private pageSize$ = new BehaviorSubject(5);
-
-  // estado de tela/form
   view: ViewMode = 'list';
   formMode: FormMode = 'create';
   currentToy!: Brinquedo;
-
-  // snapshot para achar item por id ao editar
   private latestBrinquedos: Brinquedo[] = [];
 
   ngOnInit(): void {
     this.brinquedos$ = this.brinquedoService.getBrinquedos();
-
-    // guardar snapshot
     this.brinquedos$.subscribe((list) => (this.latestBrinquedos = list ?? []));
 
     this.paginatedBrinquedos$ = combineLatest([
@@ -72,7 +65,6 @@ export class FbcAdminComponent {
     this.pageSize$.next(event.pageSize);
   }
 
-  // === ações de UI ===
   newToy(): void {
     this.formMode = 'create';
     this.currentToy = {
@@ -89,15 +81,16 @@ export class FbcAdminComponent {
     this.view = 'form';
   }
 
+  // --- handleEdit CORRIGIDO: SEM DIÁLOGO ---
+  // A responsabilidade é apenas preparar o formulário para edição.
   handleEdit(id: number): void {
     const found = this.latestBrinquedos.find((b) => b.id === id);
     if (found) {
-      // clonar para não mutar a lista
       this.currentToy = { ...found };
       this.formMode = 'edit';
       this.view = 'form';
     } else {
-      // fallback: buscar do serviço, se preferir
+      // Fallback caso o item não esteja na lista local
       this.brinquedoService.getBrinquedoPorId(id).subscribe((item) => {
         this.currentToy = { ...item };
         this.formMode = 'edit';
@@ -106,25 +99,56 @@ export class FbcAdminComponent {
     }
   }
 
+  // --- handleRemove COM DIÁLOGO ---
   handleRemove(id: number): void {
-    // lógica de remoção
-    this.brinquedoService.removerBrinquedo(id).subscribe(() => {
-      // serviço deve atualizar a stream interna (ou recarregar)
-      // aqui só garantimos que a tela continue na lista
-      this.view = 'list';
+    const toyToRemove = this.latestBrinquedos.find((b) => b.id === id);
+    const toyDescription = toyToRemove
+      ? `"${toyToRemove.descricao}"`
+      : 'o item selecionado';
+
+    const dialogRef = this.dialogService.confirmAction({
+      title: 'Confirmar Exclusão',
+      message: `Você tem certeza que deseja excluir ${toyDescription}? Esta ação não pode ser desfeita.`,
+      confirmButtonText: 'Sim, Excluir',
+      cancelButtonText: 'Cancelar',
+      action: () => this.brinquedoService.removerBrinquedo(id),
+    });
+
+    dialogRef.afterClosed().subscribe((success) => {
+      if (success) {
+        this.view = 'list';
+      }
     });
   }
 
+  // --- onSave COM DIÁLOGO PARA CRIAR E EDITAR ---
   onSave(toy: Brinquedo): void {
     if (this.formMode === 'create') {
-      this.brinquedoService.adicionarBrinquedo(toy).subscribe(() => {
-        this.afterPersist();
+      const dialogRef = this.dialogService.confirmAction({
+        title: 'Confirmar Criação',
+        message: `Deseja realmente adicionar o novo brinquedo "${toy.descricao}"?`,
+        confirmButtonText: 'Sim, Criar',
+        cancelButtonText: 'Não, Voltar',
+        action: () => this.brinquedoService.adicionarBrinquedo(toy),
+      });
+
+      dialogRef.afterClosed().subscribe((success) => {
+        if (success) this.afterPersist();
       });
     } else {
-      // segurança: garantir que id exista na edição
+      // formMode === 'edit'
       if (!toy.id) return;
-      this.brinquedoService.atualizarBrinquedo(toy.id, toy).subscribe(() => {
-        this.afterPersist();
+
+      const dialogRef = this.dialogService.confirmAction({
+        title: 'Confirmar Alterações',
+        message: `Deseja salvar as alterações feitas no brinquedo "${toy.descricao}"?`,
+        confirmButtonText: 'Sim, Salvar',
+        cancelButtonText: 'Não, Descartar',
+        action: () => this.brinquedoService.atualizarBrinquedo(toy.id!, toy),
+      });
+
+      dialogRef.afterClosed().subscribe((success) => {
+        if (success) this.afterPersist();
       });
     }
   }
@@ -134,9 +158,7 @@ export class FbcAdminComponent {
   }
 
   private afterPersist(): void {
-    // opcional: resetar paginação ou manter
     this.pageIndex$.next(0);
-    // o serviço deve emitir a nova lista (BehaviorSubject/shareReplay ou refetch)
     this.view = 'list';
   }
 }

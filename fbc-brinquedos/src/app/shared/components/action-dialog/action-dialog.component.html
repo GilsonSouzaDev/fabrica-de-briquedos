@@ -1,0 +1,40 @@
+<div [ngSwitch]="state">
+
+  <!-- Estado 1: CONFIRMAÇÃO INICIAL -->
+  <ng-container *ngSwitchCase="'confirmation'">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <div mat-dialog-content>
+      <p>{{ data.message }}</p>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button (click)="onCancel()">{{ data.cancelButtonText }}</button>
+      <button mat-raised-button color="primary" (click)="onConfirm()" cdkFocusInitial>{{ data.confirmButtonText }}</button>
+    </div>
+  </ng-container>
+
+  <!-- Estado 2: CARREGANDO -->
+  <ng-container *ngSwitchCase="'loading'">
+    <h1 mat-dialog-title>Processando...</h1>
+    <div mat-dialog-content class="state-content-wrapper">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Por favor, aguarde.</p>
+    </div>
+  </ng-container>
+
+  <!-- Estado 3: RESULTADO (SUCESSO/FALHA) -->
+  <ng-container *ngSwitchCase="'result'">
+    <h1 mat-dialog-title [class.success-text]="resultData?.success" [class.error-text]="!resultData?.success">
+      {{ resultData?.title }}
+    </h1>
+    <div mat-dialog-content class="state-content-wrapper">
+      <mat-icon *ngIf="resultData?.success" class="success-text result-icon">check_circle</mat-icon>
+      <mat-icon *ngIf="!resultData?.success" class="error-text result-icon">error</mat-icon>
+      <p>{{ resultData?.message }}</p>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-raised-button [color]="resultData?.success ? 'primary' : 'warn'" (click)="closeDialog()">Fechar</button>
+    </div>
+  </ng-container>
+
+</div>
+
