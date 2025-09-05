@@ -1,5 +1,7 @@
 <div class="card" (click)="onClicked()">
-  <img [src]=brinquedo.imagem alt="imagem do card">
+  <img
+  *ngIf="brinquedo?.imagem"
+  [src]=brinquedo.imagem alt="imagem do card">
   <p>{{ brinquedo.descricao }}</p>
   <p class="preco">{{ brinquedo.valor | currency:'BRL'}} </p>
 </div>

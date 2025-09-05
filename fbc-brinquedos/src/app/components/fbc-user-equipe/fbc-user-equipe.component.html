@@ -2,7 +2,9 @@
 
   <div class="usuario">
     <div class="foto-wrapper">
-      <img [src]="equipe.userImagem" [alt]="equipe.nome + ' ' + equipe.sobrenome" />
+      <img
+      *ngIf="equipe?.userImagem"
+      [src]="equipe.userImagem" [alt]="equipe.nome + ' ' + equipe.sobrenome" />
     </div>
     <p class="nome">{{ equipe.nome }} {{ equipe.sobrenome }}</p>
     <div class="links">

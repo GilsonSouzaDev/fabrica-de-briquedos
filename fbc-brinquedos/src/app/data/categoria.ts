@@ -3,43 +3,43 @@ import { Categoria } from '../interfaces/categoria';
 export const CATEGORIAS: Categoria[] = [
   {
     titulo: 'Veículos',
-    imagem: 'assets/img/category/veiculos.png',
+    imagem: 'https://i.imgur.com/65zGku1.png',
   },
   {
     titulo: 'Bonecas',
-    imagem: 'assets/img/category/bonecas.png',
+    imagem: 'https://i.imgur.com/WL721d2.png',
   },
   {
     titulo: 'Construção',
-    imagem: 'assets/img/category/construcao.png',
+    imagem: 'https://i.imgur.com/upev2RO.png',
   },
   {
     titulo: 'Pelúcia',
-    imagem: 'assets/img/category/pelucia.png',
+    imagem: 'https://i.imgur.com/yiQtoBj.png',
   },
   {
     titulo: 'Quebra-Cabeça',
-    imagem: 'assets/img/category/quebra-cabeca.png',
+    imagem: 'https://i.imgur.com/DU6Uyfn.png',
   },
   {
     titulo: 'Jogos',
-    imagem: 'assets/img/category/jogos.png',
+    imagem: 'https://i.imgur.com/qIqUkDZ.png',
   },
   {
     titulo: 'Profissões',
-    imagem: 'assets/img/category/profissoes.png',
+    imagem: 'https://i.imgur.com/yP5q8tp.png',
   },
   {
     titulo: 'Esportes',
-    imagem: 'assets/img/category/esportes.png',
+    imagem: 'https://i.imgur.com/qIqUkDZ.png',
   },
   {
     titulo: 'Ação',
-    imagem: 'assets/img/category/acao.png',
+    imagem: 'https://i.imgur.com/fSIYd2h.png',
   },
   {
     titulo: 'Artes',
-    imagem: 'assets/img/category/artes.png',
+    imagem: 'https://i.imgur.com/GyZDjzM.png',
   },
 
   // {
@@ -48,6 +48,6 @@ export const CATEGORIAS: Categoria[] = [
   // },
   // {
   //   titulo: 'Musical',
-  //   imagem: 'assets/img/category/musical.png',
+  //   imagem: 'https://i.imgur.com/9vwGmPb.png',
   // },
 ];

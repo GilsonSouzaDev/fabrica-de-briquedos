@@ -1,10 +1,12 @@
 <div class="detalhe-container">
   <div class="card-detalhe">
     <div class="imagem-container">
-      <img [src]="brinquedoDetalhe.imagem" [alt]="brinquedoDetalhe.descricao" />
+      <img
+      *ngIf="brinquedoDetalhe?.imagem"
+      [src]="brinquedoDetalhe.imagem" [alt]="brinquedoDetalhe.descricao" />
     </div>
 
-    <div class="info-container">
+    <div class="info-container" *ngIf="brinquedoDetalhe">
       <h1 class="titulo">{{ brinquedoDetalhe.descricao }}</h1>
       <p class="marca">{{ brinquedoDetalhe.marca }}</p>
       <p class="detalhes">{{ brinquedoDetalhe.detalhes }}</p>

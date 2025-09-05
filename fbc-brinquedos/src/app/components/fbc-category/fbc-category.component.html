@@ -1,4 +1,6 @@
 <div class="categoria" (click)="onClick()">
-  <img [src]=categoria.imagem alt="imagem da categoria">
+  <img
+  *ngIf="categoria?.imagem"
+  [src]=categoria.imagem alt="imagem da categoria">
   <h1>{{ categoria.titulo }}</h1>
 </div>

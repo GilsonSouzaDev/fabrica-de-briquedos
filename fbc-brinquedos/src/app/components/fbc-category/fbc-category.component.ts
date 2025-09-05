@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Categoria } from '../../interfaces/categoria';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-fbc-category',
-  imports: [],
+  imports: [NgIf],
   templateUrl: './fbc-category.component.html',
   styleUrl: './fbc-category.component.scss',
 })
@@ -16,5 +17,5 @@ export class FbcCategoryComponent {
     this.categoryClicked.emit(this.categoria.titulo); // Emite o título da categoria
   }
 
-  
+
 }
