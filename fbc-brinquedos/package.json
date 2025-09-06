@@ -1,13 +1,16 @@
 {
   "name": "fbc-brinquedos",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:fbc-brinquedos": "node dist/fbc-brinquedos/server/server.mjs"
+    "build:ssr": "ng build && ng run fbc-brinquedos:server",
+    "serve:ssr": "node dist/fbc-brinquedos/server/main.js",
+    "dev:ssr": "ng run fbc-brinquedos:serve-ssr",
+    "prerender": "ng run fbc-brinquedos:prerender"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +26,7 @@
     "@angular/router": "^19.2.0",
     "@angular/ssr": "^19.2.1",
     "@fortawesome/fontawesome-free": "^7.0.1",
+    "@vercel/node": "^5.3.21",
     "express": "^4.18.2",
     "ngx-bootstrap": "^19.0.2",
     "normalize.css": "^8.0.1",
@@ -45,5 +49,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
