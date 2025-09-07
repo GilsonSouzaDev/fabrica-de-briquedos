@@ -1,0 +1,128 @@
+@use 'variables' as *;
+
+// Estilo principal do container da página de login
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $bg-body-color;
+  padding: 1rem;
+}
+
+// O card de login central
+.login-card {
+  background-color: $bg-card;
+  border: 1px solid $border-card-color;
+  border-radius: 12px; // Consistente com os cards do seu site
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Sombra suave
+  padding: 0.5rem 3rem;
+  width: 100%;
+  max-width: 450px; // Largura máxima do card
+  text-align: center;
+}
+
+// Cabeçalho com logo, título e subtítulo
+.login-header {
+  margin-bottom: 1rem;
+
+  .login-logo {
+    max-width: 150px;
+  }
+
+  h2 {
+    color: $text-primary;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-top: 0.5rem;
+  }
+}
+
+// Estilo do formulário
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; // Espaçamento entre os grupos de formulário
+}
+
+// Grupos de formulário (label + input)
+.form-group {
+  text-align: left;
+
+  label {
+    display: block;
+    color: $text-primary;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid $border-card-color;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+    }
+  }
+}
+
+// Opções extras (Esqueceu a senha?)
+.form-options {
+  text-align: right;
+  margin-top: -0.5rem; // Puxa um pouco para cima
+
+  .forgot-password {
+    color: $second-color;
+    font-size: 0.9rem;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Botão principal de login
+.btn-login {
+  background-color: $primary-color;
+  color: $text-light;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 0.5rem;
+
+  &:hover {
+    background-color: $second-color; // Escurece no hover
+  }
+}
+
+// Rodapé do card (link para cadastro)
+.login-footer {
+  margin-top: 2rem;
+  color: $text-secondary;
+  font-size: 0.9rem;
+
+  a {
+    color: $second-color;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { FbcEquipeComponent } from './Pages/fbc-equipe/fbc-equipe.component';
 import { FbcCatalogComponent } from './Pages/fbc-catalog/fbc-catalog.component';
 import { FbcAdminComponent } from './Pages/fbc-admin/fbc-admin.component';
 import { DetalhesPageComponent } from './Pages/detalhes-page/detalhes-page.component';
+import { FbcLoginpageComponent } from './Pages/fbc-loginpage/fbc-loginpage.component';
 
 export const routes: Routes = [
   { path: '', component: FbcHomeComponent },
@@ -11,4 +12,5 @@ export const routes: Routes = [
   { path: 'catalogo', component: FbcCatalogComponent },
   { path: 'admin', component: FbcAdminComponent },
   { path: 'detalhes', component: DetalhesPageComponent },
+  { path: 'login', component: FbcLoginpageComponent },
 ];

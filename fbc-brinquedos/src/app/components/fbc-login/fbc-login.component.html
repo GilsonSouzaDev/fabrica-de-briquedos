@@ -1,1 +1,32 @@
-<p>fbc-login works!</p>
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <img src="assets/img/logotipo-fabrica.png" alt="Logo Fábrica de Brinquedos" class="login-logo">
+      <h2>Acessar Painel</h2>
+      <p>Bem-vindo(a) de volta! Faça login para continuar.</p>
+    </div>
+
+    <form class="login-form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" [(ngModel)]="usuarioAdmin.userLogin" name="email" placeholder="seuemail@exemplo.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" [(ngModel)]="usuarioAdmin.userSenha" name="password" placeholder="••••••••" required>
+      </div>
+
+      <div class="form-options">
+        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+      </div>
+
+      <button type="submit" class="btn-login">Entrar</button>
+    </form>
+
+    <div class="login-footer">
+      <p>Ainda não tem uma conta? <a href="#">Cadastre-se</a></p>
+    </div>
+  </div>
+</div>
+
