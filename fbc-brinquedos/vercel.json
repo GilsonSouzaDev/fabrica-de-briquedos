@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "dist/fbc-brinquedos",
+  "outputDirectory": "dist/fbc-brinquedos/browser",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
