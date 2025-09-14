@@ -1,5 +1,5 @@
 export interface UsuarioAdmin{
   nome: string,
-  userLogin: string,
+  userEmail: string,
   userSenha: string
 }

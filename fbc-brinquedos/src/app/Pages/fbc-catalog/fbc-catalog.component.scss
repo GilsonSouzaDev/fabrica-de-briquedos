@@ -34,6 +34,7 @@
   &__card-category {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     gap: 32px;
     padding: 16px;
 
