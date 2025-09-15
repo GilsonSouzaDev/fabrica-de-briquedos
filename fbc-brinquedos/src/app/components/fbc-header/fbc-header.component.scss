@@ -2,13 +2,19 @@
 
 .header__container{
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-
   background-color: $primary-color ;
   height: 70px;
   min-height: 57px;
   max-height: 90px;
+
+  img {
+    justify-items: center;
+    align-items: center;
+    margin: auto;
+  }
+
+  app-fbc-usermenu{
+    justify-items: end;
+  }
 
 }

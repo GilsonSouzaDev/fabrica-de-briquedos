@@ -3,6 +3,12 @@
       <li class="menu__lista-item" routerLink="/">Home</li>
       <li class="menu__lista-item" routerLink="/catalogo">Catálogo</li>
       <li class="menu__lista-item" routerLink="/sobre">Equipe</li>
-      <li class="menu__lista-item" routerLink="/login">Administração</li>
+      @if ( isLoggedIn() ) {
+        <li class="menu__lista-item" routerLink="/admin">Administração</li>
+      }
+      @else{
+        <li class="menu__lista-item" routerLink="/login">Administração</li>
+      }
+
     </ul>
 </div>
