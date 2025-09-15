@@ -2,7 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 600px;
+  flex-wrap: wrap;
+  margin-top: 128px;
+  height: auto;
   gap: 16px;
 
 }
