@@ -15,6 +15,7 @@ import { FbcFormComponent } from '../../components/fbc-form/fbc-form.component';
 import { CustomPaginator } from '../../utils/custom-paginator-intl';
 import { paginate } from '../../utils/pagination.util';
 import { DialogService } from '../../shared/services/dialog.service';
+import { getNextCodigo } from '../../utils/codigo.util';
 
 type ViewMode = 'list' | 'form';
 type FormMode = 'create' | 'edit';
@@ -79,9 +80,13 @@ export class FbcAdminComponent {
 
   newToy(): void {
     this.formMode = 'create';
+
+   const nextCode = getNextCodigo(this.latestBrinquedos);
+
+
     this.currentToy = {
       id: 0,
-      codigo: 0,
+      codigo: nextCode,
       descricao: '',
       categoria: '',
       marca: '',
