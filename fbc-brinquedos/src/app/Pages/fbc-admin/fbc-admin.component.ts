@@ -37,20 +37,32 @@ export class FbcAdminComponent {
   private dialogService = inject(DialogService);
 
   brinquedos$!: Observable<Brinquedo[]>;
+
+  // --- NOVO: Subject local que controla a lista exibida ---
+  private localBrinquedos$ = new BehaviorSubject<Brinquedo[]>([]);
+
   paginatedBrinquedos$!: Observable<Brinquedo[]>;
   private pageIndex$ = new BehaviorSubject(0);
   private pageSize$ = new BehaviorSubject(5);
   view: ViewMode = 'list';
   formMode: FormMode = 'create';
   currentToy!: Brinquedo;
+
   private latestBrinquedos: Brinquedo[] = [];
 
   ngOnInit(): void {
+    // carrega a lista original
     this.brinquedos$ = this.brinquedoService.getBrinquedos();
-    this.brinquedos$.subscribe((list) => (this.latestBrinquedos = list ?? []));
 
+    // mantém a cópia local e joga no BehaviorSubject
+    this.brinquedos$.subscribe((list) => {
+      this.latestBrinquedos = list ?? [];
+      this.localBrinquedos$.next(this.latestBrinquedos);
+    });
+
+    // paginação agora usa a lista local
     this.paginatedBrinquedos$ = combineLatest([
-      this.brinquedos$,
+      this.localBrinquedos$,
       this.pageIndex$,
       this.pageSize$,
     ]).pipe(
@@ -81,8 +93,6 @@ export class FbcAdminComponent {
     this.view = 'form';
   }
 
-  // --- handleEdit CORRIGIDO: SEM DIÁLOGO ---
-  // A responsabilidade é apenas preparar o formulário para edição.
   handleEdit(id: number): void {
     const found = this.latestBrinquedos.find((b) => b.id === id);
     if (found) {
@@ -90,7 +100,6 @@ export class FbcAdminComponent {
       this.formMode = 'edit';
       this.view = 'form';
     } else {
-      // Fallback caso o item não esteja na lista local
       this.brinquedoService.getBrinquedoPorId(id).subscribe((item) => {
         this.currentToy = { ...item };
         this.formMode = 'edit';
@@ -99,7 +108,7 @@ export class FbcAdminComponent {
     }
   }
 
-  // --- handleRemove COM DIÁLOGO ---
+  // --- handleRemove atualizado ---
   handleRemove(id: number): void {
     const toyToRemove = this.latestBrinquedos.find((b) => b.id === id);
     const toyDescription = toyToRemove
@@ -116,12 +125,20 @@ export class FbcAdminComponent {
 
     dialogRef.afterClosed().subscribe((success) => {
       if (success) {
-        this.view = 'list';
+        // remove do array local
+        this.latestBrinquedos = this.latestBrinquedos.filter(
+          (b) => b.id !== id
+        );
+
+        // atualiza a lista usada pela tabela
+        this.localBrinquedos$.next(this.latestBrinquedos);
+
+        // opcional: voltar para a primeira página para evitar páginas vazias
+        this.pageIndex$.next(0);
       }
     });
   }
 
-  // --- onSave COM DIÁLOGO PARA CRIAR E EDITAR ---
   onSave(toy: Brinquedo): void {
     if (this.formMode === 'create') {
       const dialogRef = this.dialogService.confirmAction({
@@ -136,7 +153,6 @@ export class FbcAdminComponent {
         if (success) this.afterPersist();
       });
     } else {
-      // formMode === 'edit'
       if (!toy.id) return;
 
       const dialogRef = this.dialogService.confirmAction({

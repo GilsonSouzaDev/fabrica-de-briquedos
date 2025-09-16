@@ -107,6 +107,15 @@
       }
     }
   }
+
+    .product-table tr {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .product-table tr.removendo {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
 }
 
 .loading-spinner {

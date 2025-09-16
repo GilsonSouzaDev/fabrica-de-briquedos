@@ -1,4 +1,4 @@
-export interface Brinquedo{
+export interface Brinquedo {
   id: number;
   codigo: number;
   descricao: string;
@@ -8,4 +8,5 @@ export interface Brinquedo{
   valor: number;
   detalhes: string;
   quantVendas: number;
+
 }

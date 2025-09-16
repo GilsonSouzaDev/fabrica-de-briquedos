@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './fbc-admin-list.component.scss',
 })
 export class FbcAdminListComponent {
+
   // RECEBE os dados. Não busca, não conhece serviços.
   @Input() brinquedos: Brinquedo[] | null = [];
   @Input() isLoading = false;
