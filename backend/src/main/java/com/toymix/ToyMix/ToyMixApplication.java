@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ToyMixApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ToyMixApplication.class, args);
+        SpringApplication.run(ToyMixApplication.class, args);
 	}
 
 }
