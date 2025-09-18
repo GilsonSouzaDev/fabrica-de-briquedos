@@ -1,5 +1,6 @@
-export interface UsuarioAdmin{
-  nome: string,
-  userEmail: string,
-  userSenha: string
+export interface UsuarioAdmin {
+  id_usuario: number;
+  nome: string;
+  userEmail: string;
+  userSenha: string;
 }

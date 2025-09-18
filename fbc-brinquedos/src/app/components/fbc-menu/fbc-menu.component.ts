@@ -1,6 +1,7 @@
 import { Component, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { AuthApiService } from '../../services/auth-api.service';
 
 @Component({
   selector: 'app-fbc-menu',
@@ -12,8 +13,8 @@ export class FbcMenuComponent {
 
   public readonly isLoggedIn: Signal<boolean>;
 
-  constructor(private readonly authService: AuthService) {
-    this.isLoggedIn = this.authService.isLoggedIn;
+  constructor(private readonly authApiService: AuthApiService) {
+    this.isLoggedIn = this.authApiService.isLoggedIn;
 
   }
 }
