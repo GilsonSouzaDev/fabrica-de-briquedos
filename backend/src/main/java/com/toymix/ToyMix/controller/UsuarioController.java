@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/usuario")
 public class UsuarioController {
 
@@ -21,11 +22,20 @@ public class UsuarioController {
         return usuarioService.listarTodosUsuarios();
     }
 
+
     @PostMapping
     public ResponseEntity<UsuarioDTO> salvar(@RequestBody UsuarioDTO usuarioDTO) {
         Usuario usuario = usuarioService.salvarCadastro(usuarioDTO);
         return ResponseEntity.ok(usuarioDTO);
     }
+
+    @GetMapping("/email/{userEmail}")
+    public ResponseEntity<Usuario> buscarUsuarioPorEmail(@PathVariable String userEmail) {
+        return usuarioService.buscarPorEmail(userEmail)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 
     @PutMapping("/{id_usuario}")
     public ResponseEntity<Usuario> atualizar(@PathVariable int id_usuario, @RequestBody UsuarioDTO usuarioDTO) {
@@ -39,5 +49,14 @@ public class UsuarioController {
         usuarioService.excluirCadastro(id_usuario);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<UsuarioDTO> login(@RequestBody UsuarioDTO loginRequest) {
+        return usuarioService.login(loginRequest.getUserEmail(), loginRequest.getUserSenha())
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(401).build()); // Unauthorized
+    }
+
+
 
 }
