@@ -53,7 +53,7 @@ public class UsuarioService {
                     UsuarioDTO dto = new UsuarioDTO();
                     dto.setNome(usuario.getNome());
                     dto.setUserEmail(usuario.getUserEmail());
-                    // 🚫 não retorna senha
+                    // não retorna senha
                     return dto;
                 });
     }
