@@ -5,11 +5,11 @@
             <table class="product-table">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Valor</th>
-                        <th>Ações</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,9 +29,9 @@
                             <td>{{ brinquedo.categoria }}</td>
                             <td>{{ brinquedo.valor | currency:'BRL' }}</td>
                             <td>
-                                <!-- Dispara os outputs ao ser clicado -->
-                                <a href="javascript:void(0)" (click)="onEdit(brinquedo.id!)" class="product-table__action product-table__action--edit">Editar</a>
-                                <a href="javascript:void(0)" (click)="onRemove(brinquedo.id!)" class="product-table__action product-table__action--delete">Apagar</a>
+                                <!-- Ações agora são botões para melhor semântica e acessibilidade -->
+                                <button type="button" (click)="onEdit(brinquedo.id!)" class="product-table__action product-table__action--edit">Editar</button>
+                                <button type="button" (click)="onRemove(brinquedo.id!)" class="product-table__action product-table__action--delete">Apagar</button>
                             </td>
                         </tr>
                       }
@@ -48,4 +48,3 @@
         </div>
     </div>
 </div>
-

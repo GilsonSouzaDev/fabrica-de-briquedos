@@ -1,44 +1,58 @@
+@use "sass:math";
 @use 'variables' as *;
+
+@function rem($pixels) {
+  @return math.div($pixels, 16) * 1rem;
+}
+
+// Definindo variáveis CSS no escopo do componente para fácil customização
+:host {
+  --text-primary-color: #{$text-primary};
+  --primary-theme-color: #{$primary-color};
+  --avatar-max-size: #{rem(200)};
+  --avatar-min-size: #{rem(150)};
+}
 
 .usuario-container {
   padding: 2rem;
   background-color: $bg-body-color;
 
-
   h2 {
     font-family: $fontcard;
     font-size: 2rem;
-    color: $text-primary;
+    color: var(--text-primary-color);
     margin-bottom: 2rem;
   }
 }
 
-
 .foto-wrapper {
-  width: 200px;
-  height: 200px;
+  // 1. Tamanho Fluido: O avatar se ajustará entre 150px e 200px
+  width: clamp(var(--avatar-min-size), 25vw, var(--avatar-max-size));
+
+  // 2. Proporção Perfeita: Mantém o círculo perfeito sem fixar a altura
+  aspect-ratio: 1 / 1;
+
   border-radius: 50%;
   background-color: $nav-menu-color;
   display: flex;
   justify-content: center;
-  justify-items: center;
   align-items: center;
   overflow: hidden;
+  margin-inline: auto; // Centraliza horizontalmente
   margin-bottom: 1rem;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 rem(6) rem(15) rgba(0, 0, 0, 0.1); // Convertido para rem
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
   }
 }
 
 .nome {
   font-size: 1.1rem;
   font-weight: 600;
-  color: $text-primary;
+  color: var(--text-primary-color);
   margin-bottom: 0.5rem;
   text-align: center;
 }
@@ -54,8 +68,7 @@
     transition: color 0.2s ease;
 
     &:hover {
-        color: $primary-color;
+      color: var(--primary-theme-color);
     }
   }
-
 }

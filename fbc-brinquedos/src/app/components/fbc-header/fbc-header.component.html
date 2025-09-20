@@ -1,8 +1,10 @@
-<div class="header__container">
-  <img ngSrc="/assets/img/toymix.png" width="110" height="90" alt="logotipo" loading="lazy" >
-  @if ( isLoggedIn())
-  {
+<!-- header.component.html -->
+<header class="header__container">
+  <a routerLink="/" class="header__logo-link" aria-label="Página Inicial">
+    <img ngSrc="/assets/img/toymix.png" width="110" height="90" alt="Logotipo ToyMix" loading="lazy">
+  </a>
+
+  @if (isLoggedIn()) {
     <app-fbc-usermenu></app-fbc-usermenu>
   }
-</div>
-
+</header>

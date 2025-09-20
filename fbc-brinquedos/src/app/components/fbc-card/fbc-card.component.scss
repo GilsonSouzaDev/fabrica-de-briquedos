@@ -1,34 +1,40 @@
 @use 'variables' as *;
+@use 'sass:math';
+
+// Função para converter px para rem.
+@function rem($pixels, $context: 16) {
+  @return math.div($pixels, $context) * 1rem;
+}
 
 .card {
   display: flex;
   flex-direction: column;
   text-align: center;
   background-color: $bg-card;
-  width: 180px;
-  height: 250px;
-  border-radius: 10px;
-  border: solid 1px $border-card-color;
-  box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
+  width: rem(180); // Convertido
+  height: rem(250); // Convertido
+  border-radius: rem(10); // Convertido
+  border: solid 1px $border-card-color; // 1px mantido por ser uma unidade atômica
+  box-shadow: 0px rem(4) rem(6) rem(-2) rgba(0, 0, 0, 0.4); // Convertido
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
-  .preco{
+  .preco {
     color: $second-color;
     font-weight: 500;
   }
 
   img {
     width: 100%;
-    height: 140px;
-    border-radius: 11px;
+    height: rem(140); // Convertido
+    border-radius: rem(11); // Convertido
     transition: transform 0.3s ease-in-out;
   }
 
   // Efeito ao passar o mouse
   &:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow: 0px 8px 15px -2px rgba(0, 0, 0, 0.5);
+    transform: translateY(rem(-5)) scale(1.03); // Convertido
+    box-shadow: 0px rem(8) rem(15) rem(-2) rgba(0, 0, 0, 0.5); // Convertido
 
     img {
       transform: scale(1.05);

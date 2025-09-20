@@ -1,7 +1,19 @@
-<div class="card" (click)="onClicked()">
+<!-- O (click) foi movido para um elemento <article> para melhor semântica. -->
+<!-- <article> é a tag ideal para um conteúdo autônomo e repetível, como um card de produto. -->
+<article class="card" (click)="onClicked()">
+
+  <!-- O alt text agora é descritivo, melhorando acessibilidade e SEO. -->
   <img
-  *ngIf="brinquedo?.imagem"
-  [src]=brinquedo.imagem alt="imagem do card">
+    *ngIf="brinquedo?.imagem"
+    [src]="brinquedo.imagem"
+    [alt]="brinquedo.descricao">
+
   <p>{{ brinquedo.descricao }}</p>
-  <p class="preco">{{ brinquedo.valor | currency:'BRL'}} </p>
-</div>
+
+  <!-- O uso de <strong> dá ênfase semântica ao preço. -->
+  <p class="preco">
+    <strong>{{ brinquedo.valor | currency:'BRL' }}</strong>
+  </p>
+
+</article>
+

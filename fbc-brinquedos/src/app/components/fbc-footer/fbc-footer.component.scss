@@ -1,18 +1,24 @@
 @use 'variables' as *;
+@use 'sass:math';
 
-.footer{
+// Função para converter px para rem.
+@function rem($pixels, $context: 16) {
+  @return math.div($pixels, $context) * 1rem;
+}
+
+.footer {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto;
-  margin-top: 48px;
+  margin-top: rem(48); // Convertido
   background-color: $second-color;
-  font-size: 18px;
+  font-size: rem(18); // Convertido
   width: 100%;
-  height: 60px;
+  height: rem(60); // Convertido
 
-
-  p{
+  // O seletor foi atualizado de 'p' para 'small' para corresponder ao novo HTML.
+  small {
     text-align: center;
     color: $text-light;
   }

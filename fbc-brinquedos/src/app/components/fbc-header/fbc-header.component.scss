@@ -1,20 +1,46 @@
+/* header.component.scss */
 @use 'variables' as *;
+@use 'sass:math';
 
-.header__container{
+@function rem($pixels, $context: 16) {
+  @return math.div($pixels, $context) * 1rem;
+}
+
+.header__container {
   display: flex;
-  background-color: $primary-color ;
-  height: 70px;
-  min-height: 57px;
-  max-height: 90px;
+  align-items: center; // Alinha verticalmente todos os itens
+  position: relative; // Essencial para posicionar o menu do usuário de forma absoluta
+
+  background-color: $primary-color;
+  height: rem(70);
+  min-height: rem(57);
+  max-height: rem(90);
+}
+
+.header__logo-link {
+  // *** CORREÇÃO DE LAYOUT APLICADA AQUI ***
+
+  // 1. O link do logo ocupa todo o espaço horizontal.
+  width: 100%;
+
+  // 2. Usamos flex para centralizar a imagem DENTRO do link.
+  display: flex;
+  justify-content: center; // Centraliza a imagem horizontalmente
+  align-items: center; // Centraliza a imagem verticalmente
 
   img {
-    justify-items: center;
-    align-items: center;
-    margin: auto;
+    // 3. A imagem tem uma altura máxima para não estourar o header.
+    //    O ngSrc cuidará da proporção.
+    max-height: 90%;
   }
+}
 
-  app-fbc-usermenu{
-    justify-items: end;
-  }
+app-fbc-usermenu {
+  // *** POSICIONAMENTO CORRIGIDO DO MENU ***
 
+  // 1. O menu é posicionado de forma absoluta em relação ao header.
+  position: absolute;
+  right: rem(32); // Espaçamento da borda direita.
+  top: 50%; // Alinhado verticalmente ao centro.
+  transform: translateY(-50%); // Ajuste fino para centralização vertical perfeita.
 }

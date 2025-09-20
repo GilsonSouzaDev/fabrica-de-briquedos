@@ -1,14 +1,22 @@
-<div class="menu">
-    <ul class="menu__lista">
-      <li class="menu__lista-item" routerLink="/">Home</li>
-      <li class="menu__lista-item" routerLink="/catalogo">Catálogo</li>
-      <li class="menu__lista-item" routerLink="/sobre">Equipe</li>
-      @if ( isLoggedIn() ) {
-        <li class="menu__lista-item" routerLink="/admin">Administração</li>
-      }
-      @else{
-        <li class="menu__lista-item" routerLink="/login">Administração</li>
-      }
-
-    </ul>
-</div>
+<nav class="menu">
+  <ul class="menu__lista">
+    <li class="menu__lista-item">
+      <a routerLink="/">Home</a>
+    </li>
+    <li class="menu__lista-item">
+      <a routerLink="/catalogo">Catálogo</a>
+    </li>
+    <li class="menu__lista-item">
+      <a routerLink="/sobre">Equipe</a>
+    </li>
+    @if (isLoggedIn()) {
+      <li class="menu__lista-item">
+        <a routerLink="/admin">Administração</a>
+      </li>
+    } @else {
+      <li class="menu__lista-item">
+        <a routerLink="/login">Administração</a>
+      </li>
+    }
+  </ul>
+</nav>

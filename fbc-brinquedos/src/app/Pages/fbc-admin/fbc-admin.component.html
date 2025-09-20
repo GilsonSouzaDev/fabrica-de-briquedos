@@ -1,8 +1,7 @@
-<!-- pages/fbc-admin/fbc-admin.component.html -->
 <main class="admin-page">
-
   <ng-container *ngIf="view === 'list'; else formTpl">
-    <h2 class="admin-page__title">Administração</h2>
+    <h1 class="admin-page__title">Administração</h1>
+
     <app-fbc-admin-list
       [brinquedos]="(paginatedBrinquedos$ | async)"
       [isLoading]="!(brinquedos$ | async)"
@@ -18,8 +17,6 @@
     </mat-paginator>
 
     <button class="btn btn--primary" (click)="newToy()">Novo Brinquedo</button>
-    
-
   </ng-container>
 
   <ng-template #formTpl>

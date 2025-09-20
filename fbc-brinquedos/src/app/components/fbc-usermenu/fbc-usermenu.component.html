@@ -1,19 +1,15 @@
 <!-- Menu de Login com ícone de rosto -->
-<div class="menulogin">
-
-  <h3>{{ currentUser()?.nome }}</h3>
+<nav class="menulogin">
+  <span class="menulogin__username">{{ currentUser()?.nome }}</span>
 
   <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu de usuário">
     <mat-icon class="mat-36">account_circle</mat-icon>
   </button>
 
   <mat-menu #menu="matMenu">
-    <!-- Opção de Logout -->
     <button mat-menu-item (click)="logout()">
-      <mat-icon >exit_to_app</mat-icon>
-      <span>sair</span>
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Sair</span>
     </button>
-
   </mat-menu>
-
-</div>
+</nav>

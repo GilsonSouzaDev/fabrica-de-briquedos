@@ -1,5 +1,5 @@
-<div class="equipe">
+<section class="equipe">
   @for (users of meusUsuarios$ | async; track $index) {
     <app-fbc-user-equipe [equipe]="users"></app-fbc-user-equipe>
   }
-</div>
+</section>

@@ -1,47 +1,48 @@
 @use 'variables' as *;
+@use 'sass:math';
+
+@function rem($pixels, $context: 16) {
+  @return math.div($pixels, $context) * 1rem;
+}
 
 .categoria {
-  position: relative; // Essencial para posicionar o título sobre a imagem
-  width: 210px; // Largura e altura iguais para formar um círculo
-  height: 210px;
-  border-radius: 50%; // A mágica para deixar o container redondo
-  overflow: hidden; // Esconde o que "vazar" do círculo (como o zoom da imagem)
-  cursor: pointer;
+  // *** CORREÇÃO CRÍTICA ADICIONADA AQUI ***
+  margin: 0; // Anula a margem padrão que o navegador aplica à tag <figure>
 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: rem(210);
+  height: rem(210);
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 rem(5) rem(15) rgba(0, 0, 0, 0.1);
   transition: transform 0.4s ease-out;
 
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover; // Garante que a imagem preencha o círculo sem distorcer
-    transition: transform 0.4s ease-out; // Transição suave para o efeito de zoom
+    object-fit: cover;
+    transition: transform 0.4s ease-out;
   }
 
-  // Título da Categoria
-  h1 {
-    position: absolute; // Posiciona o título em relação ao container '.categoria'
+  figcaption {
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); // Centraliza o texto perfeitamente
-
-    margin: 0;
-    width: 100%; // Garante que o texto possa se quebrar e continuar centralizado
-    padding: 1rem;
-
+    transform: translate(-50%, -50%);
+    margin: 0; // Já estava aqui, mas é bom confirmar
+    width: 100%;
+    padding: rem(16);
     font-family: $fontcard;
-    font-size: 2.5rem; // Título bem grande
+    font-size: rem(40);
     font-weight: 700;
-    color: $text-light; // Texto claro para contrastar com a camada escura
+    color: $text-light;
     text-align: center;
-
-    opacity: 0; // Oculto por padrão
+    opacity: 0;
     transition: opacity 0.4s ease-out;
-    // Sombra no texto para melhorar ainda mais a legibilidade sobre qualquer imagem
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: rem(2) rem(2) rem(4) rgba(0, 0, 0, 0.8);
   }
 
-  // Camada escura que aparece sobre a imagem no hover
   &::after {
     content: '';
     position: absolute;
@@ -49,22 +50,20 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba($bg-dark, 0.6); // Usa a variável de fundo escuro com transparência
-    opacity: 0; // Oculta por padrão
+    background-color: rgba($bg-dark, 0.6);
+    opacity: 0;
     transition: opacity 0.4s ease-out;
   }
 
-  // --- Efeitos de Interatividade (Hover) ---
   &:hover {
-    transform: scale(1.05); // Aumenta levemente o círculo todo
+    transform: scale(1.05);
 
     img {
-      transform: scale(1.15); // Efeito de zoom na imagem dentro do círculo
+      transform: scale(1.15);
     }
 
-    // Mostra a camada escura e o título
     &::after,
-    h1 {
+    figcaption {
       opacity: 1;
     }
   }
