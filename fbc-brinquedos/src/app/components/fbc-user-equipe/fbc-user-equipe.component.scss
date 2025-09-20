@@ -9,8 +9,8 @@
 :host {
   --text-primary-color: #{$text-primary};
   --primary-theme-color: #{$primary-color};
-  --avatar-max-size: #{rem(200)};
-  --avatar-min-size: #{rem(150)};
+  --avatar-max-size: #{rem(250)};
+  --avatar-min-size: #{rem(200)};
 }
 
 .usuario-container {
@@ -70,5 +70,11 @@
     &:hover {
       color: var(--primary-theme-color);
     }
+  }
+}
+
+@media (max-width: 750px) {
+  .usuario-container{
+    padding: 2rem;
   }
 }

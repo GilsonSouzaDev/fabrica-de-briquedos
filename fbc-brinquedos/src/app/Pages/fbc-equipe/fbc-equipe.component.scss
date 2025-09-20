@@ -7,3 +7,10 @@
   height: auto;
   gap: 1rem; // Convertido de 16px
 }
+
+
+@media (max-width: 750px) {
+  .equipe{
+    margin-top: 1rem;
+  }
+}
