@@ -1,23 +1,17 @@
 @use 'variables' as *;
 @use 'sass:color';
-@use 'sass:math'; // 1. Importar o módulo 'math' do Sass
+@use 'sass:math';
 
-// Função auxiliar para converter px para rem de forma consistente
 @function rem($pixels, $context: 16) {
-  // 2. Usar math.div() para a divisão, resolvendo o warning
   @return math.div($pixels, $context) * 1rem;
 }
 
-// Animação do Spinner
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-// ... o restante do arquivo SASS permanece exatamente o mesmo ...
-
-// Estilos do componente
 :host {
   display: block;
 }
@@ -129,4 +123,28 @@
   height: rem(36);
   animation: spin 0.8s linear infinite;
   margin: 0 auto;
+}
+
+// --- Bloco de Responsividade Simplificado ---
+// --- Bloco de Responsividade Simplificado ---
+@media (max-width: 750px) {
+
+  // ADICIONAR ESTA REGRA:
+  .product-table {
+    // Isso remove a largura mínima forçada, permitindo que a tabela
+    // encolha junto com a tela novamente.
+    min-width: auto;
+  }
+
+  // As regras existentes permanecem
+  .col-categoria,
+  .col-valor {
+    display: none;
+  }
+
+  .product-table th,
+  .product-table td {
+    padding-left: rem(12);
+    padding-right: rem(12);
+  }
 }

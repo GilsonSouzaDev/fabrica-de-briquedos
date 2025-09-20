@@ -1,50 +1,46 @@
 <div class="card">
-    <h2 class="card__title">Lista de Produtos</h2>
-    <div class="card__content">
-        <div class="table-responsive">
-            <table class="product-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Código</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Categoria</th>
-                        <th scope="col">Valor</th>
-                        <th scope="col">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Estado de Carregamento -->
-                    @if (isLoading) {
-                      <tr class="product-table__row--loading">
-                        <td colspan="5"><div class="loading-spinner"></div></td>
-                      </tr>
-                    }
+  <h2 class="card__title">Lista de Produtos</h2>
+  <div class="card__content">
+    <div class="table-responsive">
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Nome</th>
+            <th scope="col" class="col-categoria">Categoria</th>
+            <th scope="col" class="col-valor">Valor</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (isLoading) {
+            <tr class="product-table__row--loading">
+              <td colspan="3"><div class="loading-spinner"></div></td>
+            </tr>
+          }
 
-                    <!-- Estado com Dados -->
-                    @if (!isLoading && brinquedos && brinquedos.length > 0) {
-                      @for (brinquedo of brinquedos; track brinquedo.id) {
-                        <tr>
-                            <td>{{ brinquedo.codigo }}</td>
-                            <td>{{ brinquedo.descricao }}</td>
-                            <td>{{ brinquedo.categoria }}</td>
-                            <td>{{ brinquedo.valor | currency:'BRL' }}</td>
-                            <td>
-                                <!-- Ações agora são botões para melhor semântica e acessibilidade -->
-                                <button type="button" (click)="onEdit(brinquedo.id!)" class="product-table__action product-table__action--edit">Editar</button>
-                                <button type="button" (click)="onRemove(brinquedo.id!)" class="product-table__action product-table__action--delete">Apagar</button>
-                            </td>
-                        </tr>
-                      }
-                    }
+          @if (!isLoading && brinquedos && brinquedos.length > 0) {
+            @for (brinquedo of brinquedos; track brinquedo.id) {
+              <tr>
+                <td>{{ brinquedo.codigo }}</td>
+                <td>{{ brinquedo.descricao }}</td>
+                <td class="col-categoria">{{ brinquedo.categoria }}</td>
+                <td class="col-valor">{{ brinquedo.valor | currency:'BRL' }}</td>
+                <td>
+                  <button type="button" (click)="onEdit(brinquedo.id!)" class="product-table__action product-table__action--edit">Editar</button>
+                  <button type="button" (click)="onRemove(brinquedo.id!)" class="product-table__action product-table__action--delete">Apagar</button>
+                </td>
+              </tr>
+            }
+          }
 
-                    <!-- Estado Vazio -->
-                    @if (!isLoading && (!brinquedos || brinquedos.length === 0)) {
-                      <tr class="product-table__row--empty">
-                        <td colspan="5">Nenhum brinquedo cadastrado.</td>
-                      </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+          @if (!isLoading && (!brinquedos || brinquedos.length === 0)) {
+            <tr class="product-table__row--empty">
+              <td colspan="3">Nenhum brinquedo cadastrado.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>

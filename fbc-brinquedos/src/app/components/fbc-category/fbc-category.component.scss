@@ -6,9 +6,7 @@
 }
 
 .categoria {
-  // *** CORREÇÃO CRÍTICA ADICIONADA AQUI ***
-  margin: 0; // Anula a margem padrão que o navegador aplica à tag <figure>
-
+  margin: 0; // Anula a margem padrão da tag <figure>
   position: relative;
   width: rem(210);
   height: rem(210);
@@ -30,7 +28,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin: 0; // Já estava aqui, mas é bom confirmar
+    margin: 0;
     width: 100%;
     padding: rem(16);
     font-family: $fontcard;
@@ -38,7 +36,7 @@
     font-weight: 700;
     color: $text-light;
     text-align: center;
-    opacity: 0;
+    opacity: 0; // Fica invisível por padrão no desktop
     transition: opacity 0.4s ease-out;
     text-shadow: rem(2) rem(2) rem(4) rgba(0, 0, 0, 0.8);
   }
@@ -51,10 +49,11 @@
     width: 100%;
     height: 100%;
     background-color: rgba($bg-dark, 0.6);
-    opacity: 0;
+    opacity: 0; // Fica invisível por padrão no desktop
     transition: opacity 0.4s ease-out;
   }
 
+  // Animação apenas para DESKTOP (dispositivos que têm hover)
   &:hover {
     transform: scale(1.05);
 
@@ -65,6 +64,44 @@
     &::after,
     figcaption {
       opacity: 1;
+    }
+  }
+}
+
+// --- Bloco de Responsividade para MOBILE ---
+@media (max-width: 750px) {
+  .categoria {
+    // 1. Reduz o tamanho do círculo
+    width: rem(150);
+    height: rem(150);
+
+    // 2. Torna a sobreposição e o título visíveis por padrão
+    &::after,
+    figcaption {
+      opacity: 1;
+    }
+
+    // CORREÇÃO: Substitui a cor sólida por um gradiente
+    &::after {
+      background: linear-gradient(to top, rgba($bg-dark, 0.8) 10%, transparent 70%);
+    }
+
+    // CORREÇÃO: Ajusta a legenda para a parte inferior
+    figcaption {
+      font-size: rem(24);
+      top: auto; // Remove o alinhamento vertical do centro
+      bottom: 0; // Posiciona na base
+      transform: translateX(-50%); // Centraliza apenas horizontalmente
+      padding: rem(12);
+    }
+
+    // Remove as animações de hover que não funcionam no mobile
+    &:hover {
+      transform: none; // Anula o scale
+
+      img {
+        transform: none; // Anula o scale da imagem
+      }
     }
   }
 }

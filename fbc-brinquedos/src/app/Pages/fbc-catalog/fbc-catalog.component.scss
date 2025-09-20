@@ -3,7 +3,7 @@
 .catalog {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   margin: auto;
   text-align: center;
@@ -14,7 +14,7 @@
     justify-content: center;
     flex-wrap: wrap;
     padding: 1rem; // Convertido de 16px
-    gap: 2rem; // Convertido de 32px
+    gap: 1rem; // Convertido de 16px
   }
 
   h2 {
@@ -31,8 +31,8 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    gap: 2rem; // Convertido de 32px
-    padding: 1rem; // Convertido de 16px
+    gap: 0.5rem;
+    padding: 1rem;
   }
 
   // CORREÇÃO: Usando a classe específica do botão para garantir que SÓ ele seja afetado.
@@ -55,5 +55,11 @@
       background: rgba($primary-color, 0.9);
       transform: scale(1.05);
     }
+  }
+}
+
+@media (max-width: 950px) {
+  .catalog {
+    width: 100%;
   }
 }

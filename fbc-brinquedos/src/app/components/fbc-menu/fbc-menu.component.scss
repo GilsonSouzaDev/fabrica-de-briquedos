@@ -49,3 +49,18 @@
     }
   }
 }
+
+@media (max-width: 950px) {
+  .menu__lista {
+    width: 100%;
+  }
+}
+
+// --- Bloco de Responsividade Adicionado ---
+@media (max-width: 750px) {
+  .menu__lista-item {
+    // Reduz o tamanho da fonte para 16px em telas menores,
+    // sobrescrevendo a regra do clamp().
+    font-size: rem(16);
+  }
+}

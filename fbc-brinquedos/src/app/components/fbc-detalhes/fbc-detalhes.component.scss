@@ -8,20 +8,20 @@
 .detalhe-container {
   display: flex;
   justify-content: center;
-  padding: rem(32); // Convertido
+  padding: rem(32);
   background-color: $bg-body-color;
 }
 
 .card-detalhe {
   display: flex;
   flex-direction: row;
-  gap: rem(32); // Convertido
+  gap: rem(32);
   background: $bg-card;
   border: 1px solid $border-card-color;
-  border-radius: rem(24); // Convertido
-  padding: rem(32); // Convertido
-  box-shadow: 0 rem(4) rem(12) rgba(0, 0, 0, 0.08); // Convertido
-  max-width: rem(1000); // Convertido
+  border-radius: rem(24);
+  padding: rem(32);
+  box-shadow: 0 rem(4) rem(12) rgba(0, 0, 0, 0.08);
+  max-width: rem(1000);
   width: 100%;
   font-family: $fontcard;
 
@@ -32,8 +32,8 @@
     justify-content: center;
 
     img {
-      max-width: rem(350); // Convertido
-      border-radius: rem(16); // Convertido
+      max-width: rem(350);
+      border-radius: rem(16);
     }
   }
 
@@ -44,34 +44,32 @@
     justify-content: space-between;
 
     .titulo {
-      font-size: rem(32); // Convertido
+      font-size: rem(32);
       font-weight: bold;
       color: $text-primary;
-      margin-bottom: rem(8); // Convertido
+      margin-bottom: rem(8);
     }
 
     .marca {
-      font-size: rem(19.2); // Convertido (1.2rem)
+      font-size: rem(19.2);
       color: $text-secondary;
-      margin-bottom: rem(16); // Convertido
+      margin-bottom: rem(16);
     }
 
     .detalhes {
-      font-size: rem(17.6); // Convertido (1.1rem)
+      font-size: rem(17.6);
       line-height: 1.4;
       color: $text-primary;
-      margin-bottom: rem(24); // Convertido
+      margin-bottom: rem(24);
     }
 
-    // Estilos para a nova estrutura <dl>
     .info-extra {
       display: flex;
       flex-wrap: wrap;
-      gap: rem(16); // Convertido
-      font-size: rem(15.2); // Convertido (0.95rem)
+      gap: rem(16);
+      font-size: rem(15.2);
       color: $text-secondary;
 
-      // Reset de estilos padrão da lista
       dl,
       dt,
       dd {
@@ -82,14 +80,14 @@
       div {
         display: flex;
         align-items: center;
-        gap: rem(8); // Espaço entre a chave e o valor
+        gap: rem(8);
         background: $nav-menu-color;
-        padding: rem(6.4) rem(12.8); // Convertido
-        border-radius: rem(8); // Convertido
+        padding: rem(6.4) rem(12.8);
+        border-radius: rem(8);
       }
 
       dt {
-        font-weight: bold; // Dando um leve destaque para a chave
+        font-weight: bold;
       }
     }
 
@@ -97,26 +95,25 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: rem(32); // Convertido
+      margin-top: rem(32);
 
       .preco {
-        font-size: rem(28.8); // Convertido (1.8rem)
+        font-size: rem(28.8);
         font-weight: bold;
         color: $second-color;
       }
 
-      // Seletor atualizado para <a>, mas mantendo a classe
       .btn-comprar {
-        display: inline-block; // Bom para links estilizados como botões
-        text-decoration: none; // Remove sublinhado do link
-        text-align: center; // Centraliza o texto
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
         background: $primary-color;
         color: $text-light;
-        font-size: rem(16); // Convertido
+        font-size: rem(16);
         font-weight: bold;
-        padding: rem(12.8) rem(25.6); // Convertido
+        padding: rem(12.8) rem(25.6);
         border: none;
-        border-radius: rem(12.8); // Convertido
+        border-radius: rem(12.8);
         cursor: pointer;
         transition: all 0.3s ease;
 
@@ -125,6 +122,52 @@
           transform: scale(1.05);
         }
       }
+    }
+  }
+}
+
+// --- Bloco de Responsividade para MOBILE ---
+@media (max-width: 750px) {
+  .detalhe-container {
+    padding: rem(16); // Reduz o padding geral
+  }
+
+  .card-detalhe {
+    // 1. Muda a direção para empilhar verticalmente
+    flex-direction: column;
+    padding: rem(24);
+    gap: rem(24);
+  }
+
+  .imagem-container img {
+    max-width: 100%; // Imagem ocupa a largura do card
+    height: auto;
+  }
+
+  .info-container {
+
+    // O texto agora tem mais espaço para respirar
+    .titulo {
+      font-size: rem(28);
+    }
+
+    .detalhes {
+      font-size: rem(16);
+    }
+  }
+
+  .valor-compra {
+    // 2. Empilha o preço e o botão
+    flex-direction: column;
+    align-items: stretch; // Faz o botão esticar na largura
+    gap: rem(16);
+
+    .preco {
+      text-align: center; // Centraliza o preço
+    }
+
+    .btn-comprar {
+      width: 100%; // Botão grande e fácil de tocar
     }
   }
 }
