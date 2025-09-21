@@ -20,24 +20,4 @@ public class ProdutoController {
     public List<Produto> ExibirTodosProdutos() {
         return produtoService.listarTodosProdutos();
     }
-
-    @PostMapping
-    public ResponseEntity<Produto> salvar(@RequestBody ProdutoDTO produtoDTO) {
-        Produto produto = produtoService.cadastrarProduto(produtoDTO);
-        return ResponseEntity.ok(produto);
-    }
-
-    @PutMapping("/{id_produto}")
-    public ResponseEntity<Produto> atualizar(@PathVariable int id_produto, @RequestBody ProdutoDTO produtoDTO) {
-        return produtoService.atualizarProduto(id_produto, produtoDTO)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/{id_produto}")
-    public ResponseEntity<Produto> excluir(@PathVariable int id_produto) {
-        produtoService.excluirProduto(id_produto);
-        return ResponseEntity.noContent().build();
-    }
-
 }
