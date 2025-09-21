@@ -26,7 +26,7 @@ export const CATEGORIAS: Categoria[] = [
     imagem: 'https://i.imgur.com/fSIYd2h.png',
   },
   {
-    titulo: 'Esportes',
+    titulo: 'Esportivos',
     imagem: 'https://i.imgur.com/zwzpcxS.png',
   },
   {
