@@ -8,5 +8,4 @@ export interface Brinquedo {
   valor: number;
   detalhes: string;
   quantVendas: number;
-
 }

@@ -18,7 +18,11 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_usuario;
     private String nome;
+
+    @Column(name = "userEmail", nullable = false)
     private String userEmail;
+
+    @Column(name = "userSenha", nullable = false)
     private String userSenha;
 
 }

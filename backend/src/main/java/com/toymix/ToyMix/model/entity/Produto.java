@@ -40,10 +40,4 @@ public class Produto {
     @Column(name = "descricao_produto")
     private String descricaoProduto;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
-
-    @Column(name = "id_categoria")
-    private Integer idCategoria;
 }
