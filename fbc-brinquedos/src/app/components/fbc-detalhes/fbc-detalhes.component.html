@@ -1,27 +1,39 @@
 <div class="detalhe-container">
-  <div class="card-detalhe">
-    <div class="imagem-container">
+  <!-- <article> é ideal para um bloco de conteúdo autocontido como um produto. -->
+  <article class="card-detalhe">
+    <section class="imagem-container" aria-label="Imagem do Produto">
       <img
-      *ngIf="brinquedoDetalhe?.imagem"
-      [src]="brinquedoDetalhe.imagem" [alt]="brinquedoDetalhe.descricao" />
-    </div>
+        *ngIf="brinquedoDetalhe?.imagem"
+        [src]="brinquedoDetalhe.imagem"
+        [alt]="brinquedoDetalhe.descricao" />
+    </section>
 
-    <div class="info-container" *ngIf="brinquedoDetalhe">
+    <section class="info-container" *ngIf="brinquedoDetalhe" aria-label="Informações do Produto">
       <h1 class="titulo">{{ brinquedoDetalhe.descricao }}</h1>
       <p class="marca">{{ brinquedoDetalhe.marca }}</p>
       <p class="detalhes">{{ brinquedoDetalhe.detalhes }}</p>
 
-      <div class="info-extra">
-        <span class="categoria">Categoria: {{ brinquedoDetalhe.categoria }}</span>
-        <span class="codigo">Código: {{ brinquedoDetalhe.codigo }}</span>
-        <span class="vendas">Vendas: {{ brinquedoDetalhe.quantVendas }}</span>
-      </div>
+      <!-- <dl> (lista de definições) é a estrutura semântica perfeita para pares de chave-valor. -->
+      <dl class="info-extra">
+        <div>
+          <dt>Categoria:</dt>
+          <dd>{{ brinquedoDetalhe.categoria }}</dd>
+        </div>
+        <div>
+          <dt>Código:</dt>
+          <dd>{{ brinquedoDetalhe.codigo }}</dd>
+        </div>
+        <div>
+          <dt>Vendas:</dt>
+          <dd>{{ brinquedoDetalhe.quantVendas }}</dd>
+        </div>
+      </dl>
 
       <div class="valor-compra">
         <span class="preco">R$ {{ brinquedoDetalhe.valor | number:'1.2-2' }}</span>
-        <button class="btn-comprar" routerLink="/catalogo">Categorias</button>
+        <!-- Se a ação é navegar para outra rota, <a> é mais semântico que <button>. -->
+        <a class="btn-comprar" routerLink="/catalogo">Categorias</a>
       </div>
-    </div>
-  </div>
+    </section>
+  </article>
 </div>
-

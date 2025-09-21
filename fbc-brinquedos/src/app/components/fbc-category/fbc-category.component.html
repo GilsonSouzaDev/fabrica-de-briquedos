@@ -1,6 +1,13 @@
-<div class="categoria" (click)="onClick()">
+<!-- <figure> é a tag semântica ideal para uma imagem com legenda. -->
+<figure class="categoria" (click)="onClick()">
+
+  <!-- O alt text dinâmico melhora a acessibilidade. -->
   <img
-  *ngIf="categoria?.imagem"
-  [src]=categoria.imagem alt="imagem da categoria">
-  <h1>{{ categoria.titulo }}</h1>
-</div>
+    *ngIf="categoria?.imagem"
+    [src]="categoria.imagem"
+    [alt]="categoria.titulo">
+
+  <!-- <figcaption> é a legenda correta para uma <figure>. -->
+  <figcaption>{{ categoria.titulo }}</figcaption>
+
+</figure>

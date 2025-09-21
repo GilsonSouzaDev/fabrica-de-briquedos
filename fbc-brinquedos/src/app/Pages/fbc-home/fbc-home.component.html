@@ -1,19 +1,15 @@
-<div class="home">
-
+<main class="home">
   <div class="home__imagem">
     <app-fbc-banner></app-fbc-banner>
   </div>
 
-    <h2>Mais Vendidos</h2>
+  <section class="home__bestsellers" aria-labelledby="bestsellers-title">
+    <h1 id="bestsellers-title">Mais Vendidos</h1>
 
-  <div class="home__card">
-    @for (brinq of destaques$ | async ; track brinq.id) {
-      <app-fbc-card [brinquedo]="brinq"></app-fbc-card>
-    }
-  </div>
-
-</div>
-
-
-
-
+    <div class="home__card">
+      @for (brinq of destaques$ | async ; track brinq.id) {
+        <app-fbc-card [brinquedo]="brinq"></app-fbc-card>
+      }
+    </div>
+  </section>
+</main>

@@ -1,7 +1,14 @@
-<div class="card" (click)="onClicked()">
+<article class="card" (click)="onClicked()">
+
   <img
-  *ngIf="brinquedo?.imagem"
-  [src]=brinquedo.imagem alt="imagem do card">
+    *ngIf="brinquedo?.imagem"
+    [src]="brinquedo.imagem"
+    [alt]="brinquedo.descricao">
+
   <p>{{ brinquedo.descricao }}</p>
-  <p class="preco">{{ brinquedo.valor | currency:'BRL'}} </p>
-</div>
+
+  <p class="preco">
+    <strong>{{ brinquedo.valor | currency:'BRL' }}</strong>
+  </p>
+
+</article>

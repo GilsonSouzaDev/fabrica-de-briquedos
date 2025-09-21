@@ -1,44 +1,66 @@
-@use 'variables' as *;
+// 1. Importar o módulo de matemática do SASS para cálculos precisos
+@use "sass:math";
+@use "variables" as *;
 
-.menu{
+// Função auxiliar moderna para converter px para rem
+@function rem($pixels) {
+  // 2. Usar math.div para divisão, que é a sintaxe moderna e recomendada
+  @return math.div($pixels, 16) * 1rem;
+}
+
+// 3. Definir Variáveis CSS (Custom Properties) para maior flexibilidade no browser
+:host {
+  --menu-background-color: #{$nav-menu-color}; // Usando a variável SASS para definir a variável CSS
+  --menu-font-size: #{rem(20)};
+  --menu-item-padding: #{rem(8)};
+}
+
+.menu {
   display: flex;
-  flex-direction: row;
   max-width: 100%;
-  min-height: 40px;
-  background-color: $nav-menu-color;
-  box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
+  min-height: rem(40);
+  // Usa a variável CSS, permitindo manipulação via JS se necessário no futuro
+  background-color: var(--menu-background-color);
+  box-shadow: 0 rem(4) rem(6) rem(-2) rgba(0, 0, 0, 0.4);
 
-
-
-  h1{
-    font-size: 30px;
-    text-align: center;
-
+  a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: var(--menu-item-padding);
   }
 
-  &__lista{
+  &__lista {
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
     margin: auto;
     width: 60%;
 
-    :hover {
-        cursor: pointer;
-      }
-
-    &-item{
-      font-size: 20px;
-      padding:  8px;
-
-
+    &:hover {
+      cursor: pointer;
     }
 
+    &-item {
+      // 4. Tipografia Fluida com clamp()
+      // O tamanho da fonte se ajustará suavemente com o tamanho da tela
+      // Mínimo: 18px, Ideal: 0.5vw + 16px, Máximo: 20px
+      font-size: clamp(#{rem(18)}, 0.5vw + #{rem(16)}, var(--menu-font-size));
+      text-align: center;
+    }
   }
-
-
-
-
 }
 
+@media (max-width: 950px) {
+  .menu__lista {
+    width: 100%;
+  }
+}
 
+// --- Bloco de Responsividade Adicionado ---
+@media (max-width: 750px) {
+  .menu__lista-item {
+    // Reduz o tamanho da fonte para 16px em telas menores,
+    // sobrescrevendo a regra do clamp().
+    font-size: rem(16);
+  }
+}

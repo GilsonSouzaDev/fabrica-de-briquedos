@@ -1,23 +1,27 @@
 @use 'variables' as *;
+@use 'sass:math';
 
+@function rem($pixels, $context: 16) {
+  @return math.div($pixels, $context) * 1rem;
+}
 
 .detalhe-container {
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  padding: rem(32);
   background-color: $bg-body-color;
 }
 
 .card-detalhe {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: rem(32);
   background: $bg-card;
   border: 1px solid $border-card-color;
-  border-radius: 1.5rem;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  max-width: 1000px;
+  border-radius: rem(24);
+  padding: rem(32);
+  box-shadow: 0 rem(4) rem(12) rgba(0, 0, 0, 0.08);
+  max-width: rem(1000);
   width: 100%;
   font-family: $fontcard;
 
@@ -28,8 +32,8 @@
     justify-content: center;
 
     img {
-      max-width: 350px;
-      border-radius: 1rem;
+      max-width: rem(350);
+      border-radius: rem(16);
     }
   }
 
@@ -40,36 +44,50 @@
     justify-content: space-between;
 
     .titulo {
-      font-size: 2rem;
+      font-size: rem(32);
       font-weight: bold;
       color: $text-primary;
-      margin-bottom: 0.5rem;
+      margin-bottom: rem(8);
     }
 
     .marca {
-      font-size: 1.2rem;
+      font-size: rem(19.2);
       color: $text-secondary;
-      margin-bottom: 1rem;
+      margin-bottom: rem(16);
     }
 
     .detalhes {
-      font-size: 1.1rem;
+      font-size: rem(17.6);
       line-height: 1.4;
       color: $text-primary;
-      margin-bottom: 1.5rem;
+      margin-bottom: rem(24);
     }
 
     .info-extra {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
-      font-size: 0.95rem;
+      gap: rem(16);
+      font-size: rem(15.2);
       color: $text-secondary;
 
-      span {
+      dl,
+      dt,
+      dd {
+        margin: 0;
+        padding: 0;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: rem(8);
         background: $nav-menu-color;
-        padding: 0.4rem 0.8rem;
-        border-radius: 0.5rem;
+        padding: rem(6.4) rem(12.8);
+        border-radius: rem(8);
+      }
+
+      dt {
+        font-weight: bold;
       }
     }
 
@@ -77,30 +95,79 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 2rem;
+      margin-top: rem(32);
 
       .preco {
-        font-size: 1.8rem;
+        font-size: rem(28.8);
         font-weight: bold;
         color: $second-color;
       }
 
       .btn-comprar {
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
         background: $primary-color;
         color: $text-light;
-        font-size: 1rem;
+        font-size: rem(16);
         font-weight: bold;
-        padding: 0.8rem 1.6rem;
+        padding: rem(12.8) rem(25.6);
         border: none;
-        border-radius: 0.8rem;
+        border-radius: rem(12.8);
         cursor: pointer;
         transition: all 0.3s ease;
 
         &:hover {
-            background: rgba($primary-color, 0.9); // Ou ajuste a opacidade
-            transform: scale(1.05);
+          background: rgba($primary-color, 0.9);
+          transform: scale(1.05);
         }
       }
+    }
+  }
+}
+
+// --- Bloco de Responsividade para MOBILE ---
+@media (max-width: 750px) {
+  .detalhe-container {
+    padding: rem(16); // Reduz o padding geral
+  }
+
+  .card-detalhe {
+    // 1. Muda a direção para empilhar verticalmente
+    flex-direction: column;
+    padding: rem(24);
+    gap: rem(24);
+  }
+
+  .imagem-container img {
+    max-width: 100%; // Imagem ocupa a largura do card
+    height: auto;
+  }
+
+  .info-container {
+
+    // O texto agora tem mais espaço para respirar
+    .titulo {
+      font-size: rem(28);
+    }
+
+    .detalhes {
+      font-size: rem(16);
+    }
+  }
+
+  .valor-compra {
+    // 2. Empilha o preço e o botão
+    flex-direction: column;
+    align-items: stretch; // Faz o botão esticar na largura
+    gap: rem(16);
+
+    .preco {
+      text-align: center; // Centraliza o preço
+    }
+
+    .btn-comprar {
+      width: 100%; // Botão grande e fácil de tocar
     }
   }
 }

@@ -1,4 +1,10 @@
+/* components/fbc-form/fbc-form.component.scss */
 @use 'variables' as *;
+@use 'sass:math';
+
+@function rem($pixels, $context: 16) {
+  @return math.div($pixels, $context) * 1rem;
+}
 
 .fbc-form {
   display: flex;
@@ -6,116 +12,113 @@
   justify-content: center;
   align-items: center;
   margin: auto;
-  width: 80%;
+  width: 100%;
   background-color: $bg-body-color;
-  padding: 0.5rem;
+  padding: rem(8);
   font-family: $fontcard;
 }
 
-// Título do formulário
-h3 {
-  color: $text-primary;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-// O "card" que envolve o formulário
 .form-container {
+  border: none;
+  padding: rem(16);
+  margin: 0;
   background-color: $bg-card;
-  padding: 1rem;
-  border-radius: 16px; // Bordas mais arredondadas como na imagem
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); // Sombra suave para dar elevação
+  border-radius: rem(16);
+  box-shadow: 0 rem(10) rem(25) rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 800px;
+  max-width: rem(800);
+
+  legend {
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin-bottom: rem(16);
+    color: $text-primary;
+    font-size: rem(24);
+    font-weight: 600;
+    text-align: center;
+  }
 }
 
-// Estrutura do formulário em grid para alinhar labels e inputs
 form {
+  clear: both;
   display: grid;
-  // Duas colunas: a primeira para o label (auto) e a segunda para o input (ocupa o resto)
   grid-template-columns: auto 1fr;
-  gap: 0.5rem 0.8rem; // Espaçamento vertical e horizontal
+  gap: rem(8) rem(12.8);
   align-items: center;
-  padding: 1rem;
-  margin-right: 16px;
+  padding: rem(16);
+  margin-right: rem(16);
 
   label {
     color: $text-secondary;
-    font-size: 1rem;
+    font-size: rem(16);
     font-weight: 500;
-    text-align: right; // Alinha o texto do label à direita
+    text-align: right;
   }
 
-  // Estilo base para inputs e textarea
   input,
   textarea,
   select {
+    // *** CORREÇÃO CRÍTICA ADICIONADA AQUI ***
+    box-sizing: border-box; // Garante que padding e border sejam incluídos no tamanho total
+    font: inherit; // Força a herança de todas as propriedades de fonte
+
+    // Estilos originais mantidos
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid transparent; // Borda transparente para não "pular" no focus
-    background-color: $adm-bg-color; // Fundo cinza claro como na imagem
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 1rem;
+    padding: rem(8);
+    border: 1px solid transparent;
+    background-color: $adm-bg-color;
+    border-radius: rem(8);
     color: $text-primary;
     transition: all 0.2s ease-in-out;
 
     &:focus {
       outline: none;
       border-color: $primary-color;
-      box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+      box-shadow: 0 0 0 rem(3) rgba($primary-color, 0.2);
     }
-
-
   }
-
 
   textarea {
-    grid-column: 2 / 3; // Ocupa apenas a coluna do input
-    min-height: 80px;
-    resize: vertical; // Permite redimensionar apenas na vertical
+    grid-column: 2 / 3;
+    min-height: rem(80);
+    resize: vertical;
   }
 
-  // O input "código" é menor na imagem
   input[name="codigo"] {
-    max-width: 120px;
+    max-width: rem(120);
   }
 }
 
-// Container para os botões de ação
 .actions {
-  grid-column: 1 / -1; // Ocupa todas as colunas do grid
+  grid-column: 1 / -1;
   display: flex;
-  justify-content: center; // Centraliza os botões
-  gap: 1rem;
-  margin-top: 1rem;
+  justify-content: center;
+  gap: rem(16);
+  margin-top: rem(16);
 }
 
-// Estilo dos botões
 button {
-  padding: 0.8rem 1rem;
+  padding: rem(12.8) rem(16);
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: rem(8);
+  font-size: rem(16);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  min-width: 150px;
+  min-width: rem(150);
 
-  // Botão principal (Cadastrar)
   &[type="submit"] {
-    background: linear-gradient(to top, #509bf7, #6eb0fa); // Gradiente suave
+    background: linear-gradient(to top, #509bf7, #6eb0fa);
     color: $text-light;
-    box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+    box-shadow: 0 rem(4) rem(15) rgba($primary-color, 0.3);
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba($primary-color, 0.35);
+      transform: translateY(rem(-2));
+      box-shadow: 0 rem(6) rem(20) rgba($primary-color, 0.35);
     }
   }
 
-  // Botão secundário (Cancelar)
   &[type="button"] {
     background-color: transparent;
     color: $text-secondary;
