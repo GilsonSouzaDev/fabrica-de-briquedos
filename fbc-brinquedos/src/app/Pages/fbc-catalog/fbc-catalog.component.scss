@@ -61,5 +61,10 @@
 @media (max-width: 950px) {
   .catalog {
     width: 100%;
+
+    &__filtered-view{
+      gap: 0.5rem; // Convertido de 32px
+    }
+
   }
 }
