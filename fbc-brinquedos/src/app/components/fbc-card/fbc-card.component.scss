@@ -20,7 +20,7 @@
   width: rem(180);
   border-radius: rem(10);
   border: solid 1px $border-card-color;
-  margin: 6px;
+  margin: 4px;
   box-shadow: 0px rem(4) rem(6) rem(-2) rgba(0, 0, 0, 0.4);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -32,7 +32,6 @@ img {
     object-position: center; // centraliza a imagem
     border-radius: rem(10) rem(10) 0 0;
     transition: transform 0.3s ease-in-out;
-    background-color: $bg-card; // opcional: evita espaços transparentes estranhos
   }
 
   p {

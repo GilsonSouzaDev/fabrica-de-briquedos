@@ -67,5 +67,11 @@
 @media (max-width: 950px) {
   .home {
     width: 100%;
+
+
+    &__card {
+        gap: rem(8);
+      }
+
   }
 }
