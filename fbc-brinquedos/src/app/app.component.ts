@@ -1,18 +1,18 @@
 // Importações principais do Angular e dos seus componentes
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { RouterOutlet, Router, Scroll } from '@angular/router';
 import { FbcHeaderComponent } from './components/fbc-header/fbc-header.component';
 import { FbcMenuComponent } from './components/fbc-menu/fbc-menu.component';
 import { FbcFooterComponent } from './components/fbc-footer/fbc-footer.component';
 
-// Importações para a solução do SSR (Server-Side Rendering)
-import { isPlatformBrowser } from '@angular/common';
+// Swiper
 import { register } from 'swiper/element/bundle';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  standalone: true, // Adicionei 'standalone: true' pois seus imports sugerem isso
+  standalone: true,
   imports: [
     CommonModule,
     RouterOutlet,
@@ -26,12 +26,20 @@ import { register } from 'swiper/element/bundle';
 export class AppComponent {
   title = 'fbc-brinquedos';
 
-  // O construtor agora injeta o PLATFORM_ID para detectar o ambiente
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {
-    // A inicialização do Swiper agora está protegida.
-    // Ela só será executada quando o código estiver rodando no navegador.
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
+    private router: Router
+  ) {
     if (isPlatformBrowser(this.platformId)) {
+      // Inicializa Swiper somente no browser
       register();
+
+      // Força scroll para o topo a cada mudança de rota
+      this.router.events
+        .pipe(filter((e): e is Scroll => e instanceof Scroll))
+        .subscribe(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        });
     }
   }
 }

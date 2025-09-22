@@ -25,12 +25,14 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
-  img {
+img {
     width: 100%;
-    height: rem(140);
-    object-fit: cover;
+    height: rem(140); // altura do container
+    object-fit: contain; // garante que a imagem inteira apareça
+    object-position: center; // centraliza a imagem
     border-radius: rem(10) rem(10) 0 0;
     transition: transform 0.3s ease-in-out;
+    background-color: $bg-card; // opcional: evita espaços transparentes estranhos
   }
 
   p {

@@ -136,6 +136,7 @@
     // 1. Muda a direção para empilhar verticalmente
     flex-direction: column;
     padding: rem(24);
+    width: 90%;
     gap: rem(24);
   }
 
@@ -167,7 +168,7 @@
     }
 
     .btn-comprar {
-      width: 100%; // Botão grande e fácil de tocar
+      width: 60%; // Botão grande e fácil de tocar
     }
   }
 }

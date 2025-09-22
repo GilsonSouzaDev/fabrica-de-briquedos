@@ -1,14 +1,16 @@
 <div class="container">
   <header>
     <app-fbc-header></app-fbc-header>
-    <app-fbc-menu></app-fbc-menu>
+    <nav aria-label="Menu principal">
+      <app-fbc-menu></app-fbc-menu>
+    </nav>
   </header>
+
   <main>
-    <router-outlet/>
+    <router-outlet></router-outlet>
   </main>
+
   <footer>
     <app-fbc-footer></app-fbc-footer>
   </footer>
 </div>
-
-
