@@ -1,0 +1,54 @@
+package com.toymix.ToyMix.controller;
+
+import com.toymix.ToyMix.dto.BrinquedoDTO;
+import com.toymix.ToyMix.model.entity.Brinquedo;
+import com.toymix.ToyMix.service.BrinquedoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/brinquedo")
+public class BrinquedoController {
+
+    @Autowired
+    private BrinquedoService brinquedoService;
+
+    @GetMapping("/")
+    public List<Brinquedo> listarBrinquedos() {
+        return brinquedoService.listarTodosBrinquedos();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Brinquedo> buscarBrinquedoPorId(@PathVariable Integer id) {
+        return brinquedoService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/buscar/{nome}")
+    public List<Brinquedo> buscarBrinquedoPorNome(@PathVariable String nome) {
+           return brinquedoService.buscarPorNome(nome);
+    }
+
+    @PostMapping
+    public ResponseEntity<Brinquedo> salvarCadastroDoBrinquedo(@RequestBody BrinquedoDTO brinquedoDTO){
+        Brinquedo novoBrinquedo = brinquedoService.cadastrarBrinquedo(brinquedoDTO);
+        return ResponseEntity.ok(novoBrinquedo);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Brinquedo> atualizarCadastroDoBrinquedo(@PathVariable int id, @RequestBody BrinquedoDTO brinquedoDTO){
+        return brinquedoService.atualizarCadastroDoBrinquedo(id, brinquedoDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirCadastroDoBrinquedo(@PathVariable int id){
+        brinquedoService.excluirCadastroDoBrinquedo(id);
+        return ResponseEntity.noContent().build();
+    }
+}
