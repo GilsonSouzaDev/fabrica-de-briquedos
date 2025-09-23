@@ -8,12 +8,7 @@ create table usuario (
     userSenha varchar(100) NOT NULL
 );
 
-alter table usuario
-change email userEmail varchar(100),
-change senha userSenha varchar(100);
-
 desc usuario;
-
 select * from usuario;
 
 create table categoria (
@@ -21,23 +16,28 @@ create table categoria (
     nome_categoria varchar(50) unique not null
 );
 
+DROP TABLE categoria;
+
 select * from categoria;
 
-create table produto (
-	id_produto int primary key auto_increment,
-    codigo_produto varchar(20) not null,
-    nome_produto varchar(100) not null,
-    marca_produto varchar(100) not null,
-    imagem_produto varchar(255),
-    valor_produto decimal(10,2),
-    descricao_produto text,
-    id_usuario int,
-    id_categoria int,
-    foreign key(id_usuario) references usuario(id_usuario) on delete cascade,
-    foreign key(id_categoria) references categoria(id_categoria) on delete set null
+create table brinquedo (
+	id int primary key auto_increment,
+    codigo varchar(10) not null,
+    nome varchar(100) not null,
+    marca varchar(100) not null,
+    imagem varchar(255),
+    valor decimal(10,2),
+    detalhes text,
+    quantVendas int
 );
 
-desc produto;
+DESC brinquedo;
+
+insert into brinquedo (codigo, nome, marca, imagem, valor,  detalhes, quantVendas)
+values ("1BL1544", "Boneco Max Steel", "Hasbro", "https://a-static.mlcdn.com.br/1500x1500/conjunto-boneco-articulado-menino-max-steel-e-animal-pantera-com-acessorios-mattel-brinquedos-fdt75/topsvirtual/14481951998/8ffedb647069617f46e0fc72bcbf684e.jpeg", 47.99, "Novo boneco do Max Steel versão 2025", 18);
+
+desc brinquedo;
+SELECT * FROM brinquedo;
 
 insert into categoria (nome_categoria) values
 ('Bonecos'),
