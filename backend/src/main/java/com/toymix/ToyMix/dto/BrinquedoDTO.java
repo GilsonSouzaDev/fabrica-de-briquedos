@@ -14,5 +14,7 @@ public class BrinquedoDTO {
     private String marca;
     private String imagem;
     private BigDecimal valor;
-    private String descricao;
+    private String detalhes;
+    private Integer quantVendas;
+
 }

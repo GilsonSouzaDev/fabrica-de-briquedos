@@ -33,7 +33,8 @@ public class BrinquedoService {
         brinquedo.setMarca(brinquedoDTO.getMarca());
         brinquedo.setImagem(brinquedoDTO.getImagem());
         brinquedo.setValor(brinquedoDTO.getValor());
-        brinquedo.setDescricao(brinquedoDTO.getDescricao());
+        brinquedo.setDetalhes(brinquedoDTO.getDetalhes());
+        brinquedo.setQuantVendas(brinquedoDTO.getQuantVendas());
 
         return brinquedoRepository.save(brinquedo);
     }
@@ -45,7 +46,8 @@ public class BrinquedoService {
             brinquedo.setMarca(brinquedoDTO.getMarca());
             brinquedo.setImagem(brinquedoDTO.getImagem());
             brinquedo.setValor(brinquedoDTO.getValor());
-            brinquedo.setDescricao(brinquedoDTO.getDescricao());
+            brinquedo.setDetalhes(brinquedoDTO.getDetalhes());
+            brinquedo.setQuantVendas(brinquedoDTO.getQuantVendas());
 
             return brinquedoRepository.save(brinquedo);
         });

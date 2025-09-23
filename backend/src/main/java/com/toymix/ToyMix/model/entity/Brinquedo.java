@@ -37,7 +37,10 @@ public class Brinquedo {
     private BigDecimal valor;
 
     @Lob
-    @Column(name = "descricao")
-    private String descricao;
+    @Column(name = "detalhes")
+    private String detalhes;
+
+    @Column(name = "quantVendas")
+    private Integer quantVendas;
 
 }
