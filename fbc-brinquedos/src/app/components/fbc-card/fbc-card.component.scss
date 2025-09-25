@@ -30,6 +30,7 @@ img {
     height: rem(140); // altura do container
     object-fit: contain; // garante que a imagem inteira apareça
     object-position: center; // centraliza a imagem
+    background: transparent;
     border-radius: rem(10) rem(10) 0 0;
     transition: transform 0.3s ease-in-out;
   }

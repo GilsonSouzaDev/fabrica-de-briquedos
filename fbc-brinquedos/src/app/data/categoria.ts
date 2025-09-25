@@ -6,11 +6,11 @@ export const CATEGORIAS: Categoria[] = [
     imagem: 'https://i.imgur.com/WL721d2.png',
   },
   {
-    titulo: 'Pelúcia',
+    titulo: 'Pelucia',
     imagem: 'https://i.imgur.com/yiQtoBj.png',
   },
   {
-    titulo: 'Veículos',
+    titulo: 'Veiculos',
     imagem: 'https://i.imgur.com/65zGku1.png',
   },
   {

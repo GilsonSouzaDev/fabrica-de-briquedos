@@ -62,9 +62,13 @@
   .catalog {
     width: 100%;
 
+
     &__filtered-view{
       gap: 0.5rem; // Convertido de 32px
+      width: 100%;
     }
+
+
 
   }
 }
