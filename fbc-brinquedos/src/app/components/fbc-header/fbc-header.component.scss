@@ -40,7 +40,8 @@ app-fbc-usermenu {
 
   // 1. O menu é posicionado de forma absoluta em relação ao header.
   position: absolute;
-  right: rem(32); // Espaçamento da borda direita.
+  margin-left: auto;
+  right: rem(8); // Espaçamento da borda direita.
   top: 50%; // Alinhado verticalmente ao centro.
   transform: translateY(-50%); // Ajuste fino para centralização vertical perfeita.
 }

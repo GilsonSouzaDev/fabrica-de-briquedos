@@ -11,11 +11,10 @@
   align-items: center;
   justify-content: center;
   margin: auto;
-  margin-top: rem(48); // Convertido
   background-color: $second-color;
-  font-size: rem(18); // Convertido
+  font-size: rem(18);
   width: 100%;
-  height: rem(60); // Convertido
+  height: rem(60);
 
   // O seletor foi atualizado de 'p' para 'small' para corresponder ao novo HTML.
   small {

@@ -10,7 +10,7 @@
 
 // 3. Definir Variáveis CSS (Custom Properties) para maior flexibilidade no browser
 :host {
-  --menu-background-color: #{$nav-menu-color}; // Usando a variável SASS para definir a variável CSS
+  --menu-background-color: #{$nav-menu-color};
   --menu-font-size: #{rem(20)};
   --menu-item-padding: #{rem(8)};
 }

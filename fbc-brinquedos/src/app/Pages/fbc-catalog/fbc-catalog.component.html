@@ -1,6 +1,6 @@
 <section class="catalog">
   @if (!selectedCategory()) {
-    <h2>Catálogo de Brinquedos</h2>
+    <h2>Catálogo</h2>
     <div class="catalog__card">
       @for (category of categoria$ | async; track $index) {
         <app-fbc-category

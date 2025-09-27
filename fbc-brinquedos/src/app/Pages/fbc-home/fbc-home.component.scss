@@ -9,13 +9,14 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-  margin-top: rem(24);
+  margin-top: rem(10);
   height: auto;
   width: 70%;
-  gap: rem(6);
+  gap: rem(1);
 
   &__imagem {
-    width: 100%;
+    margin: auto;
+    width: 80%;
     height: rem(270);
   }
 
@@ -29,8 +30,7 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-    padding: rem(8);
-    gap: rem(16);
+    gap: rem(8);
   }
 
   img {
@@ -54,11 +54,6 @@
   }
 
   @media (max-width: 950px) {
-    // Este seletor estava aninhado incorretamente.
-    // Para afetar .home, ele não deve estar dentro de si mesmo.
-    // Esta correção é implícita, pois o código não seria gerado corretamente.
-    // A forma correta seria fora ou com @at-root.
-    // Para manter a simplicidade, assumimos que deveria estar fora.
     width: 100%;
   }
 }

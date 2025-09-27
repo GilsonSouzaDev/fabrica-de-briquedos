@@ -3,36 +3,30 @@
 .catalog {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   margin: auto;
   text-align: center;
-  width: 80%;
+  width: 54%;
 
   &__card {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 1rem; // Convertido de 16px
-    gap: 1rem; // Convertido de 16px
+    gap: 1.5rem;
   }
 
   h2 {
     font-size: 1.875rem; // Convertido de 30px
   }
 
-  &__filtered-view {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem; // Convertido de 32px
-  }
 
   &__card-category {
     display: flex;
-    justify-content: center;
+    justify-content: first baseline;
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding: 1rem;
+    padding: 0 1rem ;
   }
 
   // CORREÇÃO: Usando a classe específica do botão para garantir que SÓ ele seja afetado.
@@ -42,9 +36,7 @@
     margin: auto;
     font-size: 1rem;
     font-weight: bold;
-    // OBS: As regras conflitantes de min/max-width e min-height foram removidas.
-    // O tamanho do botão será controlado pelo padding, o que é mais flexível e seguro,
-    // mantendo a aparência visual.
+
     padding: 0.8rem 1.6rem;
     border: none;
     border-radius: 0.8rem;
@@ -58,7 +50,7 @@
   }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1300px) {
   .catalog {
     width: 100%;
 
@@ -66,6 +58,11 @@
     &__filtered-view{
       gap: 0.5rem; // Convertido de 32px
       width: 100%;
+    }
+
+    &__card-category{
+      justify-content: center;
+      margin-bottom: 1rem;
     }
 
 
