@@ -19,13 +19,16 @@ public class Brinquedo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "codigo", nullable = false)
-    private String codigo;
+    private int codigo;
 
-    @Column(name = "nome", nullable = false)
-    private String nome;
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
+
+    @Column(name = "categoria", nullable = false)
+    private String categoria;
 
     @Column(name = "marca", nullable = false)
     private String marca;
