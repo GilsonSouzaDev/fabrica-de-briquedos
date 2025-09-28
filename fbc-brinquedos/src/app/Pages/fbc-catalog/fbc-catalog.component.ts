@@ -1,5 +1,5 @@
 import { CategoriaService } from './../../services/categoria.service';
-import { BrinquedoService } from './../../services/brinquedo.service'; // Supondo que você tenha um serviço para brinquedos
+//import { BrinquedoService } from './../../services/brinquedo.service'; // Supondo que você tenha um serviço para brinquedos
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { Categoria } from '../../interfaces/categoria';
 import { Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FbcCategoryComponent } from '../../components/fbc-category/fbc-category.component';
 import { Brinquedo } from '../../interfaces/brinquedo';
 import { FbcCardComponent } from '../../components/fbc-card/fbc-card.component';
+import { BrinquedoApiService } from '../../services/brinquedo-api.service';
 
 @Component({
   selector: 'app-fbc-catalog',
@@ -24,7 +25,7 @@ export class FbcCatalogComponent implements OnInit {
 
   constructor(
     private readonly categoryService: CategoriaService,
-    private readonly brinquedoService: BrinquedoService // Injete o serviço de brinquedos
+    private readonly brinquedoService: BrinquedoApiService // Injete o serviço de brinquedos
   ) {}
 
   ngOnInit(): void {

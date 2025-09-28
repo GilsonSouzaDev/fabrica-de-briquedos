@@ -9,13 +9,14 @@ import {
 } from '@angular/material/paginator';
 
 import { Brinquedo } from '../../interfaces/brinquedo';
-import { BrinquedoService } from '../../services/brinquedo.service';
+// import { BrinquedoService } from '../../services/brinquedo.service';
 import { FbcAdminListComponent } from '../../components/fbc-admin-list/fbc-admin-list.component';
 import { FbcFormComponent } from '../../components/fbc-form/fbc-form.component';
 import { CustomPaginator } from '../../utils/custom-paginator-intl';
 import { paginate } from '../../utils/pagination.util';
 import { DialogService } from '../../shared/services/dialog.service';
 import { getNextCodigo } from '../../utils/codigo.util';
+import { BrinquedoApiService } from '../../services/brinquedo-api.service';
 
 type ViewMode = 'list' | 'form';
 type FormMode = 'create' | 'edit';
@@ -34,7 +35,7 @@ type FormMode = 'create' | 'edit';
   providers: [{ provide: MatPaginatorIntl, useFactory: CustomPaginator }],
 })
 export class FbcAdminComponent {
-  private brinquedoService = inject(BrinquedoService);
+  private brinquedoService = inject(BrinquedoApiService);
   private dialogService = inject(DialogService);
 
   brinquedos$!: Observable<Brinquedo[]>;
