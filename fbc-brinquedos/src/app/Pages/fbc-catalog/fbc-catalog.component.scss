@@ -10,33 +10,31 @@
   width: 54%;
 
   &__card {
-    display: flex;
+    display: flex; // categorias continuam flex
     justify-content: center;
     flex-wrap: wrap;
     gap: 1.5rem;
   }
 
   h2 {
-    font-size: 1.875rem; // Convertido de 30px
+    font-size: 1.875rem; // 30px
   }
-
 
   &__card-category {
-    display: flex;
-    justify-content: first baseline;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0 1rem ;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); // fixo em telas grandes
+    gap: 1.5rem; // espaçamento grande para desktop
+    padding: 0 1rem;
+    width: 100%;
+    justify-items: center; // centraliza os cards dentro das colunas
   }
 
-  // CORREÇÃO: Usando a classe específica do botão para garantir que SÓ ele seja afetado.
   .back-button {
     background: $primary-color;
     color: $text-light;
     margin: auto;
     font-size: 1rem;
     font-weight: bold;
-
     padding: 0.8rem 1.6rem;
     border: none;
     border-radius: 0.8rem;
@@ -50,22 +48,38 @@
   }
 }
 
+// telas médias (ex: tablets e notebooks menores)
 @media (max-width: 1300px) {
   .catalog {
     width: 100%;
 
-
-    &__filtered-view{
-      gap: 0.5rem; // Convertido de 32px
+    &__filtered-view {
+      gap: 0.5rem;
       width: 100%;
     }
 
-    &__card-category{
-      justify-content: center;
+    &__card-category {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; // reduz espaço entre os cards
       margin-bottom: 1rem;
+      justify-items: center; // garante centralização
     }
+  }
+}
 
+// telas pequenas (celulares)
+@media (max-width: 768px) {
+  .catalog {
+    // Removemos o padding daqui para não afetar outras telas
+    width: 100%;
 
-
+    &__card-category {
+      // Trocamos Grid por Flexbox para ter mais controle no mobile
+      display: flex;
+      flex-wrap: wrap; // Permite que os itens quebrem para a próxima linha
+      justify-content: center; // Centraliza os cards horizontalmente no contêiner
+      gap: 1rem; // Espaçamento entre os cards
+      padding: 0 1rem; // Adiciona o padding aqui, no contêiner direto dos cards
+    }
   }
 }
