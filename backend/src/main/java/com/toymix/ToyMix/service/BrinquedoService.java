@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class BrinquedoService {
 
@@ -22,14 +23,15 @@ public class BrinquedoService {
         return brinquedoRepository.findById(id);
     }
 
-    public List<Brinquedo> buscarPorNome(String nome){
-        return brinquedoRepository.findByNomeContainsIgnoreCase(nome);
+    public List<Brinquedo> buscarPorNome(String descricao){
+        return brinquedoRepository.findByDescricaoContainsIgnoreCase(descricao);
     }
 
     public Brinquedo cadastrarBrinquedo(BrinquedoDTO brinquedoDTO){
         Brinquedo brinquedo = new Brinquedo();
         brinquedo.setCodigo(brinquedoDTO.getCodigo());
-        brinquedo.setNome(brinquedoDTO.getNome());
+        brinquedo.setDescricao(brinquedoDTO.getDescricao());
+        brinquedo.setCategoria(brinquedoDTO.getCategoria());
         brinquedo.setMarca(brinquedoDTO.getMarca());
         brinquedo.setImagem(brinquedoDTO.getImagem());
         brinquedo.setValor(brinquedoDTO.getValor());
@@ -42,7 +44,8 @@ public class BrinquedoService {
     public Optional<Brinquedo> atualizarCadastroDoBrinquedo(int id, BrinquedoDTO brinquedoDTO){
         return brinquedoRepository.findById(id).map(brinquedo -> {
             brinquedo.setCodigo(brinquedoDTO.getCodigo());
-            brinquedo.setNome(brinquedoDTO.getNome());
+            brinquedo.setDescricao(brinquedoDTO.getDescricao());
+            brinquedo.setCategoria(brinquedoDTO.getCategoria());
             brinquedo.setMarca(brinquedoDTO.getMarca());
             brinquedo.setImagem(brinquedoDTO.getImagem());
             brinquedo.setValor(brinquedoDTO.getValor());
