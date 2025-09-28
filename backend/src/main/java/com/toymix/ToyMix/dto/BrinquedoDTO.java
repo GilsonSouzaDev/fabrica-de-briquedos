@@ -1,5 +1,7 @@
 package com.toymix.ToyMix.dto;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +11,9 @@ import java.math.BigDecimal;
 @Setter
 public class BrinquedoDTO {
 
-    private String nome;
-    private String codigo;
+    private int codigo;
+    private String descricao;
+    private String categoria;
     private String marca;
     private String imagem;
     private BigDecimal valor;
