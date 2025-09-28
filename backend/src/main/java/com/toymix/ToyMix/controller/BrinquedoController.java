@@ -30,8 +30,8 @@ public class BrinquedoController {
     }
 
     @GetMapping("/buscar/{nome}")
-    public List<Brinquedo> buscarBrinquedoPorNome(@PathVariable String nome) {
-           return brinquedoService.buscarPorNome(nome);
+    public List<Brinquedo> buscarBrinquedoPorNome(@PathVariable String descricao) {
+           return brinquedoService.buscarPorNome(descricao);
     }
 
     @PostMapping
