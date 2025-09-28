@@ -22,8 +22,9 @@ select * from categoria;
 
 create table brinquedo (
 	id int primary key auto_increment,
-    codigo varchar(10) not null,
-    nome varchar(100) not null,
+    codigo int,
+    descricao varchar(100) not null,
+    categoria varchar(70) not null,
     marca varchar(100) not null,
     imagem varchar(255),
     valor decimal(10,2),
@@ -31,10 +32,11 @@ create table brinquedo (
     quantVendas int
 );
 
+
 DESC brinquedo;
 
-insert into brinquedo (codigo, nome, marca, imagem, valor,  detalhes, quantVendas)
-values ("1BL1544", "Boneco Max Steel", "Hasbro", "https://a-static.mlcdn.com.br/1500x1500/conjunto-boneco-articulado-menino-max-steel-e-animal-pantera-com-acessorios-mattel-brinquedos-fdt75/topsvirtual/14481951998/8ffedb647069617f46e0fc72bcbf684e.jpeg", 47.99, "Novo boneco do Max Steel versão 2025", 18);
+insert into brinquedo (codigo, descricao, categoria, marca, imagem, valor,  detalhes, quantVendas)
+values (11544, "Boneco Max Steel", "Bonecos","Hasbro", "https://a-static.mlcdn.com.br/1500x1500/conjunto-boneco-articulado-menino-max-steel-e-animal-pantera-com-acessorios-mattel-brinquedos-fdt75/topsvirtual/14481951998/8ffedb647069617f46e0fc72bcbf684e.jpeg", 47.99, "Novo boneco do Max Steel versão 2025", 18);
 
 desc brinquedo;
 SELECT * FROM brinquedo;
