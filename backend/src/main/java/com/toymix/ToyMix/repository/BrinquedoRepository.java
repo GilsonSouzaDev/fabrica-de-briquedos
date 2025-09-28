@@ -9,7 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface BrinquedoRepository extends JpaRepository<Brinquedo, Integer> {
-    Optional<Brinquedo> findByNomeIgnoreCase(String nome);
 
-    List<Brinquedo> findByNomeContainsIgnoreCase(String nome);
+    Optional<Brinquedo> findByDescricaoIgnoreCase(String descricao);
+
+    List<Brinquedo> findByDescricaoContainsIgnoreCase(String descricao);
+
 }
