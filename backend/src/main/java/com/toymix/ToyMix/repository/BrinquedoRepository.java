@@ -14,4 +14,9 @@ public interface BrinquedoRepository extends JpaRepository<Brinquedo, Integer> {
 
     List<Brinquedo> findByDescricaoContainsIgnoreCase(String descricao);
 
+    boolean existsByDescricaoIgnoreCase(String descricao);
+
+    boolean existsByCodigo(Integer codigo);
+
+
 }

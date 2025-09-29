@@ -3,6 +3,7 @@ package com.toymix.ToyMix.controller;
 import com.toymix.ToyMix.dto.BrinquedoDTO;
 import com.toymix.ToyMix.model.entity.Brinquedo;
 import com.toymix.ToyMix.service.BrinquedoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,9 @@ import java.util.List;
 @CrossOrigin(
         origins = {
                 "https://fabrica-de-briquedos.vercel.app",
-                "http://localhost:4200"
+                "http://localhost:4200",
+                "http://localhost:8080"
+
         }
 )
 @RequestMapping("/brinquedo")
@@ -40,13 +43,13 @@ public class BrinquedoController {
     }
 
     @PostMapping
-    public ResponseEntity<Brinquedo> salvarCadastroDoBrinquedo(@RequestBody BrinquedoDTO brinquedoDTO){
+    public ResponseEntity<Brinquedo> salvarCadastroDoBrinquedo(@Valid @RequestBody BrinquedoDTO brinquedoDTO){
         Brinquedo novoBrinquedo = brinquedoService.cadastrarBrinquedo(brinquedoDTO);
         return ResponseEntity.ok(novoBrinquedo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Brinquedo> atualizarCadastroDoBrinquedo(@PathVariable int id, @RequestBody BrinquedoDTO brinquedoDTO){
+    public ResponseEntity<Brinquedo> atualizarCadastroDoBrinquedo(@Valid @PathVariable int id, @RequestBody BrinquedoDTO brinquedoDTO){
         return brinquedoService.atualizarCadastroDoBrinquedo(id, brinquedoDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
