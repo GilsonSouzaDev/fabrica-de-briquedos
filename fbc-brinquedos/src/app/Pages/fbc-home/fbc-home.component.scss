@@ -23,6 +23,7 @@
   // Seletor para a nova seção semântica
   &__bestsellers {
     display: contents; // Garante que a <section> não interfira no layout flex
+
   }
 
   &__card {
@@ -37,13 +38,13 @@
     margin: auto;
     width: 100%;
     border-radius: rem(10);
-    // Pequena limpeza: 0px para 0. Sem impacto visual.
     box-shadow: 0 rem(4) rem(6) rem(-2) rgba(0, 0, 0, 0.4);
   }
 
   // Alterado para h1 para corresponder à mudança semântica
   h1 {
     text-align: center;
+    margin: 2rem;
   }
 
   @media (max-width: 1450px) {
