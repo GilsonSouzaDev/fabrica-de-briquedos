@@ -11,6 +11,9 @@
     </div>
   } @else {
     <div class="catalog__filtered-view">
+      <button class="back-button" (click)="goBackToCategories()">
+        <i class="fas fa-arrow-left"></i> <!-- Exemplo de ícone -->
+      </button>
       <header class="filtered-view__header">
         <h2>{{ selectedCategory() }}</h2>
       </header>
@@ -21,7 +24,6 @@
         }
       </div>
 
-      <button (click)="goBackToCategories()" class="back-button">← Categorias</button>
     </div>
   }
 </section>

@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'sass:color';
 
 .catalog {
   display: flex;
@@ -8,6 +9,16 @@
   margin: auto;
   text-align: center;
   width: 54%;
+  position: relative; // Necessário para posicionamento absoluto do botão
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 1rem;
+    position: relative;
+  }
 
   &__card {
     display: flex; // categorias continuam flex
@@ -18,7 +29,9 @@
 
   h2 {
     font-size: 1.875rem; // 30px
-    margin: 1rem;
+    margin: 1.2rem;
+    flex: 1;
+    text-align: center;
   }
 
   &__card-category {
@@ -30,10 +43,78 @@
     justify-items: center; // centraliza os cards dentro das colunas
   }
 
+  // Novo botão moderno tipo ícone
+  .categories-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(135deg,
+        $primary-color,
+        color.adjust($primary-color, $lightness: 10%));
+    color: $text-light;
+    border: none;
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    z-index: 10;
+
+    // Ícone de categorias usando pseudo-elemento
+    &::before {
+      content: "☰";
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    &:hover {
+      background: linear-gradient(135deg,
+          color.adjust($primary-color, $lightness: 5%),
+          color.adjust($primary-color, $lightness: 15%));
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 20px rgba($primary-color, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: 0 2px 8px rgba($primary-color, 0.3);
+    }
+
+    // Tooltip opcional
+    &::after {
+      content: "Categorias";
+      position: absolute;
+      bottom: -2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.4rem;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+
+  // Botão antigo mantido para compatibilidade (pode ser removido se não for mais usado)
   .back-button {
+    display: flex;
     background: $primary-color;
     color: $text-light;
-    margin: auto;
+    margin-left: auto;
     font-size: 1rem;
     font-weight: bold;
     padding: 0.8rem 1.6rem;
@@ -65,14 +146,33 @@
       margin-bottom: 1rem;
       justify-items: center; // garante centralização
     }
+
+    .categories-button {
+      width: 3rem;
+      height: 3rem;
+      font-size: 1rem;
+
+      &::before {
+        font-size: 1.2rem;
+      }
+    }
   }
 }
 
 // telas pequenas (celulares)
 @media (max-width: 768px) {
   .catalog {
-    // Removemos o padding daqui para não afetar outras telas
     width: 100%;
+
+    &__header {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    h2 {
+      margin: 1.2rem;
+    }
 
     &__card-category {
       // Trocamos Grid por Flexbox para ter mais controle no mobile
@@ -81,6 +181,24 @@
       justify-content: center; // Centraliza os cards horizontalmente no contêiner
       gap: 1rem; // Espaçamento entre os cards
       padding: 0 1rem; // Adiciona o padding aqui, no contêiner direto dos cards
+    }
+
+    .categories-button {
+      position: relative;
+      top: auto;
+      right: auto;
+      width: 2.8rem;
+      height: 2.8rem;
+      font-size: 0.9rem;
+
+      &::before {
+        font-size: 1.1rem;
+      }
+
+      &::after {
+        bottom: -2rem;
+        font-size: 0.7rem;
+      }
     }
   }
 }

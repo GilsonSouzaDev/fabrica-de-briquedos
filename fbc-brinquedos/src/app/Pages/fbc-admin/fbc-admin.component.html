@@ -1,6 +1,6 @@
 <main class="admin-page">
   <ng-container *ngIf="view === 'list'; else formTpl">
-    <h1 class="admin-page__title">Administração</h1>
+    <h2 class="admin-page__title">Administração</h2>
 
     <app-fbc-admin-list
       [brinquedos]="(paginatedBrinquedos$ | async)"

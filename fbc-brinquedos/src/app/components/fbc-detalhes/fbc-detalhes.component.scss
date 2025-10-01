@@ -129,25 +129,23 @@
 // --- Bloco de Responsividade para MOBILE ---
 @media (max-width: 750px) {
   .detalhe-container {
-    padding: rem(16); // Reduz o padding geral
+    padding: rem(16); 
   }
 
   .card-detalhe {
-    // 1. Muda a direção para empilhar verticalmente
     flex-direction: column;
     padding: rem(24);
-    width: 90%;
+    width: 100%;
     gap: rem(24);
   }
 
   .imagem-container img {
-    max-width: 100%; // Imagem ocupa a largura do card
+    max-width: 100%;
     height: auto;
   }
 
   .info-container {
 
-    // O texto agora tem mais espaço para respirar
     .titulo {
       font-size: rem(28);
     }
@@ -158,17 +156,16 @@
   }
 
   .valor-compra {
-    // 2. Empilha o preço e o botão
     flex-direction: column;
-    align-items: stretch; // Faz o botão esticar na largura
+    align-items: stretch;
     gap: rem(16);
 
     .preco {
-      text-align: center; // Centraliza o preço
+      text-align: center;
     }
 
     .btn-comprar {
-      width: 60%; // Botão grande e fácil de tocar
+      width: 60%;
     }
   }
 }
