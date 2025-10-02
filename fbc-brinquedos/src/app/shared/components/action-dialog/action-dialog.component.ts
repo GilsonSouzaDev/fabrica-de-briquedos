@@ -25,6 +25,10 @@ export interface ResultStateData {
   message: string;
 }
 
+
+
+
+
 @Component({
   selector: 'app-action-dialog',
   standalone: true,
@@ -65,17 +69,11 @@ export class ActionDialogComponent {
     } catch (error: any) {
       console.error('Falha na ação do diálogo:', error);
 
-      // **LINHA MODIFICADA ABAIXO**
-      // Primeiro, tentamos pegar a mensagem de dentro do corpo do erro (error.error).
-      // Se a API retornar um objeto { error: 'mensagem' }, error.error.error funcionará.
-      // Se a API retornar um objeto { message: 'mensagem' }, error.error.message funcionará.
-      // Se for apenas uma string, error.error funcionará.
-      // Se nada disso existir, usamos a mensagem padrão.
       const errorMessage =
-        error?.error?.error || // Para o caso de { error: { error: '...' } }
-        error?.error?.message || // Para o caso de { error: { message: '...' } }
-        (typeof error?.error === 'string' ? error.error : null) || // Para o caso de { error: '...' }
-        error?.message || // Fallback para a mensagem HTTP genérica
+        error?.error?.error ||
+        error?.error?.message ||
+        (typeof error?.error === 'string' ? error.error : null) ||
+        error?.message ||
         'Não foi possível completar a operação. Tente novamente.';
 
       this.resultData = {

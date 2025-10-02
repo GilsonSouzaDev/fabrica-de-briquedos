@@ -1,4 +1,4 @@
-/* components/fbc-form/fbc-form.component.scss */
+/* src/app/components/fbc-form/fbc-form.component.scss */
 @use 'variables' as *;
 @use 'sass:math';
 
@@ -59,9 +59,8 @@ form {
   input,
   textarea,
   select {
-    box-sizing: border-box; // inclui padding/border no tamanho total
-    font: inherit; // força a herança da fonte
-
+    box-sizing: border-box;
+    font: inherit;
     width: 100%;
     padding: rem(8);
     border: 1px solid transparent;
@@ -77,14 +76,26 @@ form {
     }
   }
 
+  // O textarea não precisa mais de uma regra de grid-column aqui
   textarea {
-    grid-column: 2 / 3;
     min-height: rem(80);
     resize: vertical;
   }
 
   input[name="codigo"] {
     max-width: rem(120);
+  }
+}
+
+// NOVO: Contêiner para input + mensagens
+.input-wrapper {
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+
+  // O textarea está dentro de um wrapper agora, então a regra de coluna vai aqui
+  &.textarea-wrapper {
+    grid-column: 2 / 3;
   }
 }
 
@@ -130,35 +141,38 @@ button {
 
 /* --- Mensagens de erro --- */
 .error-message {
-  grid-column: 2 / 3; // ao lado do campo em telas grandes
+  // REMOVIDO: grid-column: 2 / 3;
   color: #d9534f;
   font-size: 0.8em;
-  margin-top: rem(-8);
-  margin-bottom: rem(8);
+  margin-top: rem(4);
+  margin-bottom: rem(4);
   text-align: left;
-  min-height: 1.2em; // evita "pulos"
+  min-height: 1.2em;
 }
 
 /* Inputs inválidos com destaque */
 input.ng-invalid.ng-touched,
-select.ng-invalid.ng-touched {
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  // Adicionado textarea aqui para consistência
   border-left: 5px solid #d9534f;
 }
 
 /* Responsividade para telas menores que 600px */
 @media (max-width: 600px) {
   form {
-    grid-template-columns: 1fr; // apenas uma coluna
+    grid-template-columns: 1fr;
     gap: rem(12);
 
     label {
       text-align: left;
       font-size: rem(14);
     }
+  }
 
-    textarea {
-      grid-column: 1; // ocupa toda a largura
-    }
+  // NOVO: Regra para o wrapper em telas pequenas
+  .input-wrapper {
+    grid-column: 1;
   }
 
   .actions {
@@ -180,10 +194,9 @@ select.ng-invalid.ng-touched {
     }
   }
 
-  /* Mensagens de erro no mobile: embaixo do campo */
   .error-message {
-    grid-column: 1; // ocupa toda a largura
-    margin-top: rem(4); // espaço entre campo e erro
+    // REMOVIDO: grid-column: 1;
+    margin-top: rem(4);
     font-size: rem(13);
   }
 }

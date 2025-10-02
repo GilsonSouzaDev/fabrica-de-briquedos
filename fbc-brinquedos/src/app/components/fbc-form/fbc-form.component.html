@@ -10,84 +10,100 @@
 
       <!-- CÓDIGO -->
       <label for="codigo">Código</label>
-      <input
-        id="codigo"
-        type="number"
-        [(ngModel)]="toy.codigo"
-        name="codigo"
-        required
-        #codigo="ngModel"
-        readonly
-        uniqueCodigo
-        [idBrinquedo]="isEdit ? toy.id : undefined"
-      />
-      <div *ngIf="codigo.pending" class="pending-message">Verificando...</div>
-      <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)" class="error-message">
-        <div *ngIf="codigo.errors?.['required']">O código é obrigatório.</div>
-        <div *ngIf="codigo.errors?.['uniqueCodigo']">Já existe um brinquedo com este código.</div>
+      <div class="input-wrapper">
+        <input
+          id="codigo"
+          type="number"
+          [(ngModel)]="toy.codigo"
+          name="codigo"
+          required
+          #codigo="ngModel"
+          readonly
+          uniqueCodigo
+          [idBrinquedo]="isEdit ? toy.id : undefined"
+        />
+        <div *ngIf="codigo.pending" class="pending-message">Verificando...</div>
+        <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)" class="error-message">
+          <div *ngIf="codigo.errors?.['required']">O código é obrigatório.</div>
+          <div *ngIf="codigo.errors?.['uniqueCodigo']">Já existe um brinquedo com este código.</div>
+        </div>
       </div>
 
       <!-- DESCRIÇÃO -->
       <label for="descricao">Descrição</label>
-      <input
-        id="descricao"
-        [(ngModel)]="toy.descricao"
-        name="descricao"
-        required
-        minlength="3"
-        #descricao="ngModel"
-        uniqueDescricao
-        [idBrinquedo]="isEdit ? toy.id : undefined"
-      />
-      <div *ngIf="descricao.pending" class="pending-message">Verificando...</div>
-      <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)" class="error-message">
-        <div *ngIf="descricao.errors?.['required']">A descrição é obrigatória.</div>
-        <div *ngIf="descricao.errors?.['minlength']">A descrição deve ter no mínimo 3 caracteres.</div>
-        <div *ngIf="descricao.errors?.['uniqueDescricao']">Já existe um brinquedo com esta descrição.</div>
+      <div class="input-wrapper">
+        <input
+          id="descricao"
+          [(ngModel)]="toy.descricao"
+          name="descricao"
+          required
+          minlength="3"
+          #descricao="ngModel"
+          uniqueDescricao
+          [idBrinquedo]="isEdit ? toy.id : undefined"
+        />
+        <!-- <div *ngIf="descricao.pending" class="pending-message">Verificando...</div> -->
+        <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)" class="error-message">
+          <div *ngIf="descricao.errors?.['required']">A descrição é obrigatória.</div>
+          <div *ngIf="descricao.errors?.['minlength']">A descrição deve ter no mínimo 3 caracteres.</div>
+          <div *ngIf="descricao.errors?.['uniqueDescricao']">Já existe um brinquedo com esta descrição.</div>
+        </div>
       </div>
 
       <!-- CATEGORIA -->
       <label for="categoria">Categoria</label>
-      <select id="categoria" [(ngModel)]="toy.categoria" name="categoria" required #categoria="ngModel">
-        <option [ngValue]="null" disabled>Selecione uma categoria</option>
-        <option *ngFor="let cat of categorias" [value]="cat.titulo">{{ cat.titulo }}</option>
-      </select>
-      <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)" class="error-message">
-        <div *ngIf="categoria.errors?.['required']">Selecione uma categoria.</div>
+      <div class="input-wrapper">
+        <select id="categoria" [(ngModel)]="toy.categoria" name="categoria" required #categoria="ngModel">
+          <option [ngValue]="null" disabled>Selecione uma categoria</option>
+          <option *ngFor="let cat of categorias" [value]="cat.titulo">{{ cat.titulo }}</option>
+        </select>
+        <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)" class="error-message">
+          <div *ngIf="categoria.errors?.['required']">Selecione uma categoria.</div>
+        </div>
       </div>
 
       <!-- MARCA -->
       <label for="marca">Marca</label>
-      <input id="marca" [(ngModel)]="toy.marca" name="marca" required #marca="ngModel" />
-      <div *ngIf="marca.invalid && (marca.dirty || marca.touched)" class="error-message">
-        <div *ngIf="marca.errors?.['required']">A marca é obrigatória.</div>
+      <div class="input-wrapper">
+        <input id="marca" [(ngModel)]="toy.marca" name="marca" required #marca="ngModel" />
+        <div *ngIf="marca.invalid && (marca.dirty || marca.touched)" class="error-message">
+          <div *ngIf="marca.errors?.['required']">A marca é obrigatória.</div>
+        </div>
       </div>
 
       <!-- IMAGEM (URL) -->
       <label for="imagem">Imagem (URL)</label>
-      <input id="imagem" [(ngModel)]="toy.imagem" name="imagem" pattern="https?://.+" required #imagem="ngModel" />
-      <div *ngIf="imagem.invalid && (imagem.dirty || imagem.touched )" class="error-message">
-        <div *ngIf="imagem.errors?.['pattern']">Insira uma URL válida (ex: http://... ).</div>
-        <div *ngIf="imagem.errors?.['required']">O campo imagem é obrigatório.</div>
+      <div class="input-wrapper">
+        <input id="imagem" [(ngModel)]="toy.imagem" name="imagem" pattern="https?://.+" required #imagem="ngModel" />
+        <div *ngIf="imagem.invalid && (imagem.dirty || imagem.touched  )" class="error-message">
+          <div *ngIf="imagem.errors?.['pattern']">Insira uma URL válida (ex: http://...  ).</div>
+          <div *ngIf="imagem.errors?.['required']">O campo imagem é obrigatório.</div>
+        </div>
       </div>
 
       <!-- VALOR -->
       <label for="valor">Valor</label>
-      <input id="valor" type="number" [(ngModel)]="toy.valor" name="valor" required min="0.01" #valor="ngModel" />
-      <div *ngIf="valor.invalid && (valor.dirty || valor.touched)" class="error-message">
-        <div *ngIf="valor.errors?.['required']">O valor é obrigatório.</div>
-        <div *ngIf="valor.errors?.['min']">O valor deve ser maior que zero.</div>
+      <div class="input-wrapper">
+        <input id="valor" type="number" [(ngModel)]="toy.valor" name="valor" required min="0.01" #valor="ngModel" />
+        <div *ngIf="valor.invalid && (valor.dirty || valor.touched)" class="error-message">
+          <div *ngIf="valor.errors?.['required']">O valor é obrigatório.</div>
+          <div *ngIf="valor.errors?.['min']">O valor deve ser maior que zero.</div>
+        </div>
       </div>
 
       <!-- DETALHES -->
       <label for="detalhes">Detalhes</label>
-      <textarea id="detalhes" [(ngModel)]="toy.detalhes" name="detalhes" required #detalhes="ngModel"></textarea>
-      <div *ngIf="detalhes.invalid && (detalhes.dirty || detalhes.touched)" class="error-message">
-        <div *ngIf="detalhes.errors?.['required']">O campo detalhe é obrigatório.</div>
+      <div class="input-wrapper">
+        <textarea id="detalhes" [(ngModel)]="toy.detalhes" name="detalhes" required #detalhes="ngModel"></textarea>
+        <div *ngIf="detalhes.invalid && (detalhes.dirty || detalhes.touched)" class="error-message">
+          <div *ngIf="detalhes.errors?.['required']">O campo detalhe é obrigatório.</div>
+        </div>
       </div>
 
       <div class="actions">
-        <button type="submit" [disabled]="toyForm.invalid || toyForm.pending">{{ isEdit ? 'Atualizar' : 'Cadastrar' }}</button>
+        <button type="submit" [disabled]="toyForm.pending">
+          {{ isEdit ? 'Atualizar' : 'Cadastrar' }}
+        </button>
         <button type="button" (click)="onCancel()">Cancelar</button>
       </div>
     </form>

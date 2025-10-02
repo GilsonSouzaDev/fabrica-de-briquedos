@@ -16,9 +16,18 @@
   width: 100%;
   height: rem(60);
 
+
   // O seletor foi atualizado de 'p' para 'small' para corresponder ao novo HTML.
   small {
     text-align: center;
     color: $text-light;
   }
+}
+
+@media (max-width: 750px) {
+
+    .footer{
+      margin-top: 2rem;
+      font-size: rem(16);
+    }
 }

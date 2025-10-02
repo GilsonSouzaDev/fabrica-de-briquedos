@@ -1,5 +1,6 @@
+
 // pages/fbc-admin/fbc-admin.component.ts
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import {
@@ -11,12 +12,13 @@ import {
 import { Brinquedo } from '../../interfaces/brinquedo';
 // import { BrinquedoService } from '../../services/brinquedo.service';
 import { FbcAdminListComponent } from '../../components/fbc-admin-list/fbc-admin-list.component';
-import { FbcFormComponent } from '../../components/fbc-form/fbc-form.component';
+import { FbcFormComponent, SaveEventPayload } from '../../components/fbc-form/fbc-form.component';
 import { CustomPaginator } from '../../utils/custom-paginator-intl';
 import { paginate } from '../../utils/pagination.util';
 import { DialogService } from '../../shared/services/dialog.service';
 import { getNextCodigo } from '../../utils/codigo.util';
 import { BrinquedoApiService } from '../../services/brinquedo-api.service';
+import { Categoria } from '../../interfaces/categoria';
 
 type ViewMode = 'list' | 'form';
 type FormMode = 'create' | 'edit';
@@ -38,9 +40,10 @@ export class FbcAdminComponent {
   private brinquedoService = inject(BrinquedoApiService);
   private dialogService = inject(DialogService);
 
+  @ViewChild(FbcFormComponent) private fbcFormComponent!: FbcFormComponent;
+
   brinquedos$!: Observable<Brinquedo[]>;
 
-  // --- NOVO: Subject local que controla a lista exibida ---
   private localBrinquedos$ = new BehaviorSubject<Brinquedo[]>([]);
 
   paginatedBrinquedos$!: Observable<Brinquedo[]>;
@@ -82,8 +85,7 @@ export class FbcAdminComponent {
   newToy(): void {
     this.formMode = 'create';
 
-   const nextCode = getNextCodigo(this.latestBrinquedos);
-
+    const nextCode = getNextCodigo(this.latestBrinquedos);
 
     this.currentToy = {
       id: 0,
@@ -145,7 +147,22 @@ export class FbcAdminComponent {
     });
   }
 
-  onSave(toy: Brinquedo): void {
+  public onSave(payload: SaveEventPayload): void {
+    const { toy, form } = payload;
+
+    console.log('1. onSave foi chamado.'); // LOG 1
+
+    if (form.invalid) {
+      this.dialogService.alert({
+        title: 'Cadastro Incompleto',
+        message:
+          'Por favor, preencha todos os campos obrigatórios antes de salvar.',
+        confirmButtonText: 'Entendi',
+      });
+      this.fbcFormComponent.markAllAsTouched();
+      return;
+    }
+
     if (this.formMode === 'create') {
       const dialogRef = this.dialogService.confirmAction({
         title: 'Confirmar Criação',
@@ -180,7 +197,15 @@ export class FbcAdminComponent {
   }
 
   private afterPersist(): void {
-    this.pageIndex$.next(0);
-    this.view = 'list';
+    // 1. Busca a lista de brinquedos atualizada do serviço.
+    this.brinquedoService.getBrinquedos().subscribe((updatedList) => {
+      // 2. Atualiza as listas locais que controlam a exibição.
+      this.latestBrinquedos = updatedList ?? [];
+      this.localBrinquedos$.next(this.latestBrinquedos);
+
+      // 3. Reseta a paginação e volta para a visão de lista.
+      this.pageIndex$.next(0);
+      this.view = 'list';
+    });
   }
 }

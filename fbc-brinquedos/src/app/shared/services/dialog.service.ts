@@ -4,11 +4,10 @@ import {
   ActionDialogData,
   ActionDialogComponent,
 } from '../components/action-dialog/action-dialog.component';
+import { AlertDialogComponent, AlertDialogData } from '../components/alert-dialog/alert-dialog.component';
 
-// Define uma interface para os parâmetros do nosso método de serviço
-// Usamos Partial<T> para tornar a maioria das propriedades opcionais
 export interface ConfirmActionOptions extends Partial<ActionDialogData> {
-  action: () => Promise<any> | import('rxjs').Observable<any>; // A ação é a única propriedade obrigatória
+  action: () => Promise<any> | import('rxjs').Observable<any>;
 }
 
 @Injectable({
@@ -46,5 +45,13 @@ export class DialogService {
         disableClose: true, // Impede o fechamento clicando fora ou pressionando ESC no estado inicial
       }
     );
+  }
+
+  public alert(data: AlertDialogData): MatDialogRef<AlertDialogComponent> {
+    return this.dialog.open(AlertDialogComponent, {
+      width: '400px',
+      data: data,
+      disableClose: true,
+    });
   }
 }
