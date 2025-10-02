@@ -5,13 +5,21 @@ import { CommonModule } from '@angular/common';
 import { Brinquedo } from '../../interfaces/brinquedo';
 import { Categoria } from '../../interfaces/categoria';
 import { CATEGORIAS } from '../../data/categoria';
+import { UniqueCodigoDirective } from '../../directives/unique-codigo.directive';
+import { UniqueDescricaoDirective } from '../../directives/unique-descricao.directive';
 
 type FormMode = 'create' | 'edit';
 
 @Component({
   selector: 'app-fbc-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    UniqueCodigoDirective,
+    UniqueDescricaoDirective
+
+  ],
   templateUrl: './fbc-form.component.html',
   styleUrl: './fbc-form.component.scss',
 })
