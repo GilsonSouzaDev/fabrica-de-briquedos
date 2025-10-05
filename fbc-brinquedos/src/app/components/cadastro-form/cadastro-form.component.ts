@@ -5,8 +5,10 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
+
 } from '@angular/forms';
 import { UsuarioAdmin } from '../../interfaces/usuario-admin';
+import { UniqueEmailDirective } from '../../directives/unique-email.directive';
 
 
 // Tipo para os dados emitidos, omitindo a confirmação de senha
@@ -15,7 +17,7 @@ export type CadastroFormValue = Omit<UsuarioAdmin, 'id_usuario'>;
 @Component({
   selector: 'app-cadastro-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, UniqueEmailDirective],
   templateUrl: './cadastro-form.component.html',
   styleUrls: ['./cadastro-form.component.scss'],
 })

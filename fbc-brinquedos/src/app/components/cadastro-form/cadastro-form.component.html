@@ -13,14 +13,16 @@
   </div>
 
   <!-- Campo Email -->
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input id="email" type="email" formControlName="userEmail" placeholder="exemplo@email.com">
-    <div *ngIf="cadastroForm.get('userEmail')?.invalid && cadastroForm.get('userEmail')?.touched" class="error-message">
-      <span *ngIf="cadastroForm.get('userEmail')?.errors?.['required']">O email é obrigatório.</span>
-      <span *ngIf="cadastroForm.get('userEmail')?.errors?.['email']">Por favor, insira um email válido.</span>
-    </div>
+<div class="form-group">
+  <label for="email">Email</label>
+  <input id="email" type="email" formControlName="userEmail" placeholder="exemplo@email.com" uniqueEmail>
+  <div *ngIf="cadastroForm.get('userEmail')?.invalid && cadastroForm.get('userEmail')?.touched" class="error-message">
+    <span *ngIf="cadastroForm.get('userEmail')?.errors?.['required']">O email é obrigatório.</span>
+    <span *ngIf="cadastroForm.get('userEmail')?.errors?.['email']">Por favor, insira um email válido.</span>
+    <span *ngIf="cadastroForm.get('userEmail')?.errors?.['uniqueEmail']">Este email já está cadastrado.</span>
   </div>
+</div>
+
 
   <!-- Campos de Senha -->
   <div class="form-group">

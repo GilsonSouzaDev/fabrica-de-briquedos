@@ -10,7 +10,6 @@ import {
   catchError,
   debounceTime,
   distinctUntilChanged,
-  first,
   map,
   switchMap,
 } from 'rxjs/operators';
@@ -31,7 +30,6 @@ export class UniqueEmailDirective implements AsyncValidator {
   constructor(private usuarioService: UsuarioApiService) {}
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
-    // Não valida se o campo estiver vazio ou não for um e-mail válido
     if (
       !control.value ||
       control.value.trim() === '' ||
@@ -40,17 +38,15 @@ export class UniqueEmailDirective implements AsyncValidator {
       return of(null);
     }
 
-    // Otimização: Espera 300ms após o usuário parar de digitar
-    return control.valueChanges.pipe(
+    return of(control.value).pipe(
       debounceTime(300),
-      distinctUntilChanged(), // Só dispara se o valor realmente mudou
-      first(), // Pega o primeiro valor após o debounce e finaliza
+      distinctUntilChanged(),
       switchMap((value) =>
         this.usuarioService.verificarEmail(value).pipe(
           map((emailExiste) => (emailExiste ? { uniqueEmail: true } : null)),
           catchError(() => {
             console.error('API para validação de e-mail falhou.');
-            return of(null); // Não bloqueia o formulário em caso de erro na API
+            return of(null);
           })
         )
       )

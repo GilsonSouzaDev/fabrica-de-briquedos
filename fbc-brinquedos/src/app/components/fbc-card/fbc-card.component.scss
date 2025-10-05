@@ -1,13 +1,10 @@
 @use 'variables' as *;
 @use 'sass:math';
 
-// Função para converter px para rem.
 @function rem($pixels, $context: 16) {
   @return math.div($pixels, $context) * 1rem;
 }
 
-// CORREÇÃO: Fazendo o próprio componente (app-fbc-card) ser um item flexível.
-// Isso garante que ele se estique para preencher a altura que o container pai (ex: .home__card) determinar.
 :host {
   display: flex;
 }

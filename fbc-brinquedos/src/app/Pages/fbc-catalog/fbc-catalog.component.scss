@@ -9,7 +9,7 @@
   margin: auto;
   text-align: center;
   width: 54%;
-  position: relative; // Necessário para posicionamento absoluto do botão
+  position: relative;
 
   &__header {
     display: flex;
@@ -21,14 +21,14 @@
   }
 
   &__card {
-    display: flex; // categorias continuam flex
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1.5rem;
   }
 
   h2 {
-    font-size: 1.875rem; // 30px
+    font-size: 1.875rem;
     margin: 1.2rem;
     flex: 1;
     text-align: center;
@@ -36,21 +36,18 @@
 
   &__card-category {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); // fixo em telas grandes
-    gap: 1.5rem; // espaçamento grande para desktop
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
     padding: 0 1rem;
     width: 100%;
-    justify-items: center; // centraliza os cards dentro das colunas
+    justify-items: center;
   }
 
-  // Novo botão moderno tipo ícone
   .categories-button {
     position: absolute;
     top: 0;
     right: 0;
-    background: linear-gradient(135deg,
-        $primary-color,
-        color.adjust($primary-color, $lightness: 10%));
+    background: linear-gradient(135deg, $primary-color, color.adjust($primary-color, $lightness: 10%));
     color: $text-light;
     border: none;
     border-radius: 50%;
@@ -66,7 +63,6 @@
     font-weight: 600;
     z-index: 10;
 
-    // Ícone de categorias usando pseudo-elemento
     &::before {
       content: "☰";
       font-size: 1.4rem;
@@ -74,9 +70,7 @@
     }
 
     &:hover {
-      background: linear-gradient(135deg,
-          color.adjust($primary-color, $lightness: 5%),
-          color.adjust($primary-color, $lightness: 15%));
+      background: linear-gradient(135deg, color.adjust($primary-color, $lightness: 5%), color.adjust($primary-color, $lightness: 15%));
       transform: translateY(-2px) scale(1.05);
       box-shadow: 0 6px 20px rgba($primary-color, 0.4);
     }
@@ -86,7 +80,6 @@
       box-shadow: 0 2px 8px rgba($primary-color, 0.3);
     }
 
-    // Tooltip opcional
     &::after {
       content: "Categorias";
       position: absolute;
@@ -129,21 +122,13 @@
   }
 }
 
-// telas médias (ex: tablets e notebooks menores)
 @media (max-width: 1300px) {
   .catalog {
     width: 100%;
 
-    &__filtered-view {
-      gap: 0.5rem;
-      width: 100%;
-    }
-
     &__card-category {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1rem;
-      margin-bottom: 1rem;
-      justify-items: center;
     }
 
     .categories-button {
@@ -158,7 +143,6 @@
   }
 }
 
-// telas pequenas (celulares)
 @media (max-width: 768px) {
   .catalog {
     width: 100%;
@@ -197,6 +181,15 @@
         bottom: -2rem;
         font-size: 0.7rem;
       }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .catalog {
+    &__card-category {
+      gap: 0.5rem;
+      padding: 0 0.5rem;
     }
   }
 }

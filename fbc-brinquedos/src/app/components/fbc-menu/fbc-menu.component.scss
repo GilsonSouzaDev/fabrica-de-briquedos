@@ -1,19 +1,26 @@
-// 1. Importar o módulo de matemática do SASS para cálculos precisos
 @use "sass:math";
 @use "variables" as *;
 
-// Função auxiliar moderna para converter px para rem
 @function rem($pixels) {
-  // 2. Usar math.div para divisão, que é a sintaxe moderna e recomendada
   @return math.div($pixels, 16) * 1rem;
 }
 
-// 3. Definir Variáveis CSS (Custom Properties) para maior flexibilidade no browser
 :host {
   --menu-background-color: #{$nav-menu-color};
   --menu-font-size: #{rem(20)};
-  --menu-item-padding: #{rem(12)}; // Aumentado para melhor área de toque
-  --menu-item-min-height: #{rem(48)}; // Altura mínima recomendada para touch
+  --menu-item-padding: #{rem(12)};
+  --menu-item-min-height: #{rem(48)};
+  --menu-border-width: #{rem(2)};
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host {
+  box-sizing: border-box;
 }
 
 .menu {
@@ -24,15 +31,19 @@
   max-height: rem(50);
   background-color: var(--menu-background-color);
   box-shadow: 0 rem(4) rem(6) rem(-2) rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  overflow: hidden;
 
   &__lista {
     display: flex;
     justify-content: space-around;
     margin: auto;
     width: 60%;
-    list-style: none; // Remove bullets da lista
-    padding: 0; // Remove padding padrão da lista
-    margin: 0; // Remove margin padrão da lista
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100%;
 
     &:hover {
       cursor: pointer;
@@ -42,6 +53,9 @@
       font-size: clamp(#{rem(18)}, 0.5vw + #{rem(16)}, var(--menu-font-size));
       text-align: center;
       flex: 1;
+      box-sizing: border-box;
+      height: 100%;
+
       a {
         display: flex;
         align-items: center;
@@ -49,43 +63,42 @@
         width: 100%;
         height: 100%;
         min-height: var(--menu-item-min-height);
-
-
         padding: var(--menu-item-padding);
-
         text-decoration: none;
         color: inherit;
-
-        transition: background-color 0.1s ease, transform 0.1s ease;
+        box-sizing: border-box;
+        border: var(--menu-border-width) solid transparent;
+        transition: background-color 0.1s ease, transform 0.1s ease, border-color 0.1s ease;
 
         &:hover {
           background-color: rgba(255, 255, 255, 0.1);
           transform: translateY(-1px);
+          border-color: rgba(255, 255, 255, 0.3);
         }
 
         &:active {
           transform: translateY(0);
           background-color: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
         }
 
-        // Melhor foco para acessibilidade
         &:focus {
           outline: 2px solid rgba(255, 255, 255, 0.8);
           outline-offset: -2px;
           background-color: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.6);
         }
 
-        // Estado ativo do router
         &.active {
           background-color: rgba(255, 255, 255, 0.2);
           font-weight: 600;
+          border: var(--menu-border-width) solid rgba(255, 255, 255, 0.8);
         }
       }
     }
   }
 }
 
-// Responsividade mantida e aprimorada
 @media (max-width: 950px) {
   .menu__lista {
     width: 100%;
@@ -94,37 +107,33 @@
 
 @media (max-width: 750px) {
   :host {
-    --menu-item-padding: #{rem(16)}; // Padding maior em mobile
-    --menu-item-min-height: #{rem(52)}; // Altura maior para touch
+    --menu-item-padding: #{rem(16)};
+    --menu-item-min-height: #{rem(52)};
+    --menu-border-width: #{rem(1.5)};
   }
 
   .menu__lista-item {
-    // Reduz o tamanho da fonte para 16px em telas menores,
-    // sobrescrevendo a regra do clamp().
     font-size: rem(16);
 
     a {
-      // Área de toque ainda maior em mobile
       min-height: var(--menu-item-min-height);
     }
   }
 }
 
-// Melhorias adicionais para dispositivos muito pequenos
 @media (max-width: 480px) {
   :host {
-    --menu-item-padding: #{rem(20)}; // Padding ainda maior
-    --menu-item-min-height: #{rem(56)}; // Altura máxima para touch
+    --menu-item-padding: #{rem(20)};
+    --menu-item-min-height: #{rem(56)};
+    --menu-border-width: #{rem(1)};
   }
 
   .menu__lista-item {
     font-size: rem(15);
 
     a {
-      // Garantir que toda a área seja facilmente tocável
       min-height: var(--menu-item-min-height);
 
-      // Feedback visual mais pronunciado em mobile
       &:active {
         background-color: rgba(255, 255, 255, 0.3);
         transform: scale(0.98);
@@ -133,14 +142,25 @@
   }
 }
 
-// Melhorias de acessibilidade
-@media (prefers-reduced-motion: reduce) {
-  .menu__lista-item a {
-    transition: none; // Remove animações para usuários que preferem movimento reduzido
+@media (max-width: 400px) {
+  .menu__lista-item {
+    font-size: rem(13);
+
+    a {
+      padding: rem(12) rem(8);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 
-// Suporte para modo escuro (se aplicável)
+@media (prefers-reduced-motion: reduce) {
+  .menu__lista-item a {
+    transition: none;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .menu__lista-item a {
     &:hover {
@@ -155,4 +175,8 @@
       outline-color: rgba(255, 255, 255, 0.6);
     }
   }
+}
+
+.menu * {
+  box-sizing: border-box;
 }

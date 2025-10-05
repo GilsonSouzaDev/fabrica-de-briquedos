@@ -8,6 +8,8 @@ import { DetalhesPageComponent } from './Pages/detalhes-page/detalhes-page.compo
 import { FbcLoginpageComponent } from './Pages/fbc-loginpage/fbc-loginpage.component';
 import { authGuard } from './core/auth.guard';
 import { PesquisaPageComponent } from './Pages/pesquisa-page/pesquisa-page.component';
+import { TesteDiretivaComponent } from './shared/components/teste-servico/teste-servico.component';
+import { TesteServicoComponent } from './shared/components/teste-diretiva/teste-diretiva.component';
 
 export const routes: Routes = [
   { path: '', component: FbcHomeComponent },
@@ -18,6 +20,8 @@ export const routes: Routes = [
   { path: 'login', component: FbcLoginpageComponent },
   { path: 'pesquisa', component: PesquisaPageComponent },
   { path: 'cadastro', component: CadastroUsuarioPageComponent},
+  { path: 'teste-diretiva', component: TesteDiretivaComponent},
+  { path: 'teste-servico', component: TesteServicoComponent},
 
 
 ];

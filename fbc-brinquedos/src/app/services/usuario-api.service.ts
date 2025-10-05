@@ -14,11 +14,6 @@ export class UsuarioApiService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Busca todos os usuários cadastrados na API.
-   * Corresponde ao endpoint @GetMapping do seu backend.
-   * @returns Um Observable contendo um array de UsuarioAdmin.
-   */
   getUsuarios(): Observable<UsuarioAdmin[]> {
     return this.http.get<UsuarioAdmin[]>(this.apiUrl).pipe(
       tap(() => console.log('Lista de usuários obtida com sucesso.')),
@@ -26,23 +21,18 @@ export class UsuarioApiService {
     );
   }
 
-  /**
-   * Verifica se um e-mail já existe na base de dados.
-   * Este método é ideal para ser usado pela diretiva de validação assíncrona.
-   * @param email - O email a ser verificado.
-   * @returns Um Observable<boolean> que emite `true` se o email existir e `false` caso contrário.
-   */
   verificarEmail(email: string): Observable<boolean> {
-    // Constrói a URL para a busca, por exemplo: /api/usuario/email/existe?email=exemplo@email.com
-    // Adapte o endpoint (`/email/existe`) conforme sua API.
-    const url = `${this.apiUrl}/email/existe?email=${encodeURIComponent(
-      email
-    )}`;
-
-    return this.http.get<boolean>(url).pipe(
+    return this.getUsuarios().pipe(
+      map((usuarios: UsuarioAdmin[]) => {
+        return usuarios.some(
+          (usuario) => usuario.userEmail.toLowerCase() === email.toLowerCase()
+        );
+      }),
       catchError((error) => {
-        // Se a API falhar, consideramos que o email não existe para não travar o formulário.
-        console.error('Falha ao verificar e-mail:', error);
+        console.error(
+          'Falha ao obter a lista de usuários para verificar o e-mail:',
+          error
+        );
         return of(false);
       })
     );
@@ -65,16 +55,13 @@ export class UsuarioApiService {
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocorreu um erro desconhecido.';
     if (error.error instanceof ErrorEvent) {
-      // Erro do lado do cliente
       errorMessage = `Erro do cliente: ${error.error.message}`;
     } else {
-      // Erro retornado pelo backend
       errorMessage = `Erro do servidor: ${error.status}, mensagem: ${error.message}`;
       if (error.status === 400) {
         errorMessage =
           'Dados inválidos. Por favor, verifique os campos e tente novamente.';
       } else if (error.status === 409) {
-        // Exemplo para "Conflito"
         errorMessage = 'O email informado já está em uso.';
       }
     }

@@ -5,15 +5,12 @@
       <p>Preencha os dados abaixo para se cadastrar</p>
     </div>
 
-    <!--
-      Aqui usamos o componente de formulário.
-      (formSubmit) é o evento que o filho emite.
-      handleCadastro($event) é o método neste componente (pai) que será chamado.
-    -->
     <app-cadastro-form (formSubmit)="handleCadastro($event)"></app-cadastro-form>
 
     <div class="cadastro-footer">
-      <span>Já tem uma conta? <a routerLink="/login">Faça login</a></span>
+      <span>Já tem uma conta?
+        <a routerLink="/login">Faça login</a>
+      </span>
     </div>
   </div>
 </div>
