@@ -1,1 +1,23 @@
-<p>fbc-pesquisa works!</p>
+<div class="search-box">
+  <input
+    matInput
+    type="text"
+    placeholder="Pesquisar..."
+    [(ngModel)]="query"
+    (keyup.enter)="onSearch()">
+
+  <button
+    mat-icon-button
+    *ngIf="query"
+    (click)="clear()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    (click)="onSearch()">
+    <mat-icon>search</mat-icon>
+  </button>
+</div>
+
+

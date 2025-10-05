@@ -2,13 +2,14 @@ import { Component, OnInit, Signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services-mock/auth.service';
 import { UsuarioAdmin } from '../../interfaces/usuario-admin';
 import { AuthApiService } from '../../services/auth-api.service';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-fbc-usermenu',
-  imports: [MatIconModule, MatMenuModule, MatButtonModule],
+  imports: [MatIconModule, MatMenuModule, MatButtonModule, MatDividerModule],
   templateUrl: './fbc-usermenu.component.html',
   styleUrl: './fbc-usermenu.component.scss',
 })

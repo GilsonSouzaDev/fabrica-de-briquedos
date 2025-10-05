@@ -1,17 +1,154 @@
+// Breakpoints para consistência com o header
+$mobile-max: 767px;
+$tablet-min: 768px;
+
 .menulogin {
   display: flex;
-  /* As propriedades justify-self e justify-items não têm efeito em um container flex,
-     por isso foram removidas com segurança, sem impacto visual. */
   justify-content: center;
   align-items: center;
   gap: 0.125rem; // Convertido de 2px
+
+  // Nome do usuário visível em desktop
+  &__username--desktop {
+    display: inline-block;
+    font-weight: 500;
+    color: #fff;
+    font-size: 0.875rem; // 14px
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; // Limita o tamanho máximo do nome
+    transition: opacity 0.3s ease;
+
+    // Esconder em telas pequenas
+    @media (max-width: $mobile-max) {
+      display: none;
+    }
+  }
+
+  // Estilo do botão do menu
+  button[mat-icon-button] {
+    mat-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem; // Convertido de 32px
+      width: 1.25rem; // Convertido de 20px
+    }
+  }
+
+  // Estilos para o dropdown menu
+  &__dropdown {
+    min-width: 200px;
+
+    // Nome do usuário dentro do menu - visível apenas em mobile
+    .menulogin__username--mobile {
+      display: none !important; // Escondido por padrão
+      pointer-events: none; // Desabilita cliques
+      opacity: 0.8;
+      font-weight: 600;
+      padding: 8px 16px !important;
+
+      mat-icon {
+        margin-right: 8px;
+        font-size: 1.25rem;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      span {
+        font-size: 0.875rem;
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      // Mostrar apenas em telas pequenas
+      @media (max-width: $mobile-max) {
+        display: flex !important;
+        align-items: center;
+      }
+    }
+
+    // Divisor visível apenas em mobile
+    .menulogin__divider--mobile {
+      display: none;
+      margin: 4px 0;
+
+      @media (max-width: $mobile-max) {
+        display: block;
+      }
+    }
+
+    // Estilos para itens do menu
+    button[mat-menu-item] {
+      display: flex;
+      align-items: center;
+      padding: 8px 16px;
+      font-size: 0.875rem;
+
+      mat-icon {
+        margin-right: 8px;
+        font-size: 1.25rem;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
 }
 
-/* O seletor original e específico foi mantido para evitar efeitos colaterais */
-.menulogin button[mat-icon-button] mat-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem; // Convertido de 32px
-  width: 1.25rem; // Convertido de 20px
+// Ajustes específicos para telas muito pequenas
+@media (max-width: 480px) {
+  .menulogin {
+    &__dropdown {
+      min-width: 180px; // Menu um pouco menor em telas muito pequenas
+
+      .menulogin__username--mobile {
+        padding: 6px 12px !important;
+
+        span {
+          font-size: 0.8125rem; // Fonte ligeiramente menor
+        }
+      }
+
+      button[mat-menu-item] {
+        padding: 6px 12px;
+        font-size: 0.8125rem;
+      }
+    }
+  }
+}
+
+// Melhorias de acessibilidade
+.menulogin__username--desktop,
+.menulogin__username--mobile span {
+  // Garante que nomes longos não quebrem o layout
+  word-break: break-word;
+  hyphens: auto;
+}
+
+// Animações suaves para transições
+.menulogin__username--desktop {
+  transition: all 0.3s ease;
+}
+
+// Estilos para estados de foco e hover
+.menulogin button[mat-icon-button] {
+
+  &:focus,
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+  }
+}
+
+// Customização do overlay do menu para mobile
+@media (max-width: $mobile-max) {
+  .cdk-overlay-pane {
+    .mat-menu-panel {
+      max-width: calc(100vw - 32px); // Garante que o menu não ultrapasse a tela
+    }
+  }
 }

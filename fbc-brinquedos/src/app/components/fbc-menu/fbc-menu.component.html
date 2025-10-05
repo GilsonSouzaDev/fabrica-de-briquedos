@@ -1,21 +1,42 @@
-<nav class="menu">
+<nav class="menu" role="navigation" aria-label="Menu principal">
   <ul class="menu__lista">
     <li class="menu__lista-item">
-      <a routerLink="/">Home</a>
+      <a routerLink="/"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}"
+         aria-label="Ir para página inicial">
+        Home
+      </a>
     </li>
     <li class="menu__lista-item">
-      <a routerLink="/catalogo">Catálogo</a>
+      <a routerLink="/catalogo"
+         routerLinkActive="active"
+         aria-label="Ver catálogo de produtos">
+        Catálogo
+      </a>
     </li>
     <li class="menu__lista-item">
-      <a routerLink="/sobre">Equipe</a>
+      <a routerLink="/sobre"
+         routerLinkActive="active"
+         aria-label="Conhecer nossa equipe">
+        Equipe
+      </a>
     </li>
     @if (isLoggedIn()) {
       <li class="menu__lista-item">
-        <a routerLink="/admin" >Administração</a>
+        <a routerLink="/admin"
+           routerLinkActive="active"
+           aria-label="Acessar área de administração">
+          Administração
+        </a>
       </li>
     } @else {
       <li class="menu__lista-item">
-        <a routerLink="/login">Administração</a>
+        <a routerLink="/login"
+           routerLinkActive="active"
+           aria-label="Fazer login para administração">
+          Administração
+        </a>
       </li>
     }
   </ul>

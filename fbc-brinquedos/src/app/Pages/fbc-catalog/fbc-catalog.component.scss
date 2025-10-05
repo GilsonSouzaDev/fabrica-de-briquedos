@@ -109,7 +109,6 @@
     }
   }
 
-  // Botão antigo mantido para compatibilidade (pode ser removido se não for mais usado)
   .back-button {
     display: flex;
     background: $primary-color;
@@ -142,9 +141,9 @@
 
     &__card-category {
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem; // reduz espaço entre os cards
+      gap: 1rem;
       margin-bottom: 1rem;
-      justify-items: center; // garante centralização
+      justify-items: center;
     }
 
     .categories-button {
@@ -175,12 +174,11 @@
     }
 
     &__card-category {
-      // Trocamos Grid por Flexbox para ter mais controle no mobile
       display: flex;
-      flex-wrap: wrap; // Permite que os itens quebrem para a próxima linha
-      justify-content: center; // Centraliza os cards horizontalmente no contêiner
-      gap: 1rem; // Espaçamento entre os cards
-      padding: 0 1rem; // Adiciona o padding aqui, no contêiner direto dos cards
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0 1rem;
     }
 
     .categories-button {

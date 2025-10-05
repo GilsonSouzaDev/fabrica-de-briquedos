@@ -12,55 +12,147 @@
 :host {
   --menu-background-color: #{$nav-menu-color};
   --menu-font-size: #{rem(20)};
-  --menu-item-padding: #{rem(8)};
+  --menu-item-padding: #{rem(12)}; // Aumentado para melhor área de toque
+  --menu-item-min-height: #{rem(48)}; // Altura mínima recomendada para touch
 }
 
 .menu {
   display: flex;
+  justify-content: center;
   max-width: 100%;
-  min-height: rem(40);
-  // Usa a variável CSS, permitindo manipulação via JS se necessário no futuro
+  min-height: rem(30);
+  max-height: rem(50);
   background-color: var(--menu-background-color);
   box-shadow: 0 rem(4) rem(6) rem(-2) rgba(0, 0, 0, 0.4);
-
-  a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    padding: var(--menu-item-padding);
-  }
 
   &__lista {
     display: flex;
     justify-content: space-around;
     margin: auto;
     width: 60%;
+    list-style: none; // Remove bullets da lista
+    padding: 0; // Remove padding padrão da lista
+    margin: 0; // Remove margin padrão da lista
 
     &:hover {
       cursor: pointer;
     }
 
     &-item {
-      // 4. Tipografia Fluida com clamp()
-      // O tamanho da fonte se ajustará suavemente com o tamanho da tela
-      // Mínimo: 18px, Ideal: 0.5vw + 16px, Máximo: 20px
       font-size: clamp(#{rem(18)}, 0.5vw + #{rem(16)}, var(--menu-font-size));
       text-align: center;
+      flex: 1;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        min-height: var(--menu-item-min-height);
+
+
+        padding: var(--menu-item-padding);
+
+        text-decoration: none;
+        color: inherit;
+
+        transition: background-color 0.1s ease, transform 0.1s ease;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          transform: translateY(-1px);
+        }
+
+        &:active {
+          transform: translateY(0);
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        // Melhor foco para acessibilidade
+        &:focus {
+          outline: 2px solid rgba(255, 255, 255, 0.8);
+          outline-offset: -2px;
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        // Estado ativo do router
+        &.active {
+          background-color: rgba(255, 255, 255, 0.2);
+          font-weight: 600;
+        }
+      }
     }
   }
 }
 
+// Responsividade mantida e aprimorada
 @media (max-width: 950px) {
   .menu__lista {
     width: 100%;
   }
 }
 
-// --- Bloco de Responsividade Adicionado ---
 @media (max-width: 750px) {
+  :host {
+    --menu-item-padding: #{rem(16)}; // Padding maior em mobile
+    --menu-item-min-height: #{rem(52)}; // Altura maior para touch
+  }
+
   .menu__lista-item {
     // Reduz o tamanho da fonte para 16px em telas menores,
     // sobrescrevendo a regra do clamp().
     font-size: rem(16);
+
+    a {
+      // Área de toque ainda maior em mobile
+      min-height: var(--menu-item-min-height);
+    }
+  }
+}
+
+// Melhorias adicionais para dispositivos muito pequenos
+@media (max-width: 480px) {
+  :host {
+    --menu-item-padding: #{rem(20)}; // Padding ainda maior
+    --menu-item-min-height: #{rem(56)}; // Altura máxima para touch
+  }
+
+  .menu__lista-item {
+    font-size: rem(15);
+
+    a {
+      // Garantir que toda a área seja facilmente tocável
+      min-height: var(--menu-item-min-height);
+
+      // Feedback visual mais pronunciado em mobile
+      &:active {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+// Melhorias de acessibilidade
+@media (prefers-reduced-motion: reduce) {
+  .menu__lista-item a {
+    transition: none; // Remove animações para usuários que preferem movimento reduzido
+  }
+}
+
+// Suporte para modo escuro (se aplicável)
+@media (prefers-color-scheme: dark) {
+  .menu__lista-item a {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:focus {
+      outline-color: rgba(255, 255, 255, 0.6);
+    }
   }
 }

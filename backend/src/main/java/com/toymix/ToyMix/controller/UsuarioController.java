@@ -13,7 +13,8 @@ import java.util.List;
 @CrossOrigin(
         origins = {
                 "https://fabrica-de-briquedos.vercel.app",
-                "http://localhost:4200"
+                "http://localhost:4200",
+                "http://localhost:8080"
         }
 )
 @RequestMapping("/usuario")

@@ -1,4 +1,3 @@
-/* header.component.scss */
 @use 'variables' as *;
 @use 'sass:math';
 
@@ -6,42 +5,215 @@
   @return math.div($pixels, $context) * 1rem;
 }
 
+// Breakpoints responsivos
+$mobile-max: 767px;
+$tablet-min: 768px;
+$tablet-max: 1023px;
+$desktop-min: 1024px;
+
 .header__container {
   display: flex;
-  align-items: center; // Alinha verticalmente todos os itens
-  position: relative; // Essencial para posicionar o menu do usuário de forma absoluta
-
+  align-items: center;
+  justify-content: center;
+  position: relative;
   background-color: $primary-color;
-  height: rem(70);
-  min-height: rem(57);
-  max-height: rem(90);
-}
+  height: rem(80);
+  max-height: rem(100);
+  padding: 0 rem(16);
 
-.header__logo-link {
-  // *** CORREÇÃO DE LAYOUT APLICADA AQUI ***
+  .header__center-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1100px;
+    gap: rem(20);
+    transition: all 0.3s ease;
 
-  // 1. O link do logo ocupa todo o espaço horizontal.
-  width: 100%;
+    .header__logo-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0; // Impede que o logo seja comprimido
 
-  // 2. Usamos flex para centralizar a imagem DENTRO do link.
-  display: flex;
-  justify-content: center; // Centraliza a imagem horizontalmente
-  align-items: center; // Centraliza a imagem verticalmente
+      img {
+        width: rem(110);
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+        transition: width 0.3s ease;
+      }
+    }
 
-  img {
-    // 3. A imagem tem uma altura máxima para não estourar o header.
-    //    O ngSrc cuidará da proporção.
-    max-height: 90%;
+    app-fbc-pesquisa {
+      display: flex;
+      align-items: center;
+      flex: 1 1 auto;
+      height: 44px;
+      transition: all 0.3s ease;
+      min-width: 0; // Permite que o elemento seja comprimido
+
+      .search-box {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        border-radius: 8px;
+        padding: 4px 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+        input {
+          flex: 1 1 auto;
+          border: none;
+          outline: none;
+          padding: 8px;
+          font-size: 14px;
+          background: transparent;
+          min-width: 0; // Permite compressão do input
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          background: none;
+          cursor: pointer;
+          flex-shrink: 0; // Mantém o botão sempre visível
+
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+      }
+    }
   }
-}
 
-app-fbc-usermenu {
-  // *** POSICIONAMENTO CORRIGIDO DO MENU ***
+  .header__usermenu {
+    position: absolute;
+    right: rem(8);
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 50px;
+  }
 
-  // 1. O menu é posicionado de forma absoluta em relação ao header.
-  position: absolute;
-  margin-left: auto;
-  right: rem(8); // Espaçamento da borda direita.
-  top: 50%; // Alinhado verticalmente ao centro.
-  transform: translateY(-50%); // Ajuste fino para centralização vertical perfeita.
+  // RESPONSIVIDADE PARA TABLETS
+  @media (max-width: $tablet-max) and (min-width: $tablet-min) {
+    padding: 0 rem(12);
+
+    .header__center-block {
+      gap: rem(16);
+
+      .header__logo-link img {
+        width: rem(90);
+      }
+    }
+
+    .header__usermenu {
+      right: rem(6);
+    }
+  }
+
+  // RESPONSIVIDADE PARA MOBILE
+  @media (max-width: $mobile-max) {
+    height: rem(70);
+    padding: 0 rem(8);
+
+    .header__center-block {
+      gap: rem(12);
+
+      .header__logo-link img {
+        width: rem(70);
+      }
+
+      app-fbc-pesquisa {
+        height: 40px;
+
+        .search-box {
+          padding: 3px 6px;
+          border-radius: 6px;
+
+          input {
+            padding: 6px;
+            font-size: 13px;
+          }
+
+          button mat-icon {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    .header__usermenu {
+      right: rem(4);
+      max-height: 45px;
+    }
+  }
+
+  // RESPONSIVIDADE PARA TELAS MUITO PEQUENAS
+  @media (max-width: 480px) {
+    height: rem(65);
+    padding: 0 rem(6);
+
+    .header__center-block {
+      gap: rem(8);
+
+      .header__logo-link img {
+        width: rem(60);
+      }
+
+      app-fbc-pesquisa {
+        height: 38px;
+
+        .search-box {
+          padding: 2px 4px;
+
+          input {
+            padding: 4px;
+            font-size: 12px;
+          }
+
+          button mat-icon {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .header__usermenu {
+      right: rem(2);
+      max-height: 40px;
+    }
+  }
+
+  // OTIMIZAÇÕES PARA TELAS GRANDES
+  @media (min-width: $desktop-min) {
+    .header__center-block {
+      gap: rem(24);
+
+      .header__logo-link img {
+        width: rem(120);
+      }
+
+      app-fbc-pesquisa {
+        height: 48px;
+
+        .search-box {
+          padding: 6px 10px;
+
+          input {
+            padding: 10px;
+            font-size: 15px;
+          }
+
+          button mat-icon {
+            font-size: 22px;
+          }
+        }
+      }
+    }
+  }
 }

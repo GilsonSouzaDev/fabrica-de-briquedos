@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FbcCardComponent } from "../../components/fbc-card/fbc-card.component";
 //import { BrinquedoService } from '../../services/brinquedo.service';
 import { map, Observable } from 'rxjs';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FbcBannerComponent } from "../../components/fbc-banner/fbc-banner.component";
 import { BrinquedoApiService } from '../../services/brinquedo-api.service';
 

@@ -1,0 +1,37 @@
+<div class="search-page-container">
+
+  <!-- 1. "Desembrulha" o valor do searchTerm$ em uma variável `currentTerm` para todo o bloco -->
+  <ng-container *ngIf="searchTerm$ | async as currentTerm">
+
+    <!-- Título que usa a variável `currentTerm` -->
+    <h2>{{ currentTerm ? 'Resultados para: "' + currentTerm + '"' : '' }}</h2>
+
+    <!-- Mensagem de Loading (não depende do currentTerm) -->
+    <div *ngIf="isLoading" class="feedback-container">
+      <p>Buscando brinquedos...</p>
+    </div>
+
+    <!-- Mensagem de "Nenhum Resultado" (agora com sintaxe correta) -->
+    <div *ngIf="noResults && !isLoading && currentTerm.length > 0" class="feedback-container">
+      <img src="assets/img/brinquedo-triste.png" alt="Nenhum brinquedo encontrado" class="error-image">
+      <h3>Ops! Nenhum brinquedo encontrado.</h3>
+      <p>Parece que o termo "{{ currentTerm }}" não corresponde a nenhum dos nossos brinquedos.</p>
+    </div>
+
+    <!-- Mensagem de Estado Inicial -->
+    <div *ngIf="!isLoading && currentTerm === ''" class="feedback-container">
+      <p>Digite algo na barra de pesquisa para encontrar seus brinquedos favoritos!</p>
+    </div>
+
+  </ng-container>
+
+  <!-- SEU BLOCO DE CÓDIGO FIXO (permanece inalterado) -->
+  <section class="cards-grid">
+    <div class="cards-grid__container">
+        @for(brinquedo of brinquedos$ | async; track brinquedo.id){
+            <app-fbc-card [brinquedo]="brinquedo"></app-fbc-card>
+        }
+    </div>
+  </section>
+
+</div>

@@ -1,10 +1,17 @@
-<!-- header.component.html -->
 <header class="header__container">
-  <a routerLink="/" class="header__logo-link" aria-label="Página Inicial">
-    <img ngSrc="/assets/img/toymix.png" width="110" height="90" alt="Logotipo ToyMix" loading="lazy">
-  </a>
+  <!-- BLOCO CENTRAL: LOGO + PESQUISA -->
+  <div class="header__center-block">
+    <a routerLink="/" class="header__logo-link" aria-label="Página Inicial">
+      <img
+        src="/assets/img/toymix_cropped.png"
+        alt="Logotipo ToyMix"
+        loading="lazy">
+    </a>
+
+    <app-fbc-pesquisa class="header__search" (search)="onSearch($event)"></app-fbc-pesquisa>
+  </div>
 
   @if (isLoggedIn()) {
-    <app-fbc-usermenu></app-fbc-usermenu>
+    <app-fbc-usermenu class="header__usermenu"></app-fbc-usermenu>
   }
 </header>
