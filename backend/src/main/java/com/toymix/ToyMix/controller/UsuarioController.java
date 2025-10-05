@@ -3,6 +3,7 @@ package com.toymix.ToyMix.controller;
 import com.toymix.ToyMix.dto.UsuarioDTO;
 import com.toymix.ToyMix.model.entity.Usuario;
 import com.toymix.ToyMix.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class UsuarioController {
 
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvar(@RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioDTO usuarioDTO) {
         Usuario usuario = usuarioService.salvarCadastro(usuarioDTO);
         return ResponseEntity.ok(usuarioDTO);
     }
@@ -44,7 +45,7 @@ public class UsuarioController {
 
 
     @PutMapping("/{id_usuario}")
-    public ResponseEntity<Usuario> atualizar(@PathVariable int id_usuario, @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<Usuario> atualizar(@Valid @PathVariable int id_usuario, @RequestBody UsuarioDTO usuarioDTO) {
         return usuarioService.atualizarCadastro(id_usuario, usuarioDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
