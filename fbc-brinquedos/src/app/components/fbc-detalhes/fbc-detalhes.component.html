@@ -30,7 +30,7 @@
       </dl>
 
       <div class="valor-compra">
-        <span class="preco">R$ {{ brinquedoDetalhe.valor | real }}</span>
+        <span class="preco">{{ brinquedoDetalhe.valor | real }}</span>
         <!-- Se a ação é navegar para outra rota, <a> é mais semântico que <button>. -->
         <a class="btn-comprar" routerLink="/catalogo">Catálogo</a>
       </div>
