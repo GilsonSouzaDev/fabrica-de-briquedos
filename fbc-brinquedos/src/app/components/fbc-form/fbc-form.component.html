@@ -1,5 +1,3 @@
-<!-- src/app/components/fbc-form/fbc-form.component.html -->
-
 <div class="fbc-form">
   <fieldset class="form-container">
     <legend>{{ isEdit ? 'Editar Brinquedo' : 'Cadastrar Brinquedo' }}</legend>
@@ -37,7 +35,8 @@
           [(ngModel)]="toy.descricao"
           name="descricao"
           required
-          minlength="3"
+          minlength="5"
+          maxlength="35"
           #descricao="ngModel"
           uniqueDescricao
           [idBrinquedo]="isEdit ? toy.id : undefined"
@@ -45,7 +44,8 @@
         <!-- <div *ngIf="descricao.pending" class="pending-message">Verificando...</div> -->
         <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)" class="error-message">
           <div *ngIf="descricao.errors?.['required']">A descrição é obrigatória.</div>
-          <div *ngIf="descricao.errors?.['minlength']">A descrição deve ter no mínimo 3 caracteres.</div>
+          <div *ngIf="descricao.errors?.['minlength']">A descrição deve ter no mínimo 5 caracteres.</div>
+          <div *ngIf="descricao.errors?.['maxlength']">A descrição deve ter no máximo 35 caracteres.</div>
           <div *ngIf="descricao.errors?.['uniqueDescricao']">Já existe um brinquedo com esta descrição.</div>
         </div>
       </div>
@@ -65,9 +65,19 @@
       <!-- MARCA -->
       <label for="marca">Marca</label>
       <div class="input-wrapper">
-        <input id="marca" [(ngModel)]="toy.marca" name="marca" required #marca="ngModel" />
+        <input
+          id="marca"
+          [(ngModel)]="toy.marca"
+          name="marca"
+          required
+          minlength="3"
+          maxlength="35"
+          #marca="ngModel"
+        />
         <div *ngIf="marca.invalid && (marca.dirty || marca.touched)" class="error-message">
           <div *ngIf="marca.errors?.['required']">A marca é obrigatória.</div>
+          <div *ngIf="marca.errors?.['minlength']">A marca deve ter no mínimo 3 caracteres.</div>
+          <div *ngIf="marca.errors?.['maxlength']">A marca deve ter no máximo 35 caracteres.</div>
         </div>
       </div>
 
@@ -94,9 +104,19 @@
       <!-- DETALHES -->
       <label for="detalhes">Detalhes</label>
       <div class="input-wrapper">
-        <textarea id="detalhes" [(ngModel)]="toy.detalhes" name="detalhes" required #detalhes="ngModel"></textarea>
+        <textarea
+          id="detalhes"
+          [(ngModel)]="toy.detalhes"
+          name="detalhes"
+          required
+          minlength="5"
+          maxlength="250"
+          #detalhes="ngModel"
+        ></textarea>
         <div *ngIf="detalhes.invalid && (detalhes.dirty || detalhes.touched)" class="error-message">
           <div *ngIf="detalhes.errors?.['required']">O campo detalhe é obrigatório.</div>
+          <div *ngIf="detalhes.errors?.['minlength']">Os detalhes devem ter no mínimo 5 caracteres.</div>
+          <div *ngIf="detalhes.errors?.['maxlength']">Os detalhes devem ter no máximo 250 caracteres.</div>
         </div>
       </div>
 
