@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="usuario")
 public class Usuario {
@@ -24,5 +23,13 @@ public class Usuario {
 
     @Column(name = "userSenha", nullable = false)
     private String userSenha;
+
+    public Usuario(){}
+
+    public Usuario(String nome, String userEmail, String userSenha){
+        this.nome = nome;
+        this.userEmail = userEmail;
+        this.userSenha = userSenha;
+    }
 
 }

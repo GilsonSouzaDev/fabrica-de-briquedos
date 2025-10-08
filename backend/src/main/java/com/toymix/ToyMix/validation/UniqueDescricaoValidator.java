@@ -1,24 +1,30 @@
 package com.toymix.ToyMix.validation;
 
+import com.toymix.ToyMix.dto.BrinquedoDTO;
+import com.toymix.ToyMix.model.entity.Brinquedo;
 import com.toymix.ToyMix.repository.BrinquedoRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.toymix.ToyMix.repository.BrinquedoRepository;
+import org.springframework.stereotype.Component;
+import java.util.Optional;
 
-// Validator para checar se a descrição é única
-public class UniqueDescricaoValidator implements ConstraintValidator<UniqueDescricao, String> {
+@Component
+public class UniqueDescricaoValidator implements ConstraintValidator<UniqueDescricao, BrinquedoDTO> {
 
     @Autowired
-    private BrinquedoRepository brinquedoRepository; // Repositório para verificar no banco
+    private BrinquedoRepository brinquedoRepository;
 
     @Override
-    public boolean isValid(String descricao, ConstraintValidatorContext context) {
-        if (descricao == null || descricao.isBlank()) {
-            return true; // @NotBlank deve cuidar do obrigatório
-        }
+    public boolean isValid(BrinquedoDTO dto, ConstraintValidatorContext context) {
+        if (dto == null || dto.getDescricao() == null || dto.getDescricao().isBlank()) return true;
 
-        // Verifica se já existe produto com a mesma descrição
-        return !brinquedoRepository.existsByDescricaoIgnoreCase(descricao);
+        Optional<Brinquedo> existente = brinquedoRepository.findByDescricaoIgnoreCase(dto.getDescricao());
+
+        if (existente.isEmpty()) return true;
+
+        // Permite se for o mesmo ID
+        return dto.getId() != null && existente.get().getId().equals(dto.getId());
     }
 }
+

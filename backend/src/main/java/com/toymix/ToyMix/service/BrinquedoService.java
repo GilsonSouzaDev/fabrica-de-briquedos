@@ -41,17 +41,31 @@ public class BrinquedoService {
         return brinquedoRepository.save(brinquedo);
     }
 
-    public Optional<Brinquedo> atualizarCadastroDoBrinquedo(int id, BrinquedoDTO brinquedoDTO){
-        return brinquedoRepository.findById(id).map(brinquedo -> {
-            brinquedo.setCodigo(brinquedoDTO.getCodigo());
-            brinquedo.setDescricao(brinquedoDTO.getDescricao());
-            brinquedo.setCategoria(brinquedoDTO.getCategoria());
-            brinquedo.setMarca(brinquedoDTO.getMarca());
-            brinquedo.setImagem(brinquedoDTO.getImagem());
-            brinquedo.setValor(brinquedoDTO.getValor());
-            brinquedo.setDetalhes(brinquedoDTO.getDetalhes());
-            brinquedo.setQuantVendas(brinquedoDTO.getQuantVendas());
+    public Optional<Brinquedo> atualizarCadastroDoBrinquedo(int id, BrinquedoDTO dto) {
 
+        Optional<Brinquedo> existenteCodigo = brinquedoRepository.findAll().stream()
+                .filter(b -> b.getCodigo() == dto.getCodigo())
+                .findFirst();
+
+        if (existenteCodigo.isPresent() && !existenteCodigo.get().getId().equals(id)) {
+            throw new RuntimeException("Já existe um brinquedo com este código.");
+        }
+
+        Optional<Brinquedo> existenteDescricao = brinquedoRepository.findByDescricaoIgnoreCase(dto.getDescricao());
+
+        if (existenteDescricao.isPresent() && !existenteDescricao.get().getId().equals(id)) {
+            throw new RuntimeException("Já existe um brinquedo com esta descrição.");
+        }
+
+        return brinquedoRepository.findById(id).map(brinquedo -> {
+            brinquedo.setCodigo(dto.getCodigo());
+            brinquedo.setDescricao(dto.getDescricao());
+            brinquedo.setCategoria(dto.getCategoria());
+            brinquedo.setMarca(dto.getMarca());
+            brinquedo.setImagem(dto.getImagem());
+            brinquedo.setValor(dto.getValor());
+            brinquedo.setDetalhes(dto.getDetalhes());
+            brinquedo.setQuantVendas(dto.getQuantVendas());
             return brinquedoRepository.save(brinquedo);
         });
     }

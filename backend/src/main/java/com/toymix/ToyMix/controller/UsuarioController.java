@@ -45,7 +45,7 @@ public class UsuarioController {
 
 
     @PutMapping("/{id_usuario}")
-    public ResponseEntity<Usuario> atualizar(@Valid @PathVariable int id_usuario, @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<Usuario> atualizar(@PathVariable int id_usuario,@Valid @RequestBody UsuarioDTO usuarioDTO) {
         return usuarioService.atualizarCadastro(id_usuario, usuarioDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

@@ -49,7 +49,7 @@ public class BrinquedoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Brinquedo> atualizarCadastroDoBrinquedo(@Valid @PathVariable int id, @RequestBody BrinquedoDTO brinquedoDTO){
+    public ResponseEntity<Brinquedo> atualizarCadastroDoBrinquedo(@PathVariable int id,@Valid @RequestBody BrinquedoDTO brinquedoDTO){
         return brinquedoService.atualizarCadastroDoBrinquedo(id, brinquedoDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
