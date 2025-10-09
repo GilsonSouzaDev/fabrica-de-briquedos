@@ -80,6 +80,6 @@ export class PesquisaPageComponent implements OnInit {
       if (this.noResults) {
         this.router.navigate(['']);
       }
-    }, 3000);
+    }, 5000);
   }
 }
