@@ -17,7 +17,6 @@ export class DetalhesPageComponent {
     // Recupera os dados do state
     const navigation = this.router.getCurrentNavigation();
     this.brinquedo = navigation?.extras.state?.['brinquedo'];
-    console.log(this.brinquedo);
   }
 
   ngOnInit() {

@@ -46,7 +46,7 @@ export class CadastroUsuarioPageComponent {
       },
       error: (error) => {
         // ⚠️ Se houver erro inesperado fora do fluxo do ActionDialog
-        console.error('Erro inesperado:', error);
+        //console.error('Erro inesperado:', error);
 
         this.dialog.open(AlertDialogComponent, {
           width: '400px',

@@ -67,7 +67,7 @@ export class ActionDialogComponent {
         message: 'A operação foi realizada com êxito.',
       };
     } catch (error: any) {
-      console.error('Falha na ação do diálogo:', error);
+      //console.error('Falha na ação do diálogo:', error);
 
       const errorMessage =
         error?.error?.error ||

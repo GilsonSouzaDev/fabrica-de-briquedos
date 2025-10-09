@@ -37,7 +37,7 @@ export class FbcCatalogComponent implements OnInit {
    * @param categoryTitle O título da categoria que foi clicada.
    */
   onCategorySelected(categoryTitle: string): void {
-    console.log('Categoria selecionada:', categoryTitle);
+    //console.log('Categoria selecionada:', categoryTitle);
 
     // 1. Atualiza o signal com o título da categoria selecionada
     this.selectedCategory.set(categoryTitle);

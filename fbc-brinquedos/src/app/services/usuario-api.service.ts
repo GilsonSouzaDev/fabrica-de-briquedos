@@ -16,7 +16,6 @@ export class UsuarioApiService {
 
   getUsuarios(): Observable<UsuarioAdmin[]> {
     return this.http.get<UsuarioAdmin[]>(this.apiUrl).pipe(
-      tap(() => console.log('Lista de usuários obtida com sucesso.')),
       catchError(this.handleError)
     );
   }
@@ -46,7 +45,7 @@ export class UsuarioApiService {
   cadastrar(usuario: Partial<UsuarioAdmin>): Observable<UsuarioAdmin> {
     return this.http.post<UsuarioAdmin>(this.apiUrl, usuario).pipe(
       tap((response) =>
-        console.log('Usuário cadastrado com sucesso via API:', response)
+        response
       ),
       catchError(this.handleError)
     );

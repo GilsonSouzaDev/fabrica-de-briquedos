@@ -18,6 +18,6 @@ export class FbcEquipeComponent {
 
   ngOnInit() {
     this.meusUsuarios$ = this.userEquipeService.getUserEquipe();
-    console.log(this.meusUsuarios$);
+    //console.log(this.meusUsuarios$);
   }
 }

@@ -150,7 +150,7 @@ export class FbcAdminComponent {
   public onSave(payload: SaveEventPayload): void {
     const { toy, form } = payload;
 
-    console.log('1. onSave foi chamado.'); // LOG 1
+    //console.log('1. onSave foi chamado.'); // LOG 1
 
     if (form.invalid) {
       this.dialogService.alert({
@@ -197,9 +197,7 @@ export class FbcAdminComponent {
   }
 
   private afterPersist(): void {
-    // 1. Busca a lista de brinquedos atualizada do serviço.
     this.brinquedoService.getBrinquedos().subscribe((updatedList) => {
-      // 2. Atualiza as listas locais que controlam a exibição.
       this.latestBrinquedos = updatedList ?? [];
       this.localBrinquedos$.next(this.latestBrinquedos);
 
