@@ -4,7 +4,8 @@
   <ng-container *ngIf="searchTerm$ | async as currentTerm">
 
     <!-- Título que usa a variável `currentTerm` -->
-    <h2>{{ currentTerm ? 'Resultados para: "' + currentTerm + '"' : '' }}</h2>
+    <h2 [innerHTML]="currentTerm ? 'Resultados para: <strong>' + currentTerm + '</strong>' : ''"></h2>
+
 
     <!-- Mensagem de Loading (não depende do currentTerm) -->
     <div *ngIf="isLoading" class="feedback-container">
