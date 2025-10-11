@@ -11,6 +11,10 @@ import { register } from 'swiper/element/bundle';
 import { filter, skip } from 'rxjs/operators';
 import { SearchService } from './shared/services/search.service';
 
+// Importações para a nova funcionalidade
+import { AppStatusService } from './services/app-status.service';
+import { GameWrapperComponent } from './Pages/game-wrapper/game-wrapper.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -20,16 +24,19 @@ import { SearchService } from './shared/services/search.service';
     FbcHeaderComponent,
     FbcMenuComponent,
     FbcFooterComponent,
+    GameWrapperComponent, // Adicionar o GameWrapperComponent aqui
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   title = 'fbc-brinquedos';
+  backendActive = false; // Nova propriedade para controlar o estado do backend
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
-    private router: Router
+    private router: Router,
+    private appStatusService: AppStatusService // Injetar o novo serviço
   ) {
     if (isPlatformBrowser(this.platformId)) {
       // Inicializa Swiper somente no browser
@@ -47,6 +54,7 @@ export class AppComponent implements OnInit {
   private searchService = inject(SearchService);
 
   ngOnInit(): void {
+    // Lógica existente do searchService
     this.searchService.searchTerm$
       .pipe(
         skip(1),
@@ -56,5 +64,13 @@ export class AppComponent implements OnInit {
       .subscribe(() => {
         this.router.navigate(['/pesquisa']);
       });
+
+    // Nova lógica para monitorar o status do backend
+    this.appStatusService.backendActive$.subscribe((isActive) => {
+      this.backendActive = isActive;
+    });
+
+    // Inicia a verificação de dados do backend
+    this.appStatusService.initializeDataCheck();
   }
 }

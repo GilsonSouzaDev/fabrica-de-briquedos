@@ -1,0 +1,20 @@
+<div class="game-container">
+  <div class="game-header">
+    <h2>Aguarde enquanto carregamos seus dados...</h2>
+    <p>Enquanto isso, divirta-se com este jogo!</p>
+  </div>
+
+  <div class="game-frame-container">
+    <iframe
+      [src]="gameUrl"
+      class="game-frame"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="loading-indicator">
+    <div class="spinner"></div>
+    <p>Carregando dados do servidor...</p>
+  </div>
+</div>

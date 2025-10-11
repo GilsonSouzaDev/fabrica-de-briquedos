@@ -1,13 +1,18 @@
 <div class="container">
-  <header>
+  <header [class.disabled-interaction]="!backendActive">
     <app-fbc-header></app-fbc-header>
-    <nav aria-label="Menu principal">
+    <nav aria-label="Menu principal" [class.disabled-interaction]="!backendActive">
       <app-fbc-menu></app-fbc-menu>
     </nav>
   </header>
 
   <main>
-    <router-outlet></router-outlet>
+    <ng-container *ngIf="backendActive; else gameLoading">
+      <router-outlet></router-outlet>
+    </ng-container>
+    <ng-template #gameLoading>
+      <app-game-wrapper></app-game-wrapper>
+    </ng-template>
   </main>
 
   <footer>

@@ -9,13 +9,35 @@
   min-height: 100vh;
   background-color: $bg-body-color;
 
-main {
-  flex: 1;
-  // Opcional: Adicione um pouco de padding para o conteúdo não colar no header/footer
-  padding: 16px 0;
+  main {
+    flex: 1;
+    // Opcional: Adicione um pouco de padding para o conteúdo não colar no header/footer
+    padding: 16px 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .disabled-interaction {
+      pointer-events: none;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+      position: relative;
+    }
+
+  .disabled-interaction::after {
+      content: \'\';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
 }
 
-}
+
+
+
 
 
 
