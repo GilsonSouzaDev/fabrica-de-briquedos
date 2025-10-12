@@ -1,4 +1,4 @@
-INSERT INTO brinquedo (categoria, codigo, descricao, detalhes, imagem, marca, quantvendas, valor) VALUES
+INSERT INTO brinquedo (categoria, codigo, descricao, detalhes, imagem, marca, quant_vendas, valor) VALUES
 ('Veiculos', 1001, 'Carrinho Controle Remoto', 'Carrinho elétrico com controle remoto de 4 canais.', 'https://i.imgur.com/67DJRFB.png', 'HotWheels', 120, 149.9),
 ('Bonecas', 1002, 'Boneca Fashion', 'Boneca articulada com roupas e acessórios inclusos.', 'https://i.imgur.com/CiRJA6Y.png', 'Barbie', 300, 89.9),
 ('Blocos de montar', 1003, 'Jogo Blocos Criativos', 'Kit com 500 peças para montar diferentes estruturas.', 'https://i.imgur.com/8X84Mjl.png', 'Lego', 250, 199.9),

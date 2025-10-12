@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "brinquedo")
 public class Brinquedo {
@@ -23,14 +24,13 @@ public class Brinquedo {
     @Column(name = "categoria", nullable = false)
     private String categoria;
 
-    @Column(name = "codigo", nullable = false)
+    @Column(name = "codigo", nullable = false, unique = true) // Adicionado unique = true
     private Integer codigo;
 
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @Lob
-    @Column(name = "detalhes" ,nullable = false, columnDefinition = "TEXT")
+    @Column(name = "detalhes", nullable = false, columnDefinition = "TEXT")
     private String detalhes;
 
     @Column(name = "imagem", nullable = false)
@@ -39,29 +39,10 @@ public class Brinquedo {
     @Column(name = "marca", nullable = false)
     private String marca;
 
-    @Column(name = "quantVendas")
+    @Column(name = "quant_vendas")
     private Integer quantVendas;
 
     @Column(name = "valor", nullable = false)
     private BigDecimal valor;
 
-
-
-    // Construtores
-    public Brinquedo() {}
-
-    public Brinquedo(String categoria, Integer codigo, String descricao,
-                     String detalhes, String imagem, String marca,
-                     Integer quantVendas, BigDecimal valor) {
-        this.categoria = categoria;
-        this.codigo = codigo;
-        this.descricao = descricao;
-        this.detalhes = detalhes;
-        this.imagem = imagem;
-        this.marca = marca;
-        this.quantVendas = quantVendas;
-        this.valor = valor;
-    }
-
 }
-
