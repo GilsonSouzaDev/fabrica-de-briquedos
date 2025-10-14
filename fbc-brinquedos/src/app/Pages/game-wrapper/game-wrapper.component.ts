@@ -12,7 +12,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class GameWrapperComponent implements OnInit, OnDestroy {
   // URL do jogo Bouncemasters, sanitizada para segurança
   gameUrl: SafeResourceUrl;
-  private rawGameUrl = 'http://slither.com/io';
+  private rawGameUrl = 'https://hextris.io/';
 
   constructor(private sanitizer: DomSanitizer) {
     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
