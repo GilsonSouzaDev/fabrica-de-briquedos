@@ -1,11 +1,20 @@
-# Use uma imagem base do Java. Recomendo especificar a versão.
-FROM openjdk:17-jdk-slim
-
-# Diretório de trabalho dentro do container
+# Estágio de Build usando Maven e JDK 17
+FROM maven:3.9.6-eclipse-temurin-17-focal AS build
 WORKDIR /app
+# Copia apenas o pom.xml primeiro para baixar as dependências (cache)
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+# Copia o código-fonte e compila
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# O nome do arquivo .jar DEVE CORRESPONDER ao que foi gerado pelo Maven
-COPY target/ToyMix-0.0.1-SNAPSHOT.jar /app/spring-app.jar
+# Estágio de Execução usando uma imagem mais leve
+FROM eclipse-temurin:17-jre-jammy
+WORKDIR /app
+# Copia o JAR compilado do estágio de build
+COPY --from=build /app/target/*.jar /app/spring-app.jar
 
-# Ponto de entrada para executar a aplicação
+# Define as variáveis de ambiente base (serão sobrescritas no docker-compose)
+ENV SPRING_PROFILES_ACTIVE=supabase
+
 ENTRYPOINT ["java", "-jar", "spring-app.jar"]
